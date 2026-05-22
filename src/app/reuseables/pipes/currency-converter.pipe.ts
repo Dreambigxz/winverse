@@ -37,6 +37,11 @@ export class CurrencyConverterPipe implements PipeTransform {
       converted = amount * rate;
     }
 
+    if (symbol==="BNB"&&minimumFractionDigits<=2) {
+      minimumFractionDigits=3
+    }
+
+
     return showSymbol
       ? `${symbol}${converted.toLocaleString(undefined, { minimumFractionDigits: minimumFractionDigits, maximumFractionDigits: minimumFractionDigits })}`
       : converted.toFixed(minimumFractionDigits);

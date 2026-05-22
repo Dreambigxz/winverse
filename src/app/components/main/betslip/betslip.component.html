@@ -61,7 +61,7 @@
                                   [class.active]="selectedAmount === amt"
                                   (click)="selectAmount(amt)"
                                 >
-                                  {{ amt | currencyConverter | number }}
+                                  {{ amt | currencyConverter  }}
                                 </span>
 
                               </div>
@@ -75,12 +75,12 @@
 
                             <div class="row">
                               <span>Projected Return</span>
-                              <span class="green">{{storeData.store['wallet']?.init_currency.symbol}}{{matchService.possibleWin|number:"1.2-2"}}</span>
+                              <span class="green">{{storeData.store['wallet']?.init_currency.symbol}}{{matchService.possibleWin|number:"1.5-5"}}</span>
                             </div>
 
                             <div class="row">
                               <span>Estimated Gain</span>
-                              <span class="green">+{{storeData.store['wallet']?.init_currency.symbol}}{{matchService.profit}}</span>
+                              <span class="green">+{{storeData.store['wallet']?.init_currency.symbol}}{{matchService.profit|number:"1.5-5"}}</span>
                             </div>
 
                             <!-- <div class="row">

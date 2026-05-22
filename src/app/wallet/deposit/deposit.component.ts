@@ -46,8 +46,10 @@ export class DepositComponent {
       this.quickNav.storeData.store['pageDetails']='wallet'
       if (!this.quickNav.storeData.get("deposit")) {
         this.quickNav.reqServerData.get('wallet?dir=start_deposit').subscribe((res)=>{
-          this.walletService.initializeCurrency()
 
+          console.log({res});
+
+          this.walletService.initializeCurrency()
       })}
 
       this.walletService.page='deposit'

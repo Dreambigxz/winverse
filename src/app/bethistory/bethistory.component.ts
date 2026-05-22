@@ -143,10 +143,10 @@ export class BethistoryComponent implements OnInit {
   }
 
   setProfit(bet:any,add_stake=false){
-    if(bet.status!=='won')return 0
+    if(bet.status!=='won'&&bet.status!=="open")return 0
     const totalProfit = (bet.stake_amount * bet.market_odds / 100 )
     let stake = add_stake?bet.stake_amount:0
-    return (totalProfit + stake).toFixed(2)
+    return (totalProfit + stake)//.toFixed(2)
   }
 
   filterByDate() {

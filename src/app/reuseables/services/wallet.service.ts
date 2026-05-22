@@ -20,7 +20,7 @@ import {  copyContent} from '../helper';
 // export type PaymentChannel = 'USD' | 'USDT' | 'TRON' | 'BANK';
 export type PaymentChannelGrp = 'local'|'crypto'
 type FormPageGroup = 'deposit'|'withdraw'  | 'set_new_pin'
-type CryptoKey = 'USD' | 'TRON';
+type CryptoKey = 'USD' | 'TRON' | "BNB";
 
 @Injectable({
   providedIn: 'root'
@@ -128,19 +128,20 @@ export class WalletService {
 
   cryptos = [
     { value: 'USD', label: 'USDT (TRC20)', img: 'assets/img/card/usdt.svg' },
-    { value: 'TRON', label: 'TRX', img: 'assets/img/card/tron.svg' },
-    // { value: 'ETH', label: 'Ethereum (ETH)', img: 'assets/img/card/eth.svg' }
+    { value: 'TRON', label: 'TRON', img: 'assets/img/card/tron.png' },
+    { value: 'BNB', label: 'BNB (BEP20)', img: 'assets/img/card/bnb.png' }
   ];
   cryptoMap: Record<CryptoKey, { value: string; label: string; img: string }> = {
     USD: { value: 'USD', label: 'USDT (TRC20)', img: 'assets/img/card/usdt.svg' },
-    TRON: { value: 'TRON', label: 'TRX', img: 'assets/img/card/tron.svg' }
+    TRON: { value: 'TRON', label: 'TRON', img: 'assets/img/card/tron.png' },
+    BNB: { value: 'BNB', label: 'BNB', img: 'assets/img/card/bnb.png' }
   };
 
   getCryptoLabel(code: string, value:any=null): string {
     return this.cryptoMap[code as keyof typeof this.cryptoMap]?.label || '';
   }
 
-  cryptoCoins = ["TRON", "USD", "USDT"]
+  cryptoCoins = ["TRON", "USD", "USDT", "BNB"]
 
   activeChannel$ = new BehaviorSubject<'crypto' | 'local'>('crypto');
   activeChannelObs$ = this.activeChannel$.asObservable();
@@ -159,6 +160,7 @@ export class WalletService {
   showCryptoTab = true;
   showLocalTab = true;
 
+  payAddress = ""
 
   constructor(private router: Router,  private route :ActivatedRoute) {
     this.router.events
@@ -175,10 +177,12 @@ export class WalletService {
   }
 
   // DISPLAY ALL LOCAL CURRENCY OR JUST SELECTED
-  getVisibleCurrencies(slice:any=[2]) {
+  getVisibleCurrencies(slice:any=[3]) {
 
     const isCryptoSelect = slice.length === 1
     const currencies = this.quickNav.storeData.store['init_currencies']?.slice(...slice);
+
+    // console.log({currencies});
 
     if (!this.selectedLocaLMethod) {
       return currencies; // show all before selection
@@ -201,9 +205,14 @@ export class WalletService {
 
      this.selectedData =  currencies.filter(
       (curr:any) => curr.code === this.selectedCryptoMethod
-    )[0];
+     )[0];
 
-    // this.minimumPayment
+
+    if (this.selectedData.code==='BNB') {
+      this.payAddress=this.storeData.get("pay_address")?.bnb
+    }else{
+      this.payAddress=this.storeData.get("pay_address")?.tether
+    }
 
     return currencies//[this.selectedData]
 

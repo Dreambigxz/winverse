@@ -9,7 +9,7 @@
     <!-- 🔷 NETWORK SELECT (same as deposit) -->
     <div class="network-select">
       <div
-        *ngFor="let curr of walletService.getVisibleCrptoNetwork([0,2]); let i=index"
+        *ngFor="let curr of walletService.getVisibleCrptoNetwork(); let i=index"
         class="network-chip"
         [class.active]="walletService.selectedCryptoMethod === curr.code"
         (click)="walletService.selectedCryptoMethod = curr.code">

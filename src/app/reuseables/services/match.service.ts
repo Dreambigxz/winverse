@@ -182,7 +182,8 @@ export class MatchService {
     this.toggleSlip()
     fixture['selectedScore']=selected
     this.addingFixture=fixture
-    !this.minimumStake?[this.minimumStake=this.storeData.get("bet_settings").minimum]:0
+    this.minimumStake = this.storeData.get("bet_settings").minimum
+    // !this.minimumStake?[this.currencyConverter.transform(this.storeData.get("bet_settings").minimum)]:0
   }
 
   stakeAmountHandler(event: KeyboardEvent) {
@@ -193,9 +194,20 @@ export class MatchService {
   }
 
   setProfit(){
-    this.profit = (this.stakeAmount * this.addingFixture.selectedScore.odds / 100 ).toFixed(2)
+    this.profit = (this.stakeAmount * this.addingFixture.selectedScore.odds / 100 )//.toFixed(2)
 
     this.possibleWin  = parseFloat(this.stakeAmount) + parseFloat(this.profit)
+  }
+
+  setProfitOLD() {
+
+    this.profit =
+      this.stakeAmount *
+      this.addingFixture.selectedScore.odds;
+
+    this.possibleWin =
+      parseFloat(this.stakeAmount) +
+      parseFloat(this.profit);
   }
 
   toFixedNoRound(num:any, decimals: any) {
@@ -205,7 +217,7 @@ export class MatchService {
 
   stakeAll() {
     let stakeAll = this.currencyConverter.transform(this.storeData.get('wallet')?.balance?.new);
-    this.stakeAmount = this.toFixedNoRound(parseFloat(stakeAll),1)//parseFloat(stakeAll).toFixed(1)
+    this.stakeAmount = this.toFixedNoRound(parseFloat(stakeAll),4)//parseFloat(stakeAll).toFixed(1)
     this.setProfit()
   }
 
@@ -218,11 +230,16 @@ export class MatchService {
       startDate:new Date(this.addingFixture.fixture.fixture.timestamp*1000)
     }
 
+    const minimumStake = this.currencyConverter.transform(this.minimumStake)
 
     const trade =  !["book_bet",'extra_bet'].includes(processor)
 
-    if (trade&&parseFloat(this.minimumStake)>this.stakeAmount) {
-      this.quickNav.alert(`You need at least ${this.currencyConverter.transform(this.minimumStake,true)} to bet!`,'info')
+    console.log("minimumStake", parseFloat(minimumStake), this.minimumStake);
+    console.log({"this.stakeAmount":parseFloat(this.stakeAmount)});
+
+
+    if (trade&&parseFloat(minimumStake)>parseFloat(this.stakeAmount)) {
+      this.quickNav.alert(`You need at least ${minimumStake} to bet!`,'info')
       return
     }
 

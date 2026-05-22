@@ -33,8 +33,18 @@ export class QuickNavService {
 
    modal:any
 
-   availableLang = {"English":"en", "French":'fr', "Spanish":'es' , "Portuguese (Brazil)":'pt', "Arabic":'ar', "Chinese":'zh-CN' }
-   langKeys = Object.keys(this.availableLang)
+   availableLang = {
+     "English": "en",
+     "French": "fr",
+     "Spanish": "es",
+     "Portuguese (Brazil)": "pt",
+     "Arabic": "ar",
+     "Chinese": "zh-CN",
+     "Italian": "it",
+     "Greek": "el"
+   }
+
+    langKeys = Object.keys(this.availableLang)
 
    go(url: string,  queryParams?: any, fragment?: string,): void {
 

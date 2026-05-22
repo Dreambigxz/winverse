@@ -20,9 +20,10 @@
   border-radius: 10px;
   background: #2a1f12;
   cursor: pointer;
-  font-size: 12px;
+  font-size: .54rem;;
   color: #aaa;
   transition: 0.2s;
+  font-weight: 500;
 }
 
 .network-chip img {

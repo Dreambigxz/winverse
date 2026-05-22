@@ -39,12 +39,12 @@
           <div class="amount-row">
             <div>
               <div class="label">Bet Amount</div>
-              <div class="amount">{{bet.stake_amount|currencyConverter:true}}</div>
+              <div class="amount notranslate">{{bet.stake_amount|currencyConverter:true}}</div>
             </div>
 
             <div>
               <div class="label">Estimate Return</div>
-              <div class="amount highlight">1229.98</div>
+              <div class="amount highlight notranslate">{{setProfit(bet,true)|currencyConverter:true:false:5}}</div>
             </div>
           </div>
 
@@ -122,12 +122,12 @@
           <div class="amount-row">
             <div>
               <div class="label">Bet Amount</div>
-              <div class="amount ">{{bet.stake_amount|currencyConverter:true}}</div>
+              <div class="amount notranslate">{{bet.stake_amount|currencyConverter:true}}</div>
             </div>
 
             <div>
               <div class="label">Estimate Return</div>
-              <div class="amount highlight {{bet.status}}">{{setProfit(bet,true)|currencyConverter:true}}</div>
+              <div class="amount highlight {{bet.status}} notranslate">{{setProfit(bet,true)|currencyConverter:true:false:5}}</div>
             </div>
           </div>
 

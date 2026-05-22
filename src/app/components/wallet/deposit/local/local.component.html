@@ -7,7 +7,7 @@
     <!-- METHOD SELECT -->
     <div class="method-grid">
       <div
-        *ngFor="let curr of walletService.getVisibleCurrencies([2])"
+        *ngFor="let curr of walletService.getVisibleCurrencies()"
         class="method-chip"
         [class.active]="walletService.selectedLocaLMethod === curr.code"
         (click)="walletService.selectedLocaLMethod = curr.code">

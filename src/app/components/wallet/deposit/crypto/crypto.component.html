@@ -5,7 +5,7 @@
     <!-- NETWORK SELECT -->
     <div class="network-select">
       <div
-        *ngFor="let curr of walletService.getVisibleCrptoNetwork([0,2]); let i=index"
+        *ngFor="let curr of walletService.getVisibleCrptoNetwork(); let i=index"
         class="network-chip"
         [class.active]="walletService.selectedCryptoMethod === curr.code"
         (click)="walletService.selectedCryptoMethod = curr.code">
@@ -25,8 +25,8 @@
 
       <!-- ADDRESS -->
       <div class="address-box">
-        <span class="addr">{{ payAddress | truncateCenter:18 }}</span>
-        <button (click)="walletService.quickNav.copy(payAddress, 'Address copied')" class="copy-btn">
+        <span class="addr">{{ walletService.payAddress | truncateCenter:18 }}</span>
+        <button (click)="walletService.quickNav.copy(walletService.payAddress, 'Address copied')" class="copy-btn">
           Copy
         </button>
       </div>

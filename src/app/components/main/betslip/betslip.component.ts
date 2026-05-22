@@ -29,6 +29,9 @@ export class BetslipComponent {
   selectAmount(value: number): void {
     this.selectedAmount = value;
     this.matchService.stakeAmount=this.currencyConverter_.transform(value)
+    console.log({
+      "this.matchService.stakeAmount":this.matchService.stakeAmount
+    });
 
     this.matchService.setProfit()
   }
