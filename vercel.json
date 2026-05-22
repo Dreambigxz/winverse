@@ -5,7 +5,7 @@
 
     {
       "source": "/api/(.*)",
-      "destination": "https://api.ventora.investments/api/$1"
+      "destination": "https://https://api.scorexapp.cc/api/$1"
     },
 
     { "source": "/(.*)", "destination": "/index.html" }
