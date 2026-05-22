@@ -103,7 +103,7 @@ export class VipComponent  {
 
   setVip(vip_system:any){
 
-    this.currentDeposit=this.quickNav.storeData.get("wallet")?.balance.new
+    this.currentDeposit=vip_system.current_balance//this.quickNav.storeData.get("wallet")?.balance.new
     this.requiredDeposit= parseFloat(vip_system.next.deposit_range.split("-")[0].replaceAll("$", ''))
 
     this.currentWager = vip_system.bet_amount
