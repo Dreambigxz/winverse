@@ -72,8 +72,6 @@ export class MatchesComponent {
     if (!this.matchService.storeData.get('soccer')) {
       this.matchService.reqServerData.get('soccer/?showSpinner').subscribe({
         next: (res) => {
-          console.log({res});
-
           this.setData()}
       });
     }else{this.setData()}

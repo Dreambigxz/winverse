@@ -33,7 +33,7 @@
        <!-- Quick Actions -->
        <div class="actions-grid">
 
-         <div (click)="quickNav.go('lucky-wheel')" class="action-item voucher-item">
+         <!-- <div (click)="quickNav.go('lucky-wheel')" class="action-item voucher-item">
 
               <div class="icon-wrapper">
                 <i class="ti ti-ticket"></i>
@@ -45,6 +45,11 @@
 
               <span>Lucky <br> wheel</span>
 
+            </div> -->
+
+            <div (click)="appManager.installApp()" class="action-item">
+              <i class="ti ti-download"></i>
+              <span>APP</span>
             </div>
 
         <div (click)="quickNav.openTab('')" class="action-item">
@@ -114,13 +119,13 @@
         </div>
 
 
-        <div (click)="appManager.installApp()" class="menu-item">
+        <!-- <div (click)="appManager.installApp()" class="menu-item">
           <span class="menu-left">
             <i class="ti ti-download"></i>
             Get App
           </span>
           <i class="ti ti-chevron-right"></i>
-        </div>
+        </div> -->
 
       </div>
 

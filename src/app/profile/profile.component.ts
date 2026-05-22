@@ -47,11 +47,11 @@ export class ProfileComponent {
   notificationCount=3
 
   ngOnInit(){
-    if (!this.quickNav.storeData.get('profile')) {this.quickNav.reqServerData.get("profile/").subscribe(
-    (res)=>{
-      console.log({res});
+    if (!this.quickNav.storeData.get('profile')) {
+      this.quickNav.reqServerData.get("profile/")
+      .subscribe()
     }
-  )}}
+}
 
   openModal() {
     const modalEl = document.getElementById('changePassword');

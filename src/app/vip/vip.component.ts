@@ -64,7 +64,7 @@ export class VipComponent  {
 
 
   }
-  
+
   ngAfterViewInit(): void {
      this.scroolView()
   }
@@ -102,6 +102,7 @@ export class VipComponent  {
 
 
   setVip(vip_system:any){
+
     this.currentDeposit=this.quickNav.storeData.get("wallet")?.balance.new
     this.requiredDeposit= parseFloat(vip_system.next.deposit_range.split("-")[0].replaceAll("$", ''))
 
