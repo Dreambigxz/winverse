@@ -77,7 +77,7 @@ export class InviteServices {
       if (level === 'all') {
         sumGen(this.main,data);
 
-        this.activePercent = percentages[this.main] 
+        this.activePercent = percentages[this.main]
       } else {
         const r = getGen(this.main, gen);
 
@@ -123,9 +123,10 @@ export class InviteServices {
     }
 
     const data = this.quickNav.storeData.get(key) || [ ];
+    const filterd_data =  generation !== "pending" ? data.filter((item: any) => item.type === this.main) : data;
 
     // ✅ return ONLY the selected type (no mutation)
-    return data.filter((item: any) => item.type === this.main);
+    return filterd_data
   }
 
 }
