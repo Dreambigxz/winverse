@@ -44,7 +44,7 @@
 
             <div>
               <div class="label">Estimate Return</div>
-              <div class="amount highlight notranslate">{{setProfit(bet,true)|currencyConverter:true:false:5}}</div>
+              <div class="amount highlight notranslate">{{ setProfit(bet, true) | currencyConverter:true:false:(historyServiceLoaded?.storeData.store['wallet']?.init_currency?.symbol==="BNB" ? 5 : 2) }}</div>
             </div>
           </div>
 
@@ -127,7 +127,9 @@
 
             <div>
               <div class="label">Estimate Return</div>
-              <div class="amount highlight {{bet.status}} notranslate">{{setProfit(bet,true)|currencyConverter:true:false:5}}</div>
+              <div class="amount highlight {{bet.status}} notranslate">{{ setProfit(bet, true) | currencyConverter:true:false:(historyServiceLoaded?.storeData.store['wallet']?.init_currency?.symbol==="BNB" ? 5 : 2) }}</div>
+              <!-- <div class="amount highlight notranslate">{{ setProfit(bet, true) | currencyConverter:true:false:(historyServiceLoaded?.storeData.store['wallet']?.init_currency?.symbol==="BNB" ? 5 : 2) }}</div> -->
+
             </div>
           </div>
 
