@@ -316,3 +316,10 @@
   background: #1a1208;
   color: white;
 }
+
+.error {
+  /* border: 1px solid #ff4d4f;
+  background: rgba(255, 77, 79, 0.08); */
+  color: #ff4d4f;
+  outline: none;
+}
