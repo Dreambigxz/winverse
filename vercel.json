@@ -5,7 +5,7 @@
 
     {
       "source": "/api/(.*)",
-      "destination": "https://https://api.scorexapp.cc/api/$1"
+      "destination": "https://api.scorexapp.cc//api/$1"
     },
 
     { "source": "/(.*)", "destination": "/index.html" }
