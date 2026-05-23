@@ -27,12 +27,12 @@
            *ngIf="storeData.store['wallet'] as walletData ">
 
         <div class="balance">
-          <!-- <span class="currency">
+          <span class="currency">
             {{walletData.init_currency.symbol}}
-          </span> -->
+          </span>
 
           <span class="amount">
-            {{walletData.balance.new | currencyConverter:true }}
+            {{walletData.balance.new | currencyConverter }}
           </span>
         </div>
 
