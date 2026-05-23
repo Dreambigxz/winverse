@@ -97,7 +97,8 @@ export class MatchService {
       }
 
       if (!this.notStartedMatches.length) {
-        this.notStartedMatches = notStartedMatches.slice(0, 50)
+        this.notStartedMatches = notStartedMatches
+        //.slice(0, 50)
 
       }
         return notStartedMatches
@@ -216,8 +217,13 @@ export class MatchService {
   }
 
   stakeAll() {
+
+    const init_currency = this.storeData.get('wallet').init_currency
+
+    console.log({symbol:init_currency.symbol});
+
     let stakeAll = this.currencyConverter.transform(this.storeData.get('wallet')?.balance?.new);
-    this.stakeAmount = this.toFixedNoRound(parseFloat(stakeAll),4)//parseFloat(stakeAll).toFixed(1)
+    this.stakeAmount = init_currency.symbol !== 'BNB' ? this.toFixedNoRound(parseFloat(stakeAll),1) : this.toFixedNoRound(parseFloat(stakeAll),4)//parseFloat(stakeAll).toFixed(1)
     this.setProfit()
   }
 

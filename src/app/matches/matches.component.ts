@@ -79,8 +79,12 @@ export class MatchesComponent {
 
   async setData(){
 
+    const soccer = this.matchService.storeData.store['soccer']
+
+    // console.log({soccer:soccer.length});
+
     this.matchService.setFixtures()
-    this.matchService.notStarted(this.matchService.storeData.store['soccer']);
+    this.matchService.notStarted(soccer);
     this.matchService.loadBonusMatches()
     await this.matchService.companyGame()
 
