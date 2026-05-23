@@ -220,8 +220,6 @@ export class MatchService {
 
     const init_currency = this.storeData.get('wallet').init_currency
 
-    console.log({symbol:init_currency.symbol});
-
     let stakeAll = this.currencyConverter.transform(this.storeData.get('wallet')?.balance?.new);
     this.stakeAmount = init_currency.symbol !== 'BNB' ? this.toFixedNoRound(parseFloat(stakeAll),1) : this.toFixedNoRound(parseFloat(stakeAll),4)//parseFloat(stakeAll).toFixed(1)
     this.setProfit()

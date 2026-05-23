@@ -12,6 +12,7 @@ export class CurrencyConverterPipe implements PipeTransform {
   public wallet = this.storeData.get('wallet');
   public init_currency = this.wallet?.init_currency
 
+
   transform(amount: number=0, showSymbol: boolean = false, another_currency=false,minimumFractionDigits:number=2): string {
 
     // const wallet = this.storeData.get('wallet');
@@ -19,6 +20,20 @@ export class CurrencyConverterPipe implements PipeTransform {
     if (!this.wallet) {
       this.wallet=this.storeData.get('wallet');
       this.init_currency = this.wallet?.init_currency
+
+    }
+
+    const pathname =  window.location.pathname
+
+    // if (this.init_currency?.symbol==="BNB") {
+    if (this.init_currency?.symbol==="BNB"&&!["withdraw", "deposit"].includes(pathname)) {
+      this.init_currency = {
+          'symbol': '$',
+          'name': 'Dollar',
+          'code': 'USD',
+          'rate': 1,
+          'flag': '🇺🇸'
+      }
     }
 
 
