@@ -100,7 +100,7 @@
               <div class="item-row">
                 <span class="label">Company Games</span>
                 <span class="value">
-                  {{ user.bet_history.records?.true?.won?.count || 0 }}
+                  <strong class="text-bold">${{ user.bet_history?.records?.true?.won?.won_amount || 0 }}</strong> / {{ user.bet_history?.records?.true?.won?.count || 0 }}
                 </span>
               </div>
 
@@ -114,7 +114,7 @@
               <div class="item-row">
                 <span class="label">Risk Games</span>
                 <span class="value">
-                  {{ user.bet_history.records?.false?.won?.count || 0 }}
+                  <strong class="text-bold">${{ user.bet_history?.records?.false?.won?.won_amount || 0 }}</strong>  /{{ user.bet_history?.records?.false?.won?.count || 0 }}
                 </span>
               </div>
 
