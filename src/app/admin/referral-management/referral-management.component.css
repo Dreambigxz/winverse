@@ -1,4 +1,6 @@
-/* Layout */
+/* =========================
+   REF DASHBOARD
+========================= */
 .ref-dashboard {
   display: flex;
   flex-direction: column;
@@ -6,57 +8,82 @@
   margin-top: 20px;
 }
 
-/* Summary cards */
+/* =========================
+   SUMMARY CARDS
+========================= */
 .summary-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 14px;
 }
 
 .summary-card {
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  padding: 14px;
-  border-radius: 14px;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  background: linear-gradient(135deg, #1a1200, #2b1d00);
+  padding: 16px;
+  border-radius: 16px;
+  color: #fff8e1;
+  border: 1px solid rgba(255, 235, 59, 0.1);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  transition: 0.3s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 152, 0, 0.25);
+  background: linear-gradient(135deg, #241700, #382400);
 }
 
 .summary-card .label {
   font-size: 11px;
-  color: #94a3b8;
+  color: #fcd34d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .summary-card .value {
   display: block;
-  font-size: 16px;
-  font-weight: 600;
-  margin-top: 5px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 6px;
+  color: #fff;
 }
 
 .summary-card .code {
-  color: #38bdf8;
+  color: #ffeb3b;
   letter-spacing: 1px;
 }
 
-/* Card */
+/* =========================
+   PREMIUM CARD
+========================= */
 .premium-card {
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  padding: 16px;
-  border-radius: 16px;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+  background: linear-gradient(135deg, #1a1200, #2b1d00);
+  padding: 18px;
+  border-radius: 18px;
+  color: #fff8e1;
+  border: 1px solid rgba(255, 235, 59, 0.1);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+  transition: 0.3s ease;
 }
 
-/* Titles */
+.premium-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 152, 0, 0.22);
+}
+
+/* =========================
+   TITLES
+========================= */
 .premium-card h3 {
   font-size: 14px;
-  margin-bottom: 10px;
-  color: #38bdf8;
+  margin-bottom: 12px;
+  color: #ffeb3b;
+  letter-spacing: 0.4px;
 }
 
-/* Tables */
+/* =========================
+   TABLES
+========================= */
 .premium-table {
   width: 100%;
   border-collapse: collapse;
@@ -64,39 +91,48 @@
 
 .premium-table th {
   font-size: 11px;
-  color: #94a3b8;
+  color: #fcd34d;
   text-align: left;
-  padding: 8px 0;
+  padding: 10px 0;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .premium-table td {
-  padding: 10px 0;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 12px 0;
+  border-top: 1px solid rgba(255, 235, 59, 0.06);
   font-size: 13px;
+  color: #fff8e1;
 }
 
-/* Grid for activity */
+/* Row hover */
+.premium-table tbody tr:hover {
+  background: rgba(255, 235, 59, 0.03);
+}
+
+/* =========================
+   ACTIVITY GRID
+========================= */
 .activity-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 14px;
 }
 
-/* Colors */
+/* =========================
+   COLORS
+========================= */
 .text-success {
-  color: #22c55e;
+  color: #ffeb3b;
+  font-weight: 600;
 }
 
 .text-danger {
-  color: #ef4444;
+  color: #ff9800;
+  font-weight: 600;
 }
 
 .text-warning {
-  color: #f59e0b;
-}
-
-/* Hover effect */
-.premium-card:hover {
-  transform: translateY(-2px);
-  transition: 0.3s ease;
+  color: #ffc107;
+  font-weight: 600;
 }
