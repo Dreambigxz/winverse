@@ -1,101 +1,83 @@
+<div *ngIf="quickNav.storeData.store['loaded_user']?.refDir as dashboardData" class="ref-dashboard">
 
-<div  *ngIf="quickNav.storeData.store['loaded_user']?.refDir as dashboardData">
-  <div class="admin-summary mb-5">
+  <!-- SUMMARY CARDS -->
+  <div class="summary-grid">
 
-  <p>Referral Code: {{ dashboardData.RefCode }}</p>
+    <div class="summary-card">
+      <span class="label">Referral Code</span>
+      <span class="value code">{{ dashboardData.RefCode }}</span>
+    </div>
 
-  <p>Cashed Commission: ${{ dashboardData.cashed_commissions|number:"1.2-2" }}</p>
+    <div class="summary-card">
+      <span class="label">Cashed Commission</span>
+      <span class="value text-success">
+        ${{ dashboardData.cashed_commissions | number:'1.2-2' }}
+      </span>
+    </div>
 
-  <p>Uncashed: ${{ dashboardData.uncashed|number:"1.2-2" }}</p>
+    <div class="summary-card">
+      <span class="label">Uncashed</span>
+      <span class="value text-warning">
+        ${{ dashboardData.uncashed | number:'1.2-2' }}
+      </span>
+    </div>
 
   </div>
 
-  <div class="admin-card">
-
+  <!-- REFERRAL STATS -->
+  <div class="admin-card premium-card">
     <h3>Referral Statistics</h3>
 
-    <table class="admin-table">
-
+    <table class="premium-table">
       <thead>
         <tr>
-          <th>Generation</th>
-          <th>Total </th>
-          <th>Active </th>
-          <!-- <th>Referral Count</th> -->
-          <th> Amount</th>
+          <th>Gen</th>
+          <th>Total</th>
+          <th>Active</th>
+          <th>Amount</th>
         </tr>
       </thead>
 
       <tbody>
-
         <tr *ngFor="let gen of ['generation_1','generation_2','generation_3']">
-
-          <td>{{ gen.replace('generation_',' ') }}</td>
-
+          <td>G{{ gen.replace('generation_','') }}</td>
           <td>{{ dashboardData.total[gen] }}</td>
-
-          <td>{{ dashboardData.active[gen] }}</td>
-
-          <td>${{ dashboardData.referral[gen].amount|number:"1.2-2" }}</td>
-
+          <td class="text-success">{{ dashboardData.active[gen] }}</td>
+          <td>${{ dashboardData.referral[gen].amount | number:'1.2-2' }}</td>
         </tr>
-
       </tbody>
-
     </table>
+  </div>
+
+  <!-- ACTIVITY GRID -->
+  <div class="activity-grid">
+
+    <!-- Deposit -->
+    <div class="admin-card premium-card">
+      <h3>Deposits</h3>
+      <table class="premium-table">
+        <tr *ngFor="let gen of ['generation_1','generation_2','generation_3']">
+          <td>G{{ gen.replace('generation_','') }}</td>
+          <td class="text-success">
+            ${{ dashboardData.deposit[gen].amount | number:'1.2-2' }}
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Withdraw -->
+    <div class="admin-card premium-card">
+      <h3>Withdrawals</h3>
+      <table class="premium-table">
+        <tr *ngFor="let gen of ['generation_1','generation_2','generation_3']">
+          <td>G{{ gen.replace('generation_','') }}</td>
+          <td class="text-danger">
+            ${{ dashboardData.withdraw[gen].amount | number:'1.2-2' }}
+          </td>
+        </tr>
+      </table>
+    </div>
 
   </div>
 
-    
-
-    <div class="admin-card">
-
-      <h3>Deposit Activity</h3>
-      <table class="admin-table">
-
-        <tr *ngFor="let gen of ['generation_1','generation_2','generation_3']">
-
-          <td>{{ gen.replace('generation_',' ') }}</td>
-
-          <td> ${{ dashboardData.deposit[gen].amount |number:"1.2-2" }}</td>
-
-        </tr>
-        </table>
-
-      <tr *ngFor="let gen of ['generation_1','generation_2','generation_3']">
-
-        <td>{{ gen.replace('generation_',' ') }}</td>
-
-
-      <td>Amount: {{ dashboardData.deposit[gen].amount |number:"1.2-2" }}</td>
-
-      </tr>
-
-      </div>
-
-      <div class="admin-card">
-
-        <h3>Withdraw Activity</h3>
-        <table class="admin-table">
-
-          <tr *ngFor="let gen of ['generation_1','generation_2','generation_3']">
-
-            <td>{{ gen.replace('generation_',' ') }}</td>
-
-            <td> ${{ dashboardData.withdraw[gen].amount |number:"1.2-2" }}</td>
-
-          </tr>
-          </table>
-
-        <tr *ngFor="let gen of ['generation_1','generation_2','generation_3']">
-
-          <td>{{ gen.replace('generation_',' ') }}</td>
-
-        <!-- <td>Count: {{ dashboardData.rebate[gen].count }}</td> -->
-
-        <td>Amount: {{ dashboardData.withdraw[gen].amount |number:"1.2-2" }}</td>
-
-        </tr>
-
-        </div>
 </div>
