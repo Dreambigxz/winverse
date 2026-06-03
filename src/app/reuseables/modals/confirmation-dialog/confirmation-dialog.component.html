@@ -1,19 +1,47 @@
-<div class="dialog-header" *ngIf="data.title || data.message">
+<div class="confirm-dialog">
 
-  <span class="dialog-title">
-    {{ data.title || 'Confirm' }}
-  </span>
+  <div class="dialog-icon">
 
-  <span class="dialog-separator"> | </span>
+    ⚠️
 
-  <span
-    class="dialog-message"
-    [innerHTML]="data.message || 'Are you sure you want to continue with this request?'">
-  </span>
+  </div>
 
-</div>
+  <div class="dialog-header">
 
-<div class="dialog-actions">
-  <button mat-button class="btn-cancel" (click)="cancel()">NO</button>
-  <button mat-flat-button color="primary" class="btn-confirm" (click)="confirm()">YES</button>
+    <h3>
+
+      {{ data.title || 'Confirmation Required' }}
+
+    </h3>
+
+    <p
+      [innerHTML]="data.message || 'Are you sure you want to continue with this request?'"
+    >
+
+    </p>
+
+  </div>
+
+  <div class="dialog-actions">
+
+    <button
+      class="btn-cancel"
+      (click)="cancel()"
+    >
+
+      Cancel
+
+    </button>
+
+    <button
+      class="btn-confirm"
+      (click)="confirm()"
+    >
+
+      Continue
+
+    </button>
+
+  </div>
+
 </div>

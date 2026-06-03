@@ -5,137 +5,358 @@
 
   <section class="app-container">
 
+
+
     <div class="account-page">
 
-      <div class="profile-card">
-        <div class="avatar">
-          <img class="avatar" src="https://cyber.comolho.com/static/img/avatar.png" alt="">
-        </div>
+      <!-- PROFILE -->
 
-        <div class="profile-info">
-          <h3>{{quickNav.storeData.store['username']}}</h3>
-          <span class="user-id">ID: {{quickNav.storeData.store['profile']?.id}} <i (click)="quickNav.copy(quickNav.storeData.store['profile']?.id, 'ID copied')" class="ti ti-copy"></i></span>
-        </div>
+      <div class="account-hero">
 
-        <div class="select-language">
-          <select class="notranslate trans-select" (change)="quickNav.changeLanguage($event)">
-            <option disabled='disabled' selected='selected'>change language </option>
-            <option  *ngFor="let lang of quickNav.langKeys" [value]="lang">
-                  {{ lang }}
-                </option>
-          </select>
-        </div>
-      </div>
+          <div class="hero-top">
 
-      <app-account-summary></app-account-summary>
+            <div class="avatar">
 
+              {{quickNav.storeData.store['username']?.[0]|titlecase}}
 
-       <!-- Quick Actions -->
-       <div class="actions-grid">
-
-         <!-- <div (click)="quickNav.go('lucky-wheel')" class="action-item voucher-item">
-
-              <div class="icon-wrapper">
-                <i class="ti ti-ticket"></i>
-
-                <span class="badge" >
-                  {{quickNav.storeData.store["available_wheel"]}}
-                </span>
-              </div>
-
-              <span>Lucky <br> wheel</span>
-
-            </div> -->
-
-            <div (click)="appManager.installApp()" class="action-item">
-              <i class="ti ti-download"></i>
-              <span>APP</span>
             </div>
 
-        <div (click)="quickNav.openTab('')" class="action-item">
-          <i class="ti ti-headset"></i>
-          <span>Support</span>
+            <div class="user-info">
+
+              <h2>
+
+                {{quickNav.storeData.store['username']}}
+
+              </h2>
+
+              <div class="user-meta">
+
+              <div class="vip-chip">
+
+                <span class="vip-dot"></span>
+
+                VIP {{quickNav.storeData.store['vip_system']?.active?.vip_level||0}}
+
+              </div>
+
+              <!-- <span class="user-id">
+
+                #12345
+
+              </span> -->
+
+            </div>
+
+            </div>
+
+          </div>
+
+          <div class="balance-section">
+
+            <small>
+
+              Available Balance
+
+            </small>
+
+            <h1>
+
+              {{quickNav.storeData.store['wallet']?.balance.new|currencyConverter:true}}
+
+            </h1>
+
+          </div>
+
+          <div class="wallet-actions">
+
+            <button (click)="quickNav.go('deposit')" class="deposit-btn">
+
+              Deposit
+
+            </button>
+
+            <button (click)="quickNav.go('withdraw')" class="withdraw-btn">
+
+              Withdraw
+
+            </button>
+
+          </div>
+
         </div>
 
-        <div (click)="quickNav.openTab('https://t.me/K57_Officialbetting')" class="action-item">
-          <i class="ti ti-brand-telegram"></i>
-          <span>Telegram <br> channel</span>
+      <!-- QUICK ACTIONS -->
+
+      <div class="section-title">
+
+        Quick Actions
+
+      </div>
+
+      <div class="quick-grid">
+
+        <div (click)="quickNav.go('transaction')" class="quick-card">
+          📄
+          <span>Transactions</span>
         </div>
 
-        <div (click)="openModal()" class="action-item">
-          <i class="ti ti-shield-lock"></i>
+        <div class="quick-card" (click)="quickNav.go('invite/referrals')">
+          👥
+          <span>Referrals</span>
+        </div>
+
+        <div class="quick-card" (click)="quickNav.go('invite/rebate')">
+          💰
+          <span>Rebates</span>
+        </div>
+
+        <div class="quick-card">
+          🎁
+          <span>Gifts</span>
+        </div>
+
+        <div (click)="openModal()" class="quick-card">
+          🔐
           <span>Security</span>
         </div>
 
+        <div class="quick-card">
+          🎧
+          <span>Help</span>
+        </div>
+
+        <div (click)="appManager.installApp()" class="quick-card">
+          📲
+          <span>App</span>
+        </div>
+
+        <div (click)="quickNav.authService.logout(false)" class="quick-card">
+          ⏻
+          <span>Logout</span>
+        </div>
+
       </div>
 
+      <!-- LANGUAGE -->
 
-       <!-- Settings -->
-       <div class="menu-list">
+      <div class="section-title">
 
-        <div (click)="quickNav.go('transaction')" class="menu-item">
-          <span class="menu-left">
-            <i class="ti ti-history"></i>
-            Transaction History
-          </span>
-          <i class="ti ti-chevron-right"></i>
+        Preferences
+
+      </div>
+
+      <div class="language-card">
+
+        <div class="quick-icon">
+
+          🌐
+
         </div>
 
-        <div (click)="quickNav.go('invite-rewards')" class="menu-item">
-          <span class="menu-left">
-            <i class="ti ti-gift"></i>
-            Invite Rewards
+        <div class="language-content">
+
+          <span class="language-title">
+
+            Language
+
           </span>
-          <i class="ti ti-chevron-right"></i>
+
+          <select
+            class="trans-select"
+            (change)="quickNav.changeLanguage($event)"
+          >
+
+            <option disabled selected>
+              Select Language
+            </option>
+
+            <option
+              *ngFor="let lang of quickNav.langKeys"
+              [value]="lang"
+            >
+              {{ lang }}
+            </option>
+
+          </select>
+
         </div>
 
-        <div (click)="quickNav.go('vip')" class="menu-item">
-          <span class="menu-left">
-            <i class="ti ti-diamond"></i>
-            VIP System
-          </span>
-          <i class="ti ti-chevron-right"></i>
+      </div>
+
+      <!-- STATS -->
+
+      <div class="section-title">
+
+        Transaction stats
+
+      </div>
+
+      <div *ngIf="quickNav.storeData.store['wallet']?.history as stats" class="stats-grid">
+
+        <div class="stat-card">
+
+          <small>Total Deposits</small>
+
+          <strong>{{stats.deposit|currencyConverter:true}}</strong>
+
+        </div>
+
+        <div class="stat-card">
+
+          <small>Total Withdrawals</small>
+
+          <strong>{{stats.withdraw|currencyConverter:true}}</strong>
+
         </div>
 
 
 
-        <div (click)="quickNav.go('notifications')" class="menu-item">
-          <span class="menu-left notification-icon">
+      </div>
 
-            <div class="icon-wrapper">
-              <i class="ti ti-message"></i>
+      <div class="section-title">
 
-              <!-- notification badge -->
-              <span class="badge" *ngIf="notificationCount > 0">
-                {{quickNav.storeData.store['notification']?.unseen?.length || 0}}
-              </span>
+        Betting stats
+
+      </div>
+
+      <div *ngIf="quickNav.storeData.store['betDir']?.records as stats"  class="bet-performance">
+
+        <!-- SECURE -->
+
+        <div class="bet-card secure">
+
+          <div class="bet-header">
+
+            <span>
+
+              🛡️ Secure Bets
+
+            </span>
+
+            <strong>
+
+              {{ stats.true?.won?.percentage || 0 }}%
+
+            </strong>
+
+          </div>
+
+          <div class="bet-label">
+
+            Winning Rate
+
+          </div>
+
+          <div class="bet-grid">
+
+            <div>
+
+              <small>Bets</small>
+
+              <strong>
+                {{ stats.true?.won?.count || 0  }}
+              </strong>
+
             </div>
 
-            Notifications
 
-          </span>
 
-          <i class="ti ti-chevron-right"></i>
+            <div>
+
+              <small>Profit</small>
+
+              <strong class="profit">
+                {{ stats.true?.won?.won_amount || 0 |currencyConverter:true }}
+              </strong>
+
+            </div>
+
+            <div>
+
+              <small>Loss</small>
+
+              <strong>
+                {{ stats.true?.loss?.count || 0  }} / {{ stats.true?.loss?.stake_amount || 0 |currencyConverter:true }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
         </div>
 
+        <!-- RISK -->
 
-        <!-- <div (click)="appManager.installApp()" class="menu-item">
-          <span class="menu-left">
-            <i class="ti ti-download"></i>
-            Get App
-          </span>
-          <i class="ti ti-chevron-right"></i>
-        </div> -->
+        <div class="bet-card risk">
+
+          <div class="bet-header">
+
+            <span>
+
+              ⚡ Risk Bets
+
+            </span>
+
+            <strong>
+
+              {{ stats.false?.won?.percentage || 0}}%
+
+            </strong>
+
+          </div>
+
+          <div class="bet-label">
+
+            Winning Rate
+
+          </div>
+
+          <div class="bet-grid">
+
+            <div>
+
+              <small>Bets Won</small>
+
+              <strong>
+                {{ stats.false?.won?.count }}
+              </strong>
+
+            </div>
+
+
+
+            <div>
+
+              <small>Profit</small>
+
+              <strong class="profit">
+                {{ stats.false?.won?.won_amount || 0 |currencyConverter:true }}
+              </strong>
+
+            </div>
+
+            <div>
+
+              <small>Loss</small>
+
+              <strong>
+                {{ stats.false?.loss?.count || 0  }} / {{ stats.false?.loss?.stake_amount|| 0 |currencyConverter:true }}
+
+              </strong>
+
+            </div>
+
+          </div>
+
+
+
+        </div>
 
       </div>
 
+    </div>
 
-       <!-- Logout -->
-       <button (click)="quickNav.authService.logout(false)" class="logout-btn">
-         Logout
-       </button>
-
-     </div>
  </section>
  </section>
 

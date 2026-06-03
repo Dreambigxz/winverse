@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 // import { SpinnerComponent } from '../reuseables/http-loader/spinner.component';
 
 import { WalletService } from '../reuseables/services/wallet.service';
+import { TruncateCenterPipe } from '../reuseables/pipes/truncate-center.pipe';
 
 // import { DepositComponent } from "./deposit/deposit.component";
 // import { WithdrawComponent } from "./withdraw/withdraw.component";
@@ -14,6 +15,7 @@ import { WalletService } from '../reuseables/services/wallet.service';
   selector: 'app-wallet',
   imports: [
     CommonModule,
+    TruncateCenterPipe
   ],
   templateUrl: './wallet.component.html',
   styleUrl: './wallet.component.css'

@@ -3,50 +3,144 @@
   <div *ngIf="walletService.quickNav.storeData.store['deposit']" class="deposit-card">
 
     <!-- NETWORK SELECT -->
-    <div class="network-select">
-      <div
-        *ngFor="let curr of walletService.getVisibleCrptoNetwork(); let i=index"
-        class="network-chip"
-        [class.active]="walletService.selectedCryptoMethod === curr.code"
-        (click)="walletService.selectedCryptoMethod = curr.code">
+    <div *ngIf="walletService.getCrypto(walletService.selectedData.code) as curr" class="deposit-page">
 
-        <img [src]="walletService.cryptos[i].img" alt="">
-        <span>{{ walletService.cryptos[i].label }}</span>
+        <!-- NETWORK -->
+
+        <div  class="network-header">
+
+          <img
+            [src]="curr.img"
+            alt=""
+          >
+
+          <div>
+
+            <h2>
+              {{ curr.label }}
+            </h2>
+
+            <span>
+              Deposit Channel
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- QR -->
+
+        <div class="qr-card">
+
+          <img [src]="'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + walletService.payAddress" />
+
+        </div>
+
+        <!-- ADDRESS -->
+
+        <div class="address-card">
+
+          <div class="section-label">
+
+            Wallet Address
+
+          </div>
+
+          <div class="address-box">
+
+            <span>
+
+              {{walletService.payAddress}}
+
+            </span>
+
+            <button (click)="walletService.quickNav.copy(walletService.payAddress, 'Address copied')">
+
+              Copy
+
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- INFO -->
+
+        <div class="info-card">
+
+          <div class="info-row">
+
+            <span>
+              Minimum Deposit
+            </span>
+
+            <strong>
+              {{ walletService.selectedData?.symbol }}
+              {{ walletService.minimumPayment | number:'1.2-2' }}
+            </strong>
+
+          </div>
+
+          <div class="info-row">
+
+            <span>
+              Network
+            </span>
+
+            <strong>
+              {{curr.label}}
+            </strong>
+
+          </div>
+
+          <div class="info-row">
+
+            <span>
+              Confirmations
+            </span>
+
+            <strong>
+              1 Block
+            </strong>
+
+          </div>
+
+        </div>
+
+        <!-- NOTICE -->
+
+        <div class="notice-card">
+
+          <h4>
+
+            Important Notice
+
+          </h4>
+
+          <ul>
+
+            <li>
+              Send only {{curr.network}} network.
+            </li>
+
+            <li>
+              Deposits via incorrect networks may be lost permanently.
+            </li>
+
+            <li>
+              Funds are credited automatically after confirmation.
+            </li>
+
+            <li>
+              Do not send unsupported tokens.
+            </li>
+
+          </ul>
+
+        </div>
+
       </div>
-    </div>
 
-    <!-- QR + ADDRESS BLOCK -->
-    <div class="deposit-box">
-
-      <!-- QR -->
-      <div class="qr-box">
-        <img [src]="'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + payAddress" />
-      </div>
-
-      <!-- ADDRESS -->
-      <div class="address-box">
-        <span class="addr">{{ walletService.payAddress | truncateCenter:18 }}</span>
-        <button (click)="walletService.quickNav.copy(walletService.payAddress, 'Address copied')" class="copy-btn">
-          Copy
-        </button>
-      </div>
-
-      <!-- MIN -->
-      <div class="min-box">
-        <span>Min Deposit</span>
-        <strong>
-          {{ walletService.selectedData?.symbol }}
-          {{ walletService.minimumPayment | number:'1.2-2' }}
-        </strong>
-      </div>
-
-    </div>
-
-    <!-- NOTICE -->
-    <div class="notice">
-      ⚠ Only send supported assets to this address.
-      Confirm transaction on the network before contacting support.
-    </div>
 
   </div>
 

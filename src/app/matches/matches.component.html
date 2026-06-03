@@ -1,4 +1,3 @@
-
 <div *ngIf="location.pathname==='/matches'">
   <app-header2></app-header2>
   <app-spinner></app-spinner>
@@ -6,129 +5,167 @@
 
 </div>
 
-  <div class="floating-toggle" (click)="toggleMode()">
-    <div class="toggle-pill" [class.risk]="mode === 'risk'">
+<section class="app-container ">
 
-      <div class="option safe">
-        SAFE
+
+
+  <div class="matches-header">
+
+    <div class="section-titled">
+
+      <span class="title-icon">
+
+        ⚽
+
+      </span>
+
+      Todays Matches
+
+      <span class="match-count">
+
+        {{ matchService.notStartedMatches.length }}
+
+      </span>
+
+    </div>
+
+
+
+      <div class="fixture-search">
+
+        <div class="fixture-search-inner">
+
+          <input
+            type="text"
+            placeholder="Find team, league or fixture by ID..."
+            [(ngModel)]="matchService.searchTerm"
+          >
+
+          <button
+
+            (click)="matchService.search()"
+          >
+
+            GO
+
+          </button>
+
+        </div>
+
       </div>
 
-      <div class="option risk">
-        RISK
-      </div>
+  </div>
 
-      <div class="slider"></div>
+  <div *ngIf="matchService.notStartedMatches.slice(0,slice) as matches">
+    <div  *ngFor="let i of matches">
+
+
+
+      <div class="fixture-card" (click)="router.navigate(['/game-details/'+i.fixtureID])"  *ngIf="i.fixture.fixture.timestamp | countdown :0:'data'| async as time;">
+
+        <!-- Header -->
+        <div class="fixture-header">
+
+          <div class="league-info">
+
+            <span class="time">
+              {{ i.fixture.fixture.timestamp | timeFormat:'time' }}
+            </span>
+
+            <span class="id">
+              ID {{ i.fixtureID }}
+            </span>
+
+            <span class="league">
+              {{ i.fixture.league?.country }} - {{ i.fixture.league.name   }}
+            </span>
+
+          </div>
+
+          <button class="stats-btn">
+            <!-- <mat-icon>insights</mat-icon> -->
+          </button>
+
+        </div>
+
+        <!-- Match Row -->
+        <div class="match-row">
+
+          <!-- Teams -->
+          <div class="teams">
+
+            <div class="team-block">
+              <div class="logo">
+                <img [src]="i.fixture.teams.home.logo" alt="Arsenal">
+              </div>
+
+              <div class="team-name">
+                {{ i.fixture.teams.home.name|truncateCenter:9 }}
+              </div>
+            </div>
+
+            <div class="team-block">
+
+              <div class="logo">
+                <img [src]="i.fixture.teams.away.logo" alt="Arsenal">
+              </div>
+              <div class="team-name">
+                {{ i.fixture.teams.away.name|truncateCenter:9 }}
+              </div>
+
+            </div>
+
+            <!-- <div class="extra-info">
+              +{{ match.markets }}
+
+              <img
+                src="assets/icons/stv.png"
+                alt=""
+              >
+            </div> -->
+
+          </div>
+
+          <!-- Timer -->
+          <div class="countdown-box">
+
+            <div class="time-block">
+              <span>{{ (time + '') | slice:2:4 }}</span>
+              <small>HR</small>
+            </div>
+
+            <div class="separator">:</div>
+
+            <div class="time-block">
+              <span>{{ (time + '') | slice:4:6 }}</span>
+              <small>MIN</small>
+            </div>
+
+            <div class="separator">:</div>
+
+            <div class="time-block">
+              <span>{{ (time + '') | slice:6:9 }}</span>
+              <small>SEC</small>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
 
     </div>
   </div>
 
-    <div class="screen" [class.container]="location.pathname==='/matches'">
+  <button
+    class="load-more-btn"
+    (click)="matchService.quickNav.go('/matches')"
+    *ngIf="location.pathname!=='/matches'"
+  >
 
-      <!-- SEARCH BAR -->
-      <div class="search-container">
-        <div class="search">
-          <span class="id">ID</span>
-          <input placeholder="Match, Team or League..." />
-          <div class="search-btn">🔍</div>
-        </div>
-      </div>
+    <i class="fa fa-plus-circle"></i>
 
-      <!-- SECTION HEADER -->
-      <div class="section-header">
-        <div class="title">
-          {{signal[mode]}} <span> {{mode|titlecase}} bet</span>
-        </div>
-        <!-- <div class="pill">Safe bet</div> -->
-      </div>
+    Load More Matches
 
-      <!-- EMpty data -->
-      <div *ngIf="!matchService[index_by].length;else hasMatches" class="empty-state">
-        <div class="no-data text-center">
-          <img
-            [src]="matchService.emptyDataUrl"
-            width="60"
-            alt="no data"
-          />
-          <p>No {{mode}} game found.</p>
+  </button>
 
-        </div>
-      </div>
-
-      <!-- MATCH CARD -->
-      <ng-template #hasMatches>
-
-        <div class="page-wrapper" *ngIf="matchService[index_by].slice(0,slice) as matches">
-
-          <div *ngFor="let i of matches; let in = index">
-            <div *ngIf="i.fixture.fixture.timestamp
-                 | countdown:0:'seconds'
-                 | async as remaining" class="card">
-
-
-              <!-- Top Row -->
-              <div class="card-top">
-                <div (click)="router.navigate(['/game-details/'+i.fixtureID])" class="league">{{i.fixture.league.name|truncateCenter:11}}</div>
-                <div (click)="router.navigate(['/game-details/'+i.fixtureID])"  class="match-id">ID: {{i.fixtureID}} <i (click)="matchService.quickNav.copy(i.fixtureID, 'Game id copied')" class="ti ti-copy copy"></i></div>
-              </div>
-
-              <!-- Middle -->
-              <div (click)="router.navigate(['/game-details/'+i.fixtureID])" class="card-body">
-
-                <!-- Teams -->
-                <div class="teams">
-
-                  <!-- Team 1 -->
-                  <div class="team-block">
-                    <div class="logo">
-                      <img [src]="i.fixture.teams.home.logo" alt="Arsenal">
-                    </div>
-                    <div class="name">{{i.fixture.teams.home.name|truncateCenter:9}}</div>
-                  </div>
-
-                  <!-- VS -->
-                  <div class="vs">VS</div>
-
-                  <!-- Team 2 -->
-                  <div class="team-block">
-                    <div class="logo">
-                      <img [src]="i.fixture.teams.away.logo" alt="Sporting CP">
-                    </div>
-                    <div class="name">{{i.fixture.teams.away.name|truncateCenter:9}}</div>
-                  </div>
-
-                </div>
-
-                <!-- Timer -->
-                <div class="timer">
-
-                  <svg width="80" height="80">
-                    <circle cx="40" cy="40" r="32"></circle>
-
-                    <circle cx="40" cy="40" r="32"
-                      [attr.stroke-dasharray]="circumference"
-                      [attr.stroke-dashoffset]="getDashOffset(remaining)">
-                    </circle>
-                  </svg>
-
-                  <!-- Time -->
-                  <div class="time">
-                    {{ formatTime(remaining) }}
-                  </div>
-
-                </div>
-
-              </div>
-
-              <!-- Bottom -->
-              <div class="card-bottom">
-                <div class="date">📅 {{ i.fixture.fixture.timestamp | timeFormat:'fullDate' }}</div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </ng-template>
-
-
-    </div>
+</section>

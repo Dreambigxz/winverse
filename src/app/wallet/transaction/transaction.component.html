@@ -6,112 +6,190 @@
 <div class="transactions-container app-container">
 
   <!-- 🔹 Date Filter -->
-  <form [formGroup]="filterForm" class="filter-bar">
-    <div class="date-picker-container">
-     <mat-form-field appearance="outline" class="date-range-field">
-       <mat-label>Select Date Range</mat-label>
-       <mat-date-range-input [rangePicker]="picker" formGroupName="range">
-         <input matStartDate formControlName="start" placeholder="Start date">
-         <input matEndDate formControlName="stop" placeholder="End date">
-       </mat-date-range-input>
-       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-       <mat-date-range-picker #picker></mat-date-range-picker>
-     </mat-form-field>
+    <form [formGroup]="filterForm" class="filter-bar">
+      <div class="date-picker-container">
+       <mat-form-field appearance="outline" class="date-range-field">
+         <mat-label>Select Date Range</mat-label>
+         <mat-date-range-input [rangePicker]="picker" formGroupName="range">
+           <input matStartDate formControlName="start" placeholder="Start date">
+           <input matEndDate formControlName="stop" placeholder="End date">
+         </mat-date-range-input>
+         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+         <mat-date-range-picker #picker></mat-date-range-picker>
+       </mat-form-field>
 
-     <button mat-raised- class="btn btn-md btn-outline-secondary filter-btn" (click)="filterByDate()">
-       <i class="ti ti-filter"></i>  Filter
-     </button>
+       <button mat-raised- class="btn btn-md btn-outline-secondary filter-btn" (click)="filterByDate()">
+         <i class="ti ti-filter"></i>  Filter
+       </button>
+      </div>
+     </form>
+
+
+
+   <div *ngIf="storeData.store['transactions'] as transactions" class="transactions-page">
+
+        <div class="page-header">
+
+          <h2>
+
+            Records
+
+          </h2>
+
+          <span class="count">
+
+            {{transactions.length}}
+
+          </span>
+
+        </div>
+
+        <div
+          class="transaction-card"
+          *ngFor="let tx of transactions"
+          [class.deposit]="tx.type === 'deposit'"
+          [class.withdraw]="tx.type === 'withdraw'"
+        >
+
+          <!-- TOP -->
+
+          <div class="tx-top">
+
+            <div class="tx-icon">
+
+              {{ tx.type === 'deposit' ? '↓' : '↑' }}
+
+            </div>
+
+            <div class="tx-info">
+
+              <strong>
+
+                {{ tx.type | titlecase }}
+
+              </strong>
+
+              <span>
+
+                {{ tx.method }}
+
+              </span>
+
+            </div>
+
+            <div
+              class="tx-status"
+              [ngClass]="tx.status"
+            >
+
+              {{ tx.status | titlecase }}
+
+            </div>
+
+          </div>
+
+          <!-- AMOUNT -->
+
+          <div class="tx-amount">
+
+            <span
+              [class.credit]="tx.type === 'deposit'"
+              [class.debit]="tx.type === 'withdraw'"
+            >
+
+              {{ tx.type === 'deposit' ? '+' : '-' }}
+              {{ tx.currency }}
+              {{ tx.amount }}
+
+            </span>
+
+          </div>
+
+          <!-- DETAILS -->
+
+          <div class="tx-details">
+
+            <div class="detail-row">
+
+              <span>
+                Reference
+              </span>
+
+              <strong>
+                {{ tx.txref }}
+              </strong>
+
+            </div>
+
+            <div class="detail-row">
+
+              <span>
+                Date
+              </span>
+
+              <strong>
+                {{ tx.created_at | date:'medium' }}
+              </strong>
+
+            </div>
+
+            <div class="detail-row">
+
+              <span>
+                Fee
+              </span>
+
+              <strong>
+                {{ tx.currency }} {{ tx.processFee }}
+              </strong>
+
+            </div>
+
+            <div class="detail-row">
+
+              <span>
+                Method
+              </span>
+
+              <strong>
+                {{ tx.method }}
+              </strong>
+
+            </div>
+
+          </div>
+
+          <!-- ACTIONS -->
+
+          <!-- <div class="tx-actions">
+
+            <button
+              class="details-btn"
+            >
+
+              View Details
+
+            </button>
+
+            <button
+              *ngIf="tx.status === 'pending'"
+              class="cancel-btn"
+            >
+
+              Cancel
+
+            </button>
+
+          </div> -->
+
+        </div>
+
+
+        <div *ngIf="!transactions.length">
+          <app-empty-state></app-empty-state>
+
+
+          </div>
     </div>
-   </form>
 
-   <div class="tx-list">
-
-     <div
-       *ngFor="let tx of storeData.store['transactions']"
-       class="tx-item"
-       [class.deposit]="tx.type === 'deposit'"
-       [class.withdraw]="tx.type === 'withdraw'"
-       (click)="viewDetails(tx)"
-       >
-
-       <!-- LEFT ICON -->
-       <div class="tx-icon">
-         <span *ngIf="tx.type === 'deposit'">⬇</span>
-         <span *ngIf="tx.type === 'withdraw'">⬆</span>
-       </div>
-
-       <!-- MAIN CONTENT -->
-       <div class="tx-main">
-
-         <div class="tx-top">
-           <div class="tx-title">
-             {{ tx.type | titlecase }}
-           </div>
-
-           <div class="tx-amount">
-             {{ tx.amount | currencyConverter:true }}
-           </div>
-         </div>
-
-         <div class="tx-meta">
-           <span class="tx-date">
-             {{
-               tx.type.includes('vip')
-                 ? (tx.created_at | date:'MMM d, HH:mm')
-                 : (tx.timestamp | date:'MMM d, HH:mm')
-             }}
-           </span>
-
-           <span class="tx-status"
-             [class.awaiting]="tx.status === 'awaiting'"
-             [class.pending]="tx.status === 'pending'"
-             [class.completed]="tx.status === 'success'">
-
-             {{ tx.status | titlecase }}
-           </span>
-         </div>
-
-         <!-- EXPANDED DETAILS -->
-         <div *ngIf="expandedTraId === tx.id" class="tx-details">
-
-           <div class="detail-row">
-             <span>Fee</span>
-             <strong>{{ tx.processFee | currencyConverter:true }}</strong>
-           </div>
-
-           <div class="detail-row">
-             <span>Old</span>
-             <strong>{{ tx.old_bal | currencyConverter:true }}</strong>
-           </div>
-
-           <div class="detail-row">
-             <span>New</span>
-             <strong>{{ tx.new_bal | currencyConverter:true }}</strong>
-           </div>
-
-           <div class="detail-row mono">
-             <span>ID</span>
-             <strong>{{ tx.sessionID || '—' }}</strong>
-           </div>
-
-         </div>
-
-       </div>
-
-       <!-- RIGHT ACTION -->
-       <div class="tx-action" >
-         {{ expandedTraId === tx.id ? '−' : '+' }}
-       </div>
-
-     </div>
-
-    </div>
-
-    <!-- EMPTY -->
-    <div *ngIf="!storeData.store['transactions']?.length" class="empty-state">
-     <div class="no-data">
-       <img src="https://cdn.jsdelivr.net/npm/@tabler/icons/icons/database-off.svg">
-       <p>No transactions yet</p>
-     </div>
-    </div>
   </div>

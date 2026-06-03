@@ -6,3 +6,15 @@ sub: #a034fa
 
 ____NEW___
 Main: #ff9800 -> fadded/liht #ffeb3b
+
+MAIN><420a0a cd2d05
+
+MAIN 940202
+DARK <> 310b0b
+
+lighter on main #7d0202
+
+
+MAIN: 1d0b1f
+LIGHT: cd7fd6
+MAIN 3a0751

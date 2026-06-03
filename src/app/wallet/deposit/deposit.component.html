@@ -1,10 +1,10 @@
 <app-header2></app-header2>
 <app-spinner></app-spinner>
 
-<div class="wallet-page app-container">
+<div *ngIf="quickNav.storeData.get('wallet')" class="wallet-page app-container">
 
         <app-wallet></app-wallet>
-        
+
        <div *ngIf="walletService.activeChannel==='crypto'">
          <app-crypto></app-crypto>
        </div>

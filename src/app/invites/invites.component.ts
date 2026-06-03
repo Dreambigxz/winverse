@@ -24,8 +24,6 @@ interface GenerationData {
   last_updated?: string | null;
 }
 
-
-
 @Component({
   selector: 'app-invite',
   imports: [
@@ -65,7 +63,7 @@ export class InvitesComponent {
 
   makeRefLink() {
     const RefCode = this.quickNav.storeData.get('refDir')['RefCode'];
-    this.refLink = `${window.location.origin}/sign-up?ref=${RefCode}`;
+    this.refLink = `${window.location.origin}?join&ref=${RefCode}`;
 
     if (!this.frozen_comm&&this.frozen_comm!==0) {
       this.getFrozenComm()
@@ -137,6 +135,29 @@ export class InvitesComponent {
 
     const { currentDate, firstNextMonth } = this.quickNav.getDateRange();
     return firstNextMonth
+  }
+
+  shareReferral(referralLink:any) {
+
+    console.log("shareing");
+
+    if (navigator.share) {
+      console.log("now share");
+
+      navigator.share({
+        title: 'Join and Earn',
+        text: 'Sign up using my referral link and start earning.',
+        url: referralLink
+      });
+
+    } else {
+
+      navigator.clipboard.writeText(referralLink);
+
+      alert('Referral link copied');
+
+    }
+
   }
 
 }

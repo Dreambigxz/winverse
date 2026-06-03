@@ -37,6 +37,7 @@ export class MatchService {
 
   emptyDataUrl = 'assets/images/empty-box.png'
   noMoreData = false
+  market_data: any
 
   setFixtures(){
 
@@ -148,8 +149,10 @@ export class MatchService {
       if (match) {
         match['secured'] = true;
         this.CPG.push(match);
+        this.market_data = element.data
         cpg.length = 0
       }
+
     });
 
   }
@@ -238,10 +241,6 @@ export class MatchService {
 
     const trade =  !["book_bet",'extra_bet'].includes(processor)
 
-    console.log("minimumStake", parseFloat(minimumStake), this.minimumStake);
-    console.log({"this.stakeAmount":parseFloat(this.stakeAmount)});
-
-
     if (trade&&parseFloat(minimumStake)>parseFloat(this.stakeAmount)) {
       this.quickNav.alert(`You need at least ${minimumStake} to bet!`,'info')
       return
@@ -269,7 +268,7 @@ export class MatchService {
           }
       }
     })
-  },processor.replace('_'," "), trade?`Confirming   ${processor.split('_')[0]} amount with ${this.storeData.get('wallet').init_currency.symbol}${slipData.stakeAmount} ?`:'')
+  },processor.replace('_'," "), trade?`Y    ${processor.split('_')[0]} amount with ${this.storeData.get('wallet').init_currency.symbol}${slipData.stakeAmount} ?`:'')
   // },processor.replace('_'," "), `About to ${processor.split('_')[0].replace('e','').replace("!",'')}ing bet with ${this.storeData.get('wallet').init_currency.symbol}${slipData.stakeAmount} ?`)
 
   }
@@ -280,6 +279,8 @@ export class MatchService {
  }
 
   async search() {
+
+    if(!this.searchTerm)return
 
    const term = this.searchTerm.toLowerCase()//this.searchTerm.toLowerCase();
    const matches = await this.notStarted();
@@ -295,8 +296,6 @@ export class MatchService {
 
   toggleSlip() {
      this.isSlipVisible = !this.isSlipVisible;
-     // console.log({"this.isSlipVisible": this.isSlipVisible});
-
    }
 
   async loadMore(stop = 50) {

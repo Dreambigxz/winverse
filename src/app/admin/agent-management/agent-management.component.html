@@ -100,7 +100,7 @@
               <div class="item-row">
                 <span class="label">Company Games</span>
                 <span class="value">
-                  <strong class="text-bold">${{ user.bet_history?.records?.true?.won?.won_amount || 0 }}</strong> / {{ user.bet_history?.records?.true?.won?.count || 0 }}
+                  <strong class="text-bold">${{ user.bet_history?.records?.true?.won?.won_amount || 0 | number:"1-2-2" }}</strong> / {{ user.bet_history?.records?.true?.won?.count || 0 }}
                 </span>
               </div>
 

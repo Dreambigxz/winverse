@@ -1,0 +1,32 @@
+<div class="quick-actions">
+
+  <div (click)="quickNav.go('deposit')" class="quick-card">
+    <div class="quick-icon">💰</div>
+    <span>Deposit</span>
+  </div>
+
+  <div (click)="quickNav.go('withdraw')" class="quick-card">
+    <div class="quick-icon">💸</div>
+    <span>Withdraw</span>
+  </div>
+
+  <div (click)="quickNav.go('transaction')" class="quick-card">
+    <div class="quick-icon">📄</div>
+    <span>History</span>
+  </div>
+
+  <div class="quick-card">
+    <div class="quick-icon">🎁</div>
+    <span>Rewards</span>
+  </div>
+
+  <div
+      class="quick-card"
+      [class.highlight]="!quickNav.storeData.store['checked_in']"
+      (click)="quickNav.checkIn()"
+    >
+    <div class="quick-icon">📅</div>
+    <span>{{!quickNav.storeData.store['checked_in']?"Check in": "Cheked in "}}</span>
+  </div>
+
+</div>

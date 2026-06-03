@@ -11,10 +11,16 @@ import { SwUpdate } from '@angular/service-worker';
 import { isDevMode } from '@angular/core';
 
 import { AuthService } from './reuseables/auth/auth.service';
+import { AuthModalComponent } from "./auth-modal/auth-modal.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [
+    RouterOutlet,
+    AuthModalComponent,
+    CommonModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -28,6 +34,8 @@ export class AppComponent {
 
   updateAvailable = false;
   private swRegistration: ServiceWorkerRegistration | null = null;
+
+  // authModal = inject(AuthModalComponent)
 
   constructor(private router: Router,private appManager: AppDownloadManager) {
 

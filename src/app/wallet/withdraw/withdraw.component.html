@@ -1,16 +1,19 @@
 <app-header2></app-header2>
 <app-spinner></app-spinner>
 
-<div class="wallet-page app-container">
+<div *ngIf="quickNav.storeData.get('wallet')" class="wallet-page app-container">
 
-      <app-wallet></app-wallet>
 
-       <div *ngIf="walletService.activeChannel==='crypto'">
-         <app-withdraw-crypto></app-withdraw-crypto>
+       <div *ngIf="!quickNav.storeData.store['withdraw']?.length; else hasInvoice">
+
+         <app-wallet></app-wallet>
+
+
+          <app-withdraw-form></app-withdraw-form>
        </div>
 
-       <div *ngIf="walletService.activeChannel==='local'">
-         <app-withdraw-local></app-withdraw-local>
-       </div>
+       <ng-template #hasInvoice>
+         <app-withdraw-invoice></app-withdraw-invoice>
+       </ng-template>
 
 </div>

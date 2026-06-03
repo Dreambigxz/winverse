@@ -1,0 +1,134 @@
+
+  <div  class="fixed_footer p3-bg rounded-5 -fluid" [class.show]="matchService.isSlipVisible">
+        <div (click)="matchService.toggleSlip()" *ngIf="matchService.addingFixture" class="fixed_footer__head py-3 px-4">
+            <div class="d-flex justify-content-between">
+                <div  class="fixed_footer__head-betslip d-flex align-items-center gap-2">
+                    <button class="footfixedbtn" type="button" >
+                      <span class="text-right">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div  class="fixed_footer__content ">
+            <div class="box">
+
+                <div class="tab-container">
+                    <div class="tab-content">
+
+                      <div  *ngIf="matchService.addingFixture; else loadBookinng" class="">
+                        <div class="bet-panel">
+
+                          <!-- TOP INFO -->
+                          <div *ngIf="matchService.addingFixture as fx"  class="bet-info ">
+
+                            <div class="info-box">
+                              <span class="label">Selected Outcome</span>
+                              <span class="value">{{ fx.selectedScore.value }}</span>
+                            </div>
+
+                            <div class="info-box highlight">
+                              <span class="label">Yield</span>
+                              <span class="value positive">+{{ fx.selectedScore.odds }}%</span>
+                            </div>
+
+                          </div>
+
+                          <!-- INPUT -->
+                          <div class="stake-section ">
+
+                            <div class="stake-head">
+                              <span>Enter Stake</span>
+                              <span class="wallet">Balance: {{storeData.store['wallet']?.balance.new|currencyConverter:true}}</span>
+                            </div>
+
+                            <div class="stake-input">
+                              <span class="currency">{{storeData.store['wallet']?.init_currency.symbol}}</span>
+                              <input [(ngModel)]="matchService.stakeAmount" type="number" placeholder="amount" />
+                              <button (click)="matchService.stakeAll()">MAX</button>
+                            </div>
+
+
+                            <div
+                              *ngIf="storeData.store['wallet'] as walletData"
+                              class="amount-scroll"
+                            >
+
+                              <div class="amount-track">
+
+                                <span
+                                  *ngFor="let amt of amounts"
+                                  class="amount-chip"
+                                  [class.active]="selectedAmount === amt"
+                                  (click)="selectAmount(amt)"
+                                >
+                                  {{ amt | currencyConverter  }}
+                                </span>
+
+                              </div>
+
+                            </div>
+
+                          </div>
+
+                          <!-- RESULT -->
+                          <div class="result-box">
+
+                            <div class="row">
+                              <span>Projected Return</span>
+                              <span class="green">{{storeData.store['wallet']?.init_currency.symbol}}{{matchService.possibleWin|number:"1.5-5"}}</span>
+                            </div>
+
+                            <div class="row">
+                              <span>Estimated Gain</span>
+                              <span class="green">+{{storeData.store['wallet']?.init_currency.symbol}}{{matchService.profit|number:"1.5-5"}}</span>
+                            </div>
+
+                            <!-- <div class="row">
+                              <span>Service Fee</span>
+                              <span class="red">-${{ fee }}</span>
+                            </div> -->
+
+                          </div>
+
+                          <!-- CTA -->
+                          <div class="">
+                            <button (click)="matchService.slipHandler('trade_bet!')" type="submit">
+                              Confirm Position
+                            </button>
+                            <button (click)="matchService.slipHandler('book_bet')" *ngIf="storeData.store['is_staff']" type="submit" class="w-100 mb-6 primary">Company bet</button>
+                          </div>
+
+
+                        </div>
+                      </div>
+
+                      <ng-template #loadBookinng>
+
+                        <div class="border-four d-flex align-items-center justify-content-between pe-2 rounded-3 mb-4">
+                            <input
+                             placeholder="Coupon code"
+                             class="place-style"
+                              type="number">
+                        </div>
+
+                        <button type="button" class="cmn-btn px-5 py-3 w-100 mb-4">Load</button>
+
+
+                        </ng-template>
+
+                        <!-- <div class="fixed_footer__content-bottom d-flex align-items-center justify-content-between">
+                            <div class="right-border d-flex align-items-center gap-2">
+                                <i class="ti ti-trash n3-color fs-five cpoint"></i>
+                                <a href="javascript:void(0)" class="n3-color fs-seven">Sign In &amp; Bet</a>
+                            </div>
+                            <div class="right-border2 d-flex align-items-center justify-content-end gap-2">
+                                <i class="ti ti-settings n3-color fs-five cpoint"></i>
+                                <a href="javascript:void(0)" class="n3-color fs-seven">Settings</a>
+                            </div>
+                        </div> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

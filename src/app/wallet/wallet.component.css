@@ -1,66 +1,129 @@
-.toggle-wrap {
+.withdraw-method-card {
+
   display: flex;
-  justify-content: center;
-  margin-bottom: 16px;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-bottom: 1rem;
+
+  padding: 1rem;
+
+  border-radius: 1rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.03),
+      rgba(205,127,214,.04)
+    );
+
+  border:
+    .0625rem solid rgba(205,127,214,.08);
+
 }
 
-/* container */
-.toggle {
-  position: relative;
+.method-info {
+
   display: flex;
-  width: 220px;
-  background: #2a1f12;
-  border-radius: 14px;
-  padding: 4px;
-  border: 1px solid rgba(255,235,59,0.1);
-}
 
-/* sliding background */
-.toggle-indicator {
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 50%;
-  height: calc(100% - 8px);
+  align-items: center;
 
-  background: linear-gradient(135deg, #ff9800, #ffeb3b);
-  border-radius: 10px;
+  gap: .8rem;
 
-  transition: all 0.3s ease;
-}
-
-/* move to right */
-.toggle-indicator.right {
-  left: calc(50% + 0px);
-}
-
-/* buttons */
-.toggle-btn {
   flex: 1;
-  text-align: center;
-  padding: 8px 0;
 
-  font-size: 13px;
-  font-weight: 500;
+}
 
-  color: #aaa;
+.method-icon {
+
+  width: 3rem;
+  height: 3rem;
+
+  border-radius: .9rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.2rem;
+
+  background:
+    rgba(205,127,214,.08);
+
+}
+
+.method-info small {
+
+  display: block;
+
+  color:
+    rgba(205,127,214,.7);
+
+  font-size: .7rem;
+
+}
+
+.method-info strong {
+
+  display: block;
+
+  margin-top: .15rem;
+
+  color: white;
+
+  font-size: .9rem;
+
+  font-weight: 700;
+
+}
+
+.method-info span {
+
+  display: block;
+
+  margin-top: .2rem;
+
+  color:
+    rgba(255,255,255,.6);
+
+  font-size: .72rem;
+
+}
+
+.change-method-btn {
+
+  height: 2.4rem;
+
+  padding: 0 1rem;
+
+  border: none;
+
+  border-radius: .75rem;
+
   cursor: pointer;
-  z-index: 1;
 
-  transition: 0.2s;
+  background:
+    rgba(205,127,214,.12);
+
+  border:
+    .0625rem solid rgba(205,127,214,.12);
+
+  color: #cd7fd6;
+
+  font-size: .75rem;
+
+  font-weight: 800;
+
+  transition: .2s ease;
+
 }
 
-/* active text */
-.toggle-btn.active {
-  color: #111;
-  font-weight: 600;
-}
+.change-method-btn:hover {
 
-/* hover */
-.toggle-btn:hover {
-  color: #fff;
-}
+  background:
+    rgba(205,127,214,.18);
 
-.toggle-indicator {
-  transition: left 0.25s ease, background 0.25s ease;
 }

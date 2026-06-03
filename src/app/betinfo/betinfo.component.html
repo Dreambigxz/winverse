@@ -11,100 +11,150 @@
         <div *ngIf="fixture; else expiredFixture">
             <div *ngIf="fixture.fixture.fixture.timestamp | countdown :0:'data'| async as time; else expiredFixture">
 
-              <div class="match-card">
+              <div class="card">
+                <div class="league-link">{{fixture.fixture.league.country}} - {{fixture.fixture.league.name}}</div>
 
-                  <!-- TOP -->
-                  <div class="top">
-                  <div class="league">● {{fixture.fixture.league.name}}</div>
-                  <div (click)="matchService.quickNav.copy(fixture.fixtureID)" class="match-id">ID: {{fixture.fixtureID}} ⧉</div>
-                  </div>
+                <div class="content">
+                  <!-- <button class="nav-btn">&lt;</button> -->
 
-                  <!-- TEAMS -->
                   <div class="teams">
-
-                  <div class="team">
-                    <div class="logo">
-                      <img [src]="fixture.fixture.teams.home.logo">
+                    <div class="team">
+                      <div class="team-logo">
+                        <img [src]="fixture.fixture.teams.home.logo" alt="">
+                      </div>
+                      <div class="team-name">{{fixture.fixture.teams.home.name}}</div>
                     </div>
-                    <div class="name">{{fixture.fixture.teams.home.name}}</div>
-                  </div>
 
-                  <div class="center">
-                    <div class="time">{{ fixture.fixture.fixture.timestamp * 1000 | date:'hh:mm' }}</div>
-                    <!-- <div class="vs">VS</div> -->
-                    <div class="date">{{ fixture.fixture.fixture.timestamp * 1000 | date:'dd/MM' }}</div>
-                  </div>
+                    <div class="match-info">
 
-                  <div class="team">
-                    <div class="logo">
-                      <img [src]="fixture.fixture.teams.away.logo">
+                        <div class="date">
+
+                          {{ fixture.fixture.fixture.timestamp | timeFormat:'shortDate' }}
+
+                        </div>
+
+                        <div class="day">
+
+                          {{ fixture.fixture.fixture.timestamp | timeFormat:'day' }}
+
+                        </div>
+
+                        <div class="time">
+
+                          {{ fixture.fixture.fixture.timestamp | timeFormat:'time' }}
+
+                        </div>
+
+                      </div>
+
+                    <div class="team">
+                      <div class="team-logo modern-logo">
+                        <img [src]="fixture.fixture.teams.away.logo" alt="">
+                      </div>
+                      <div class="team-name">{{fixture.fixture.teams.away.name}}</div>
                     </div>
-                    <div class="name">{{fixture.fixture.teams.away.name}}</div>
                   </div>
 
-                  </div>
+                </div>
 
-                  <!-- COUNTDOWN -->
-                  <div class="countdown">
-
-                  <!-- <span>Starts in:</span> -->
-
-                  <div class="timer-box">
-                    <div class="t">{{ (time + '') | slice:2:4 }}</div>
-                    <div class="sep">:</div>
-                    <div class="t">{{ (time + '') | slice:4:6 }}</div>
-                    <div class="sep">:</div>
-                    <div class="t">{{ (time + '') | slice:6:9 }}</div>
-
-                    <!-- {{time}} -->
-                  </div>
-
-                  </div>
-
+                <!-- <div class="footer">
+                  <span class="game-id">Game ID 34673</span>
+                  <span class="live"><span class="live-dot">◉</span> Live In-Play Available</span>
+                  <span class="stv">S<span style="color:#333">tv</span></span>
+                </div> -->
               </div>
 
               <app-betslip *ngIf="matchService.isSlipVisible"></app-betslip>
 
 
-              <!-- market options -->
-              <div *ngIf="!matchService.isSlipVisible" class="market">
+              <div *ngIf="!matchService.isSlipVisible" class="correct-score-market">
 
-                <!-- Header -->
+                <!-- HEADER -->
+
                 <div class="market-header">
-                  <h3>Reverse scores</h3>
+
+                  <div class="market-title">
+
+                    <span class="dot"></span>
+
+                    Correct Score
+
+                  </div>
+
+                  <!-- <button class="counter-btn">
+
+                    Counters
+
+                  </button> -->
+
                 </div>
 
-                <!-- Grid -->
-                <div class="grid">
+                <!-- TABLE -->
 
-                  <ng-container *ngFor="let row of predictionRows">
+                <div class="score-table">
+
+                  <!-- HEADERS -->
+
+                  <div class="table-head">
+
+                    <span>
+                      {{ fixture.fixture.teams.home.name }}
+                    </span>
+
+                    <span>
+                      Draw
+                    </span>
+
+                    <span>
+                      {{ fixture.fixture.teams.away.name }}
+                    </span>
+
+                  </div>
+
+                  <!-- ROWS -->
+
+                  <div
+                    class="score-row"
+                    *ngFor="let row of fixture.odds"
+                  >
+
+                    <!-- COLUMN -->
 
                     <div
-                      *ngFor="let odd of row"
-                      class="box"
+                      class="score-box"
+                      *ngFor="let item of row"
+                      [class.empty]="item.value === '-'"
 
-                      (click)="matchService.showBetSlip(fixture,{odds:odd.odds,value:odd.value}); activeRow=odd.value; activeID=fixture.fixtureID"
+                      (click)="matchService.showBetSlip(fixture,{odds:item.odds,value:item.value}); activeRow=item.value; activeID=fixture.fixtureID"
 
-                      [class.active]="activeRow===odd.value && activeID===fixture.fixtureID"
-
-                      [class.disabled]="!odd.value || odd.value==='-' || excludeScores.includes(odd.value)"
+                      [class.active]="activeRow===item.value && activeID===fixture.fixtureID"
                     >
 
-                      <ng-container *ngIf="odd.value && odd.value !== '-' && !excludeScores.includes(odd.value)">
+                      <ng-container
+                        *ngIf="item.value !== '-'"
+                      >
 
-                        <div class="score">{{ odd.value }}</div>
-                        <div class="value">{{ odd.odds | number:'1.2-2' }}</div>
+                        <div class="score">
+
+                          {{ item.value }}
+
+                        </div>
+
+                        <div class="odd">
+
+                          {{ item.odds | number:'1.2-2' }}
+
+                        </div>
 
                       </ng-container>
 
                     </div>
 
-                  </ng-container>
+                  </div>
 
                 </div>
 
               </div>
-
 
             </div>
           </div>
@@ -120,14 +170,7 @@
 
     <section class="app-container">
       <ng-template #expiredFixture>
-        <div class="no-data text-center empty-state">
-          <img
-            [src]="matchService.emptyDataUrl"
-            width="60"
-            alt="no data"
-          />
-          <p>Invalid or expired fixture</p>
-        </div>
+          <app-empty-state></app-empty-state>
       </ng-template>
 
     </section>

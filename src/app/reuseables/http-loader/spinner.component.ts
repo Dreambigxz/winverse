@@ -11,27 +11,23 @@ import { Observable, of} from 'rxjs';
   imports: [ CommonModule],
 
   template: `
-    <div *ngIf="isLoading | async" class="spinner-overlay">
+  <div *ngIf="isLoading | async" class="spinner-overlay">
 
-    <div class="logo-container">
+      <div class="await-loader">
 
-      <div class="glow-ring"></div>
+      <div class="loader-ring"></div>
 
-      <img src="assets/img/favicon.svg"
-           alt="App Logo"
-           class="logo-float" />
+      <div class="loader-text">
 
+        Please wait...
+
+      </div>
+
+      </div>
     </div>
-
-    <div class="loading-text">
-      Securing connection...
-    </div>
-
-  </div>
 `,
 styles: [`
 
-    /* overlay */
   .spinner-overlay {
     position: fixed;
     inset: 0;
@@ -41,100 +37,122 @@ styles: [`
     justify-content: center;
 
     backdrop-filter: blur(2px);
-    background: rgba(20, 14, 6, 0.6);
+    background: rgba(20, 14, 6, 0.8);
 
     z-index: 2000;
     overflow: hidden;
   }
 
-  /* container */
-  .logo-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 
-  /* loading text */
-  .loading-text {
-    position: absolute;
-    bottom: 35%;
-    font-size: 13px;
-    color: #ffeb3b;
-    letter-spacing: 0.4px;
-    animation: fadePulse 1.6s infinite;
-  }
+  .await-loader {
 
-  @keyframes fadePulse {
-    0%,100% { opacity: .4 }
-    50% { opacity: 1 }
-  }
+      min-height: 12rem;
 
-  /* glow ring */
-  .glow-ring {
-    position: absolute;
+      display: flex;
 
-    width: 110px;
-    height: 110px;
+      flex-direction: column;
 
-    border-radius: 50%;
+      align-items: center;
 
-    background: radial-gradient(circle,
-      rgba(255,152,0,0.6),
-      rgba(255,235,59,0.2),
-      transparent
-    );
+      justify-content: center;
 
-    animation: pulseGlow 2s ease-in-out infinite;
-  }
+      gap: 1rem;
 
-  /* logo */
-  .logo-float {
-    width: 70px;
-    max-width: 35vw;
+      }
 
-    z-index: 2;
+      /* OUTER RING */
 
-    filter: drop-shadow(0 0 12px rgba(255,152,0,0.6));
+      .loader-ring {
 
-    animation: logoFloat 2.2s ease-in-out infinite;
-  }
+      width: 4rem;
+      height: 4rem;
 
-  /* float */
-  @keyframes logoFloat {
-    0%,100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
+      border-radius: 50%;
 
-  /* glow pulse */
-  @keyframes pulseGlow {
-    0%,100% {
-      transform: scale(.9);
-      opacity: .7;
-    }
-    50% {
-      transform: scale(1.25);
-      opacity: .2;
-    }
-  }
+      border:
+        .2rem solid rgba(205,127,214,.12);
 
-  /* mobile */
-  @media (max-width: 480px) {
+      border-top-color: #cd7fd6;
 
-    .logo-float {
-      width: 55px;
-    }
+      animation:
+        spin 1s linear infinite;
 
-    .glow-ring {
-      width: 90px;
-      height: 90px;
-    }
+      position: relative;
 
-  }
+      }
+
+      /* INNER GLOW */
+
+      .loader-ring::after {
+
+      content: '';
+
+      position: absolute;
+
+      inset: .4rem;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(205,127,214,.18),
+          transparent
+        );
+
+      }
+
+      /* TEXT */
+
+      .loader-text {
+
+      color:
+        rgba(255,255,255,.75);
+
+      font-size: .9rem;
+
+      font-weight: 700;
+
+      letter-spacing: .04rem;
+
+      animation:
+        fadePulse 1.5s ease infinite;
+
+      }
+
+      @keyframes spin {
+
+      from {
+
+        transform:
+          rotate(0deg);
+
+      }
+
+      to {
+
+        transform:
+          rotate(360deg);
+
+      }
+
+      }
+
+      @keyframes fadePulse {
+
+      0%,100% {
+
+        opacity: .5;
+
+      }
+
+      50% {
+
+        opacity: 1;
+
+      }
+
+      }
 
   `]
 })

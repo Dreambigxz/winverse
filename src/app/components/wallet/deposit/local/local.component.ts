@@ -5,11 +5,12 @@ import {  FormsModule } from '@angular/forms';
 import { WalletService } from '../../../../reuseables/services/wallet.service';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { CreatePinComponent } from '../../create-pin/create-pin.component';
+import { CurrencyConverterPipe } from '../../../../reuseables/pipes/currency-converter.pipe';
 
 
 @Component({
   selector: 'app-local',
-  imports: [CommonModule, FormsModule, InvoiceComponent, CreatePinComponent],
+  imports: [CommonModule, FormsModule, InvoiceComponent, CreatePinComponent, CurrencyConverterPipe],
   templateUrl: './local.component.html',
   styleUrls: ['./local.component.css', "../../wallet-styles.component.css"]
 })

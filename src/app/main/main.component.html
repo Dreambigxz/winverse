@@ -1,18 +1,27 @@
-<app-spinner></app-spinner>
 <app-header></app-header>
+<app-spinner></app-spinner>
 
 <!-- <app-quick-notifications *ngIf="storeData.get('notification')"></app-quick-notifications> -->
 
 
-<section class="page mt-30 page-wrapper">
+<section class="page  page-wrapper">
+
       <section class="app-container">
-        <app-account-summary></app-account-summary>
+        <app-slider></app-slider>
       </section>
 
-      <section class="app-container ">
+
+        <section class="app-container">
+          <app-quick-nav></app-quick-nav>
+        </section>
+
+
+      <section class="app-container">
+        <app-cpg></app-cpg>
+      </section>
+
         <app-matches></app-matches>
 
-      </section>
   </section>
 
 

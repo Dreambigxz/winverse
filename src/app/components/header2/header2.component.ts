@@ -41,7 +41,7 @@ export class Header2Component {
     // console.log({segments:segments.pop()});
 
     if (segments.includes("game-details")) {
-      this.pageName="Game Details"
+      this.pageName="Who will win"
     }else if(segments.includes("matches")){
       this.pageName='market'
     }else if(segments.includes("bethistory")){

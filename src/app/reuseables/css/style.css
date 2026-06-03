@@ -12,331 +12,122 @@
 .mt-30 { margin-top: 7rem; }
 .mt-40 { margin-top: 10rem; }
 
-.mb-1 { margin-top: 0.25rem; }
-.mb-2 { margin-top: 0.5rem; }
-.mb-3 { margin-top: 0.75rem; }
-.mb-4 { margin-top: 1rem; }
-.mb-5 { margin-top: 1.25rem; }
-.mb-6 { margin-top: 1.5rem; }
-.mb-8 { margin-top: 2rem; }
-.mb-10 { margin-top: 2.5rem; }
-.mb-12 { margin-top: 3rem; }
-.mb-16 { margin-top: 4rem; }
-.mb-20 { margin-top: 5rem; }
-.mb-30 { margin-top: 7rem; }
-.mb-40 { margin-top: 10rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-5 { margin-bottom: 1.25rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-10 { margin-bottom: 2.5rem; }
+.mb-12 { margin-bottom: 3rem; }
+.mb-16 { margin-bottom: 4rem; }
+.mb-20 { margin-bottom: 5rem; }
+.mb-30 { margin-bottom: 7rem; }
+.mb-40 { margin-bottom: 10rem; }
 
-input:focus{
-  outline:none;
-  border-color:#ff9800 !important;
+
+
+.text-white{
+  color: #fff !important;
 }
 
 
 /* FORM */
-.my-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+.form-group {
+
+  margin-bottom: .9rem;
+
 }
 
-/* FIELD */
-.premium-field {
-  display: flex;
-  flex-direction: column;
-}
+.form-group label {
 
-/* LABEL */
-.premium-field label {
+  display: block;
 
-  margin-bottom: 10px;
+  margin-bottom: .45rem;
 
-  color: #ffeb3b;
+  color:
+    rgba(205,127,214,.8);
 
-  font-size: 13px;
+  font-size: .78rem;
   font-weight: 700;
 
-  letter-spacing: 0.3px;
 }
 
-/* INPUT */
-.form-control {
+.form-group input {
 
-  height: 64px;
+  width: 100%;
 
-  display: flex;
-  align-items: center;
+  height: 3rem;
 
-  padding: 0 14px;
+  padding: 0 1rem;
 
-  border-radius: 22px;
+  border-radius: .9rem;
 
-  background: rgba(255, 255, 255, .03);
-    border: 1px solid rgba(255, 235, 59, .08);
+  outline: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.03),
+      rgba(205,127,214,.03)
+    );
 
   border:
-    1px solid rgba(255,152,0,0.14);
-
-  box-shadow:
-    0 12px 28px rgba(0,0,0,0.3);
-
-  transition: 0.25s ease;
-}
-
-/* FOCUS */
-.form-control:focus-within {
-
-  border-color:
-    rgba(255,152,0,0.4);
-
-  box-shadow:
-    0 0 0 4px rgba(255,152,0,0.08),
-    0 12px 30px rgba(0,0,0,0.38);
-}
-
-/* INPUT */
-.form-control input {
-
-  flex: 1;
-
-  background: transparent;
-  border: none;
-  outline: none;
+    .0625rem solid rgba(205,127,214,.08);
 
   color: white;
 
-  font-size: 22px;
-  font-weight: 800;
+  font-size: .9rem;
+
+  transition: .2s ease;
+
 }
 
-/* PLACEHOLDER */
-.form-control input::placeholder {
-  color: rgba(255,255,255,0.22);
+.form-group input:focus {
+
+  border-color:
+    #cd7fd6;
+
+  box-shadow:
+    0 0 .8rem rgba(205,127,214,.12);
+
 }
 
-/* CURRENCY */
-/* CURRENCY */
-.currency-pill {
+.form-group input::placeholder {
 
-  flex-shrink: 0;
+  color:
+    rgba(205,127,214,.45);
 
-  min-width: 52px;
-  height: 40px;
+}
 
-  padding: 0 14px;
 
-  margin-left: 10px;
 
-  border-radius: 12px;
+.count {
+
+  margin-left: auto;
+
+  min-width: 1.8rem;
+
+  height: 1.8rem;
+
+  padding: 0 .6rem;
+
+  border-radius: 999px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
+  font-size: .75rem;
+
+  color: #cd7fd6;
+
   background:
-    linear-gradient(
-      135deg,
-      #ff9800,
-      #ffeb3b
-    );
-
-  color: #111;
-
-  font-size: 12px;
-  font-weight: 900;
-
-  white-space: nowrap;
-
-  box-shadow:
-    0 6px 18px rgba(255,152,0,0.22);
-}
-@media (max-width: 978px) {
-
-  .form-control {
-    height: 58px;
-    padding: 0 12px;
-  }
-
-  .form-control input {
-    font-size: 18px;
-  }
-
-  .currency-pill {
-
-    min-width: 46px;
-    height: 36px;
-
-    padding: 0 10px;
-
-    font-size: 11px;
-
-    margin-left: 8px;
-  }
-}
-/* INFO */
-.field-info {
-
-  display: flex;
-  justify-content: space-between;
-
-  margin-top: 10px;
-
-  font-size: 12px;
-
-  color: rgba(255,255,255,0.48);
-}
-
-.field-info strong {
-  color: #ffeb3b;
-}
-
-/* SELECT */
-.premium-select-wrap {
-  position: relative;
-}
-
-.premium-select-wrap select {
-
-  width: 100%;
-  height: 62px;
-
-  appearance: none;
-  -webkit-appearance: none;
-
-  padding: 0 52px 0 18px;
-
-  border-radius: 20px;
+    rgba(205,127,214,.08);
 
   border:
-    1px solid rgba(255,152,0,0.14);
+    .0625rem solid rgba(205,127,214,.12);
 
-  background:rgba(255, 255, 255, .03);
-
-  color: white;
-
-  font-size: 14px;
-  font-weight: 700;
-
-  outline: none;
-
-  transition: 0.25s ease;
-
-  box-shadow:
-    0 10px 24px rgba(0,0,0,0.25);
-}
-
-/* FOCUS */
-.premium-select-wrap select:focus {
-
-  border-color:
-    rgba(255,152,0,0.38);
-
-  box-shadow:
-    0 0 0 4px rgba(255,152,0,0.08),
-    0 12px 30px rgba(0,0,0,0.38);
-}
-
-/* OPTION */
-.premium-select-wrap option {
-  background: #101827;
-  color: white;
-}
-
-/* ICON */
-.select-icon {
-
-  position: absolute;
-
-  top: 50%;
-  right: 18px;
-
-  transform: translateY(-50%);
-
-  pointer-events: none;
-
-  color: #ffeb3b;
-
-  font-size: 15px;
-  font-weight: 800;
-}
-
-/* EDIT */
-.edit-link {
-
-  margin-top: 10px;
-
-  color: #ff9800;
-
-  font-size: 12px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  width: fit-content;
-
-  transition: 0.2s ease;
-}
-
-.edit-link:hover {
-  color: #ffeb3b;
-}
-
-/* BUTTON */
-.form-btn {
-
-  height: 62px;
-
-  margin-top: 6px;
-
-  border: none;
-  border-radius: 22px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 0 22px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff9800,
-      #ffeb3b
-    );
-
-  color: black;
-
-  font-size: 15px;
-  font-weight: 900;
-
-  cursor: pointer;
-
-  transition: 0.25s ease;
-
-  /* box-shadow:
-    0 12px 28px rgba(255,152,0,0.25); */
-}
-
-/* HOVER */
-.form-btn:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 14px 34px rgba(255,152,0,0.32);
-}
-
-/* DISABLED */
-.form-btn:disabled {
-
-  opacity: 0.45;
-
-  cursor: not-allowed;
-
-  transform: none;
-
-  box-shadow: none;
-}
-
-/* ARROW */
-.btn-arrow {
-  font-size: 18px;
 }

@@ -1,79 +1,120 @@
+<div *ngIf="!walletService.quickNav.storeData.store['deposit']?.length; else pendingDeposit">
 
-<div *ngIf="walletService.quickNav.storeData.store['wallet']?.['hasPin']; else noPin">
+  <div class="deposit-create-page">
 
-  <div *ngIf="!walletService.quickNav.storeData.store['deposit']?.length; else pendingDeposit"
-       class="local-deposit">
+    <div class="deposit-header">
 
-    <!-- METHOD SELECT -->
-    <div class="method-grid">
-      <div
-        *ngFor="let curr of walletService.getVisibleCurrencies()"
-        class="method-chip"
-        [class.active]="walletService.selectedLocaLMethod === curr.code"
-        (click)="walletService.selectedLocaLMethod = curr.code">
+      <h2>
+        Create Deposit
+      </h2>
 
-        <div class="icon">
-          <span *ngIf="['XOF'].includes(curr.code)">🌍</span>
-          <img *ngIf="!['XOF'].includes(curr.code)" [src]="makeFlag(curr.code)">
-        </div>
+      <p>
+        Generate a payment invoice to fund your wallet.
+      </p>
 
-        <div class="meta">
-          <div class="code">{{ curr.code }}</div>
-          <div class="sub">{{ curr.name }}</div>
-        </div>
-      </div>
     </div>
 
-    <!-- AMOUNT + ACTION -->
-    <div *ngIf="walletService.selectedLocaLMethod" class="amount-card premium-field">
+    <!-- AMOUNT -->
 
-      <!-- INPUT -->
-      <div class="amount-input form-control">
+    <div class="amount-card">
+
+      <label>
+
+        Deposit Amount
+
+      </label>
+
+      <div class="amount-input-wrap">
+
+        <span>
+
+          {{walletService.selectedData?.symbol}}
+
+        </span>
+
         <input
           type="number"
           [(ngModel)]="walletService.localAmount"
-          placeholder="Enter amount"
+
+          placeholder="0.00"
         >
-        <div class="currency-pill">
-          {{ walletService.selectedData.symbol }}
-        </div>
 
       </div>
 
-      <!-- QUICK INFO -->
-      <div class="field-info">
+    </div>
+
+    <!-- QUICK AMOUNTS -->
+
+    <div  class="quick-amounts">
+      <span (click)="walletService.localAmount=walletService.currencyConverter.transform(amount)" *ngFor="let amount of walletService.quickAmounts">{{amount|currencyConverter:true}}</span>
+    </div>
+
+    <!-- SUMMARY -->
+
+    <div  *ngIf="walletService.storeData.store['wallet'] as wallet"  class="deposit-summary">
+
+      <div class="summary-row">
 
         <span>
-          Minimum Withdrawal
+          Available Balance
         </span>
 
         <strong>
-          {{walletService.selectedData.symbol}}
-          {{walletService.minimumPayment | number:'1.2-2'}}
+          {{wallet?.balance.new|currencyConverter:true}}
         </strong>
 
       </div>
 
-      <!-- CTA -->
-      <button
-        (click)="creeateDeposit()"
-        [disabled]="!walletService.localAmount || walletService.localAmount < walletService.minimumPayment"
-        class="form-btn">
+      <div class="summary-row">
 
-        Continue
-        <div class="btn-arrow">
-          →
-        </div>
-      </button>
+        <span>
+
+          Processing Fee
+
+        </span>
+
+        <strong>
+
+          {{walletService.selectedData?.symbol}}0.0
+
+        </strong>
+
+      </div>
+
+      <div class="summary-row total">
+
+        <span>
+
+          Total Withdraw
+
+        </span>
+
+        <strong>
+
+          {{wallet?.history?.withdraw || 0 |currencyConverter:true}}
+
+        </strong>
+
+      </div>
 
     </div>
 
-  </div>
-</div>
+    <!-- BUTTON -->
 
-<ng-template #noPin>
-  <app-create-pin></app-create-pin>
-</ng-template>
+    <button
+      class="form-btn"
+      (click)="creeateDeposit()"
+      [disabled]="!walletService.localAmount || walletService.localAmount < walletService.minimumPayment"
+
+      >
+
+      Create Deposit Invoice
+
+    </button>
+
+  </div>
+
+</div>
 
 <ng-template #pendingDeposit>
   <app-invoice></app-invoice>

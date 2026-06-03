@@ -14,8 +14,8 @@ import { CreatePinComponent } from '../../create-pin/create-pin.component';
 
   ],
   templateUrl: './crypto.component.html',
-  // styleUrls: ['./crypto.component.css']
-  styleUrls: ["../../crypto-style.component.css"]
+  styleUrls: ['./crypto.component.css']
+  // styleUrls: ["../../crypto-style.component.css"]
 })
 export class CryptoComponent {
 

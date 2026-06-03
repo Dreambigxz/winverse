@@ -1,25 +1,68 @@
-<nav class="bottom-nav">
+<footer class="app-footer">
 
-  <div  *ngFor="let item of items" class="">
-    <div [routerLink]="item.route"  class="nav-item"  [class.active]="item.key===activePage" >
-      <i class="fa fa-{{item.path}}"></i>
-      <span>{{item.label}}</span>
-    </div>
-  </div>
+  <a [routerLink]="item.route" [class.active]="item.key===activePage"  *ngFor="let item of items" class="footer-item active">
+
+    <i *ngIf="item.key !== 'matches'" class="fa fa-{{item.path}}"></i>
+    <span *ngIf="item.key === 'matches'">⚽</span>
+
+    <span>
+
+      {{item.label}}
+
+    </span>
+
+  </a>
+
+  <!-- <a class="footer-item">
+
+    <i class="fa fa-chart-line"></i>
+
+    <span>
+
+      Matches
+
+    </span>
+
+  </a>
+
+  <a class="footer-item trade-btn">
+
+    <i class="fa fa-bolt"></i>
+
+    <span>
+
+      Tickets
+
+    </span>
+
+  </a>
 
 
-  <!-- <div class="nav-item">
-    <i class="fa fa-futbol"></i>
-    <span>Matches</span>
-  </div>
+  <a class="footer-item">
 
-  <div class="nav-item">
-    <i class="fa fa-wallet"></i>
-    <span>Wallet</span>
-  </div>
-
-  <div class="nav-item">
     <i class="fa fa-user"></i>
-    <span>Profile</span>
-  </div> -->
-</nav>
+
+    <span>
+
+      Me
+
+    </span>
+
+  </a>
+
+
+
+
+  <a class="footer-item">
+
+    <i class="fa fa-gift"></i>
+
+    <span>
+
+      Invites
+
+    </span>
+
+  </a> -->
+
+</footer>

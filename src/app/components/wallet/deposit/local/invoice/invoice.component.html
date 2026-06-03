@@ -1,152 +1,166 @@
 <div *ngIf="storeData.store['deposit'][0] as deposit" class="deposit-flow">
 
-  <!-- 🔷 SUMMARY -->
-  <div class="summary-card">
-    <div class="summary-head">
-      <h4>Deposit</h4>
-      <span class="delete" (click)="walletService.cancelPayment('deposit')">delete ✕</span>
+  <div *ngIf="deposit as invoice" class="deposit-invoice">
+
+    <div class="invoice-status">
+
+      <div class="status-dot"></div>
+
+      <span>
+        Awaiting Payment
+      </span>
+
     </div>
 
-    <div class="summary-grid">
-      <div>
-        <span>Pay</span>
-        <strong>{{deposit.method}}{{deposit.init_amount | number:'1.2-2'}}</strong>
-      </div>
+    <div class="invoice-amount">
 
-      <div>
-        <span>Receive</span>
-        <strong>${{deposit.amount}}</strong>
-      </div>
+      <h1>
 
-      <div>
-        <span>Reference</span>
-        <strong>{{deposit.sessionID}}</strong>
-      </div>
+        ₦{{ invoice.extraField.tradeAmount }}
 
-      <div>
-        <span>Opened</span>
-        <strong>{{deposit.timestamp | date:'dd MMM, hh:mm a'}}</strong>
-      </div>
+      </h1>
+
+      <small>
+
+        Deposit Invoice
+
+      </small>
+
     </div>
 
-    <div class="status-pill" [class]="deposit.status">
-      {{deposit.status | titlecase}}
+    <div class="invoice-actions">
+
+      <a
+        [href]="invoice.extraField.payInfo"
+        target="_blank"
+        class="pay-btn"
+      >
+
+        Open Payment Page
+
+      </a>
+
     </div>
-  </div>
 
-  <div *ngIf="storeData.store['local_banks']?.[0].automatic; else notAutomatic">
+    <div class="invoice-details">
 
+      <div class="detail-row">
+
+        <span>
+          Reference
+        </span>
+
+        <strong>
+          {{ invoice.txref }}
+        </strong>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span>
+          Order Number
+        </span>
+
+        <strong>
+          {{ invoice.extraField.orderNo }}
+        </strong>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span>
+          Method
+        </span>
+
+        <strong>
+          {{ invoice.method }}
+        </strong>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span>
+          Wallet Credit
+        </span>
+
+        <strong>
+          ${{ invoice.amount }}
+        </strong>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span>
+          Created
+        </span>
+
+        <strong>
+          {{ invoice.created_at | date:'medium' }}
+        </strong>
+
+      </div>
+
+    </div>
+
+    <div class="payment-guide">
+
+      <h4>
+
+        Payment Instructions
+
+      </h4>
+
+      <div class="guide-item">
+
+        1. Tap "Open Payment Page"
+
+      </div>
+
+      <div class="guide-item">
+
+        2. Complete the transfer
+
+      </div>
+
+      <div class="guide-item">
+
+        3. Wait for automatic confirmation
+
+      </div>
+
+      <div class="guide-item">
+
+        4. Funds will be credited automatically
+
+      </div>
+
+    </div>
+
+    <div class="invoice-actions">
 
       <button
-        (click)="walletService.quickNav.openTab(deposit.extraField?.payInfo)"
-        type="submit"
-        class="form-btn"
-        >
+        class="paid-btn"
+      >
 
-        Payment page
-        <div class="btn-arrow">
-          →
-        </div>
+        I've Completed Payment
 
       </button>
-  </div>
 
-  <ng-template #notAutomatic>
-  <!-- 🔶 PAYMENT SECTION -->
-    <div *ngIf="deposit.status==='pending'; else awaitingDeposit" class="payment-section">
+      <button
+        class="cancel-invoice-btn"
+        (click)="walletService.cancelPayment('deposit')"
+      >
 
-      <!-- 🏦 BANK SELECT -->
-      <div class="bank-select">
-        <div
-          *ngFor="let bank of storeData.store['local_banks']; let i=index"
-          class="bank-chip"
-          [class.active]="activeTab === i"
-          (click)="activeTab = i">
+        Cancel Deposit
 
-          {{bank.bank}}
-        </div>
-      </div>
-
-      <!-- 🏦 BANK DETAILS -->
-      <div class="bank-card" *ngIf="storeData.store['local_banks']?.length">
-
-        <ng-container *ngFor="let bank of storeData.store['local_banks']; let i=index">
-
-          <div *ngIf="activeTab === i">
-
-            <div class="bank-row">
-              <span>Bank</span>
-              <strong>{{bank.bank}}</strong>
-            </div>
-
-            <div class="bank-row">
-              <span>Name</span>
-              <strong>{{bank.account_holder}}</strong>
-            </div>
-
-            <div class="bank-row">
-              <span>Account</span>
-
-              <div class="copy-line">
-                <strong>{{bank.account_number}}</strong>
-                <button (click)="walletService.quickNav.copy(bank.account_number)">Copy</button>
-              </div>
-            </div>
-
-          </div>
-
-        </ng-container>
-
-        <div class="notice">
-          ⚠ Send ₦{{deposit.init_amount}}
-          Ref: <strong>{{deposit.sessionID}}</strong>
-        </div>
-
-      </div>
-
-      <!-- 📘 GUIDE -->
-      <div class="guide mt-4">
-        <p>1. Transfer exact amount</p>
-        <!-- <p>2. Use reference </p> -->
-        <p>2. Upload receipt</p>
-      </div>
-
-      <!-- 📤 PROOF -->
-      <div class="proof-card mt-2">
-
-        <div class="form-control">
-          <input type="file" (change)="onImageSelected($event)" />
-        </div>
-
-        <div class="form-control">
-          <input
-            [(ngModel)]="sendersName"
-            placeholder="Sender name / account"
-          />
-        </div>
-
-        <button
-          [disabled]="!selectedFile || !sendersName"
-          (click)="submitProof('payment_receipt')"
-          type="submit"
-          class="form-btn"
-          >
-
-          Submit Receipt
-          <div class="btn-arrow">
-            →
-          </div>
-
-        </button>
-
-      </div>
-
-
+      </button>
 
     </div>
 
-  </ng-template>
-
-  <ng-template #awaitingDeposit></ng-template>
+  </div>
 
 </div>

@@ -69,7 +69,7 @@ export const PostHttpInterceptor: HttpInterceptorFn = (req, next) => {
           if (event.body && typeof event.body === 'object' && !Array.isArray(event.body)) {
             body = event.body as { message?: string; status?: string; main?: Object; next_page?: any };
 
-            body.message ? toast.show(body) : 0;
+            body.status ? toast.show(body) : 0;
             body.main ? storeData.setMultiple(body.main) : 0;
 
             if (body.next_page) {
@@ -96,6 +96,20 @@ export const PostHttpInterceptor: HttpInterceptorFn = (req, next) => {
                 )
               }
             }
+
+            const wallet = storeData.get("wallet")
+            console.log(body.main);
+
+            if (wallet){
+              if(!wallet?.hasPin||!wallet.saved_add) {
+                if (!["/setup"].includes(window.location.pathname)) {
+                  // window.location.href = '/setup'
+                  router.navigate(['/setup'])
+                }
+              }
+              authService.isVisible=false
+            }
+
           }
         }
       },
@@ -120,7 +134,7 @@ export const PostHttpInterceptor: HttpInterceptorFn = (req, next) => {
           !req.url.includes('hideSpinner') ? dialog.open(StatusDialogComponent, {
             data: {
               title: 'Error',
-              message: 'Request not reached, check internet and reload!',
+              message: 'Request timeout, check internet connection and reload page!',
               status: 'error'
             }
           }) : 0;

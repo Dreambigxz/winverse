@@ -13,8 +13,9 @@ import { ReactiveFormsModule, FormBuilder, Validators, FormsModule } from '@angu
 import { WalletService } from '../../reuseables/services/wallet.service';
 import { QuickNavService } from '../../reuseables/services/quick-nav.service';
 
-import { CryptoComponent } from "../../components/wallet/withdraw/crypto/crypto.component";
-import { LocalComponent } from "../../components/wallet/withdraw/local/local.component";
+// import { CryptoComponent } from "../../components/wallet/withdraw/crypto/crypto.component";
+import { WithdrawFormComponent } from "../../components/wallet/withdraw/withdraw.component";
+import { InvoiceComponent } from "../../components/wallet/invoice/invoice.component";
 import { WalletComponent } from "../wallet.component";
 
 
@@ -23,9 +24,9 @@ import { WalletComponent } from "../wallet.component";
   imports: [
       CommonModule,FormsModule,
       ReactiveFormsModule,CurrencyConverterPipe,
-      CryptoComponent,LocalComponent,
       Header2Component, SpinnerComponent,
-      WalletComponent
+      WalletComponent, WithdrawFormComponent,
+      InvoiceComponent
     ],
   templateUrl: './withdraw.component.html',
   // styleUrl:  "../wallet-styles.component.css"
@@ -43,12 +44,9 @@ export class WithdrawComponent {
       this.quickNav.storeData.store['pageDetails']='wallet'
       if (!this.quickNav.storeData.get('withdraw')) {
         this.quickNav.reqServerData.get('wallet?dir=start_withdraw').subscribe((res)=>{
-          // console.log({res});
-          // if (!this.quickNav.storeData.get("is_agent")) {
-          //   console.log("notAgent");
-          //
-          //   this.walletService.withdraw_options =  [ ]
-          // }
+
+          console.log({res});
+
           this.walletService.initializeCurrency()
           this.walletService.updateWithdrawalOptionsSelector()
 

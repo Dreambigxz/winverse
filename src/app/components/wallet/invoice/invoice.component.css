@@ -1,107 +1,413 @@
-.withdraw-flow {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  color: #fff;
+.withdrawal-invoice {
+
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 1.25rem;
+
+  border-radius: 1.25rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.03),
+      rgba(205,127,214,.04)
+    );
+
+      /* radial-gradient(
+        circle at top right,
+        rgba(205,127,214,.12),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at bottom left,
+        rgba(205,127,214,.08),
+        transparent 35%
+      ),
+      linear-gradient(
+        145deg,
+        #120714 0%,
+        #1d0b1f 50%,
+        #2d1330 100%
+      ); */
+
+
+  border:
+    .0625rem solid rgba(205,127,214,.08);
+
+  box-shadow:
+    0 1rem 2rem rgba(0,0,0,.25);
+    margin-bottom: 2em;
+
 }
 
-/* CARD */
-.withdraw-card {
-  padding: 16px;
-  border-radius: 16px;
+/* TOP GLOW */
 
-  background: linear-gradient(145deg, #1e160c, #120c05);
-  border: 1px solid rgba(255,235,59,0.08);
-}
+.withdrawal-invoice::before {
 
-/* HEADER */
-.card-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  content: '';
 
-.card-head h4 {
-  margin: 0;
-}
+  position: absolute;
 
-.close {
-  cursor: pointer;
-  color: #ff5252;
-  font-size: 14px;
-}
+  top: 0;
+  left: 0;
 
-/* GRID */
-.info-grid {
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
+  width: 100%;
+  height: .12rem;
 
-.info-item span {
-  font-size: 11px;
-  color: #aaa;
-}
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #cd7fd6,
+      transparent
+    );
 
-.info-item strong {
-  display: block;
-  font-size: 14px;
-}
-
-/* monospace ref */
-.mono {
-  font-family: monospace;
-  letter-spacing: 0.5px;
-}
-
-/* countdown highlight */
-.countdown {
-  color: #ffeb3b;
-  font-weight: 600;
 }
 
 /* STATUS */
-.status-pill {
-  margin-top: 12px;
-  padding: 6px 10px;
-  border-radius: 10px;
+
+.invoice-status {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: .5rem;
+
+  padding: .45rem .8rem;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,255,255,.04);
+
+}
+
+.status-dot {
+
+  width: .6rem;
+  height: .6rem;
+
+  border-radius: 50%;
+
+  background: #f59e0b;
+
+  box-shadow:
+    0 0 1rem #f59e0b;
+
+  animation:
+    pulse 1.5s infinite;
+
+}
+
+.invoice-status span {
+
+  color: #f59e0b;
+
+  font-size: .75rem;
+  font-weight: 800;
+
+}
+
+/* AMOUNT */
+
+.invoice-amount {
+
   text-align: center;
-  font-size: 12px;
+
+  margin: 1.5rem 0;
+
 }
 
-.status-pill.pending {
-  background: rgba(255,152,0,0.15);
-  color: #ff9800;
+.invoice-amount h1 {
+
+  margin: 0;
+
+  font-size: 2.4rem;
+
+  font-weight: 900;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff,
+      #cd7fd6
+    );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
 }
 
-.status-pill.awaiting {
-  background: rgba(255,235,59,0.15);
-  color: #ffeb3b;
+.invoice-amount small {
+
+  color:
+    rgba(255,255,255,.6);
+
 }
 
-.status-pill.completed {
-  background: rgba(0,200,83,0.15);
-  color: #00c853;
+/* METHOD */
+
+.invoice-method {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: .9rem;
+
+  padding: 1rem;
+
+  border-radius: 1rem;
+
+  background:
+    rgba(255,255,255,.03);
+
+  border:
+    .0625rem solid rgba(205,127,214,.08);
+
 }
 
-/* NOTICE */
-.notice-card {
-  padding: 14px;
-  border-radius: 14px;
+.method-icon {
 
-  background: rgba(255,152,0,0.08);
-  border: 1px dashed rgba(255,152,0,0.2);
+  width: 3rem;
+  height: 3rem;
+
+  border-radius: .9rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.3rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(205,127,214,.18),
+      rgba(205,127,214,.05)
+    );
+
 }
 
-.notice-title {
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #ff9800;
+.invoice-method strong {
+
+  display: block;
+
+  color: white;
+
 }
 
-.notice-item {
-  font-size: 12px;
-  color: #bbb;
-  margin-bottom: 4px;
+.invoice-method span {
+
+  color:
+    rgba(205,127,214,.7);
+
+  font-size: .75rem;
+
+}
+
+/* DETAILS */
+
+.invoice-details {
+
+  margin-top: 1rem;
+
+  border-radius: 1rem;
+
+  overflow: hidden;
+
+  background:
+    rgba(255,255,255,.03);
+
+}
+
+.detail-row {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: .9rem 1rem;
+
+}
+
+.detail-row:not(:last-child) {
+
+  border-bottom:
+    .0625rem solid rgba(205,127,214,.06);
+
+}
+
+.detail-row span {
+
+  color:
+    rgba(255,255,255,.65);
+
+}
+
+.detail-row strong {
+
+  color: white;
+
+}
+
+.receive {
+
+  color: #22c55e !important;
+
+}
+
+/* TIMELINE */
+
+.timeline {
+
+  margin-top: 1.5rem;
+
+}
+
+.timeline-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: .8rem;
+
+  padding: .7rem 0;
+
+  opacity: .4;
+
+}
+
+.timeline-item.active,
+.timeline-item.current {
+
+  opacity: 1;
+
+}
+
+.timeline-icon {
+
+  width: 2rem;
+  height: 2rem;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: .8rem;
+  font-weight: 800;
+
+  background:
+    rgba(205,127,214,.08);
+
+  border:
+    .0625rem solid rgba(205,127,214,.12);
+
+}
+
+.timeline-item.active .timeline-icon {
+
+  background: #22c55e;
+
+  color: white;
+
+}
+
+.timeline-item.current .timeline-icon {
+
+  background: #f59e0b;
+
+  color: white;
+
+}
+
+.timeline-item strong {
+
+  display: block;
+
+  color: white;
+
+  font-size: .85rem;
+
+}
+
+.timeline-item span {
+
+  color:
+    rgba(255,255,255,.55);
+
+  font-size: .7rem;
+
+}
+
+/* ANIMATION */
+
+@keyframes pulse {
+
+  0% {
+    opacity: .5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: .5;
+  }
+
+}
+
+.invoice-actions {
+
+  margin-top: 1.25rem;
+
+}
+
+.cancel-withdraw-btn {
+
+  width: 100%;
+
+  height: 3rem;
+
+  border: none;
+
+  border-radius: 1rem;
+
+  cursor: pointer;
+
+  font-weight: 800;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ef4444,
+      #b91c1c
+    );
+
+  transition: .25s ease;
+
+}
+
+.cancel-withdraw-btn:hover {
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 0 1rem rgba(239,68,68,.35);
+
+}
+
+span.text-pending {
+    color: #c35353 !important;
+    letter-spacing: 4px;
 }

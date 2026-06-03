@@ -1,7 +1,9 @@
 <div *ngIf="storeData.store['notification']">
   <app-noti-popup></app-noti-popup>
 </div>
-<header class="mobile-header header__content header">
+
+
+<!-- <header class="mobile-header header__content header">
   <div class="left">
     <img src="/assets/img/vi.svg" alt="Logo" class="logo" />
   </div>
@@ -12,9 +14,71 @@
 
   <div class="right">
     <i (click)="quickNav.authService.logout(false)" class="ti ti-power"></i>
-    <!-- <span class="balance-label">BQ</span> -->
-    <!-- <span class="balance-amount">{{ balance | currency:'USD' }}</span> -->
+
   </div>
+</header> -->
+
+<header class="app-header">
+
+  <!-- LEFT -->
+
+  <div class="header-logo">
+
+    <img
+      src="assets/logo.png"
+      alt="Logo"
+    >
+
+  </div>
+
+  <!-- LOGGED OUT -->
+
+  <div
+    class="header-actions"
+    *ngIf="!authService.isLoggedIn"
+  >
+
+    <button
+      class="login-btn"
+      (click)="authService.open('login')"
+    >
+
+      Login
+
+    </button>
+
+    <button
+      class="join-btn"
+      (click)="authService.open('register')"
+    >
+
+      Join
+
+    </button>
+
+  </div>
+
+  <!-- LOGGED IN -->
+
+  <div
+    class="header-balance"
+    *ngIf="authService.isLoggedIn"
+  >
+
+    <small>
+
+      Balance
+
+    </small>
+
+    <strong>
+
+      {{quickNav.storeData.store['wallet']?.balance.new|currencyConverter:true}}
+
+    </strong>
+
+  </div>
+
 </header>
 
 <!-- end header -->

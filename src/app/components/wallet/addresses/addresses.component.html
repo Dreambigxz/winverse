@@ -1,0 +1,164 @@
+<div class="withdrawal-setup">
+
+  <div class="section-title">
+
+    Withdrawal Details
+
+  </div>
+
+  <!-- BANK NAME -->
+
+
+
+  <!-- HIDE FOR USDT -->
+
+  <ng-container *ngIf="walletService.activeChannel !== 'crypto'">
+
+    <form
+        *ngIf="walletService.formView.local.payment_info as form"
+        class="my-form"
+        [formGroup]="form"
+        (ngSubmit)="walletService.handleSubmit(form, 'create_withdraw')"
+      >
+
+      <div class="form-group">
+
+        <label>
+          Bank
+        </label>
+
+        <input
+          type="text"
+          placeholder="{{walletService.saved_add?.bank.text || 'Enter bank name'}} "
+          formControlName="bank"
+          [value]="walletService.saved_add?.account_number"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          Beneficiary Name
+        </label>
+
+        <input
+          type="text"
+          placeholder="{{walletService.saved_add?.account_holder || 'Enter beneficiary name'}} "
+          formControlName='account_holder'
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          Account Number
+        </label>
+
+        <input
+          type="text"
+          placeholder="{{walletService.saved_add?.account_number || 'Enter account number'}}"
+          formControlName="account_number"
+
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          Security Question
+        </label>
+
+        <p class="text-white">What city were you born in?</p>
+
+        <input
+          type="text"
+          placeholder="Answer"
+          formControlName="pin"
+
+        >
+
+      </div>
+
+      <button
+        type="submit"
+        class="form-btn"
+        [disabled]="!form.valid"
+      >
+
+        <span>
+          Update
+        </span>
+
+        <!-- <div class="btn-arrow">
+          →
+        </div> -->
+
+      </button>
+
+    </form>
+
+  </ng-container>
+
+  <!-- SHOW FOR CRYPTO -->
+
+  <ng-container *ngIf="walletService.activeChannel === 'crypto'">
+
+    <form
+        *ngIf="walletService.formView.crypto.payment_info as form"
+        class="my-form"
+        [formGroup]="form"
+        (ngSubmit)="walletService.handleSubmit(form, 'create_withdraw')"
+      >
+      <div class="form-group">
+
+        <label>
+          Wallet Address
+        </label>
+
+        <input
+          type="text"
+          placeholder="{{ walletService.saved_add?.account_number || 'Enter ' + walletService?.selectedData?.code +' wallet address' }}"
+          formControlName="account_number"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          Security Question
+        </label>
+
+        <p class="text-white">What city were you born in?</p>
+
+        <input
+          type="text"
+          placeholder="Answer"
+          formControlName="pin"
+        >
+
+      </div>
+
+      <button
+        type="submit"
+        class="form-btn"
+        [disabled]="!form.valid"
+      >
+
+        <span>
+          Update
+        </span>
+
+        <!-- <div class="btn-arrow">
+          →
+        </div> -->
+
+      </button>
+    </form>
+
+  </ng-container>
+
+</div>

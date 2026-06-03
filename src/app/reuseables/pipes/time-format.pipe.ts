@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TimeFormatPipe implements PipeTransform {
 
-  transform(timestamp: number | string | Date, format: 'time' | 'date' | 'fullDate' = 'time'): string {
+  transform(timestamp: number | string | Date, format: 'time' | 'date' | 'fullDate' | 'day'| 'shortDate' = 'time'): string {
 
     if (!timestamp) return '';
 
@@ -33,6 +33,15 @@ export class TimeFormatPipe implements PipeTransform {
         options.year = 'numeric';
         options.month = 'short';
         options.day = 'numeric';
+        break;
+
+      case 'day':
+        options.weekday = 'long';
+        break;
+
+      case 'shortDate':
+        options.day = '2-digit';
+        options.month = '2-digit';
         break;
 
       case 'fullDate':

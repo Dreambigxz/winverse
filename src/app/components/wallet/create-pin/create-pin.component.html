@@ -1,17 +1,17 @@
 <div class="set-pin">
 
     <div class="premium-field">
-      <label for="pool1" class="">Security pin</label>
-      <p>Pin would be required for withdrawal </p>
-      <div class="form-control">
+      <label for="pool1" class="">Security Question</label>
+      <p class="text-white">What city were you born in? </p>
+      <div class="form-group">
         <input
             [(ngModel)]="transactionPin"
-            type="number"
-            placeholder="4 - 6 digit transaction pin"
+            type="text"
+            placeholder=""
             >
       </div>
 
-      <button (click)="createPin()" [disabled]="!transactionPin"  class="form-btn" >
+      <button type='submit' (click)="createPin()" [disabled]="!transactionPin"  class="form-btn" >
         Send →
       </button>
 

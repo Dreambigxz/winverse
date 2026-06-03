@@ -1,0 +1,121 @@
+<form
+  *ngIf="walletService.formView.withdraw as form"
+  [formGroup]="form"
+  (ngSubmit)="walletService.handleSubmit(form, 'create_withdraw')"
+  >
+  <div class="withdraw-form">
+
+    <div class="form-title">
+
+      Withdrawal Amount
+
+    </div>
+
+    <!-- AMOUNT -->
+
+    <div class="amount-card">
+
+      <div class="amount-header">
+
+        <span>
+          Enter Amount
+        </span>
+
+        <button
+          type="button"
+          class="max-btn"
+          (click)="walletService.setMaxAmount(form)"
+        >
+          MAX
+        </button>
+
+      </div>
+
+      <div class="amount-input-wrap">
+
+        <span class="currency">
+
+          {{walletService.selectedData?.symbol}}
+
+        </span>
+
+
+          <input
+            type="number"
+            placeholder="0.00"
+            formControlName='amount'
+            [min]="walletService.minimumPayment"
+          >
+
+      </div>
+
+    </div>
+
+    <!-- BALANCE -->
+
+    <div *ngIf="walletService.storeData.store['wallet'] as wallet" class="summary-card">
+
+      <div class="summary-row">
+
+        <span>
+          Available Balance
+        </span>
+
+        <strong>
+          {{wallet?.balance.new|currencyConverter:true}}
+        </strong>
+
+      </div>
+
+      <div class="summary-row">
+
+        <span>
+          Withdrawal Fee
+        </span>
+
+        <strong>
+          {{wallet.settings.withdraw_fee}}%
+        </strong>
+
+      </div>
+
+      <div class="summary-row total">
+
+        <span>
+          You Will Receive
+        </span>
+
+        <strong class="receive-amount">
+          $0
+        </strong>
+
+      </div>
+
+    </div>
+
+    <!-- QUICK AMOUNTS -->
+
+    <div  class="quick-amounts">
+
+      <span (click)="walletService.setMaxAmount(form, amount)" *ngFor="let amount of quickAmounts">{{amount|currencyConverter:true}}</span>
+       <!-- <button>1000</button> -->
+
+
+    </div>
+
+    <!-- SUBMIT -->
+
+    <button
+      class="form-btn"
+      type="submit"
+      [disabled]="!form.valid"
+    >
+
+      Withdraw Funds
+
+    </button>
+
+  </div>
+
+
+</form>

@@ -6,188 +6,435 @@
 <section class="space-top pb-8 pb-md-10 ">
 
 
-  <div class="bet-history__tab container-fluid pb-8 pb-md-10">
-    <div class="tabs mb-10">
-      <ul class="tabs-nav">
-        <li
-          (click)="activeTab = 'openbet'"
-          [class.tab-active]="activeTab === 'openbet'"
-        >
-          <a>Open</a>
-        </li>
-        <li
-          (click)="settledClick()"
-          [class.tab-active]="activeTab === 'settled'"
-        >
-          <a>Settled</a>
-        </li>
-      </ul>
+  <div class="bets-history-page">
 
-      <div *ngIf="historyServiceLoaded" class="tabs-stage">
-        <!-- 🟢 OPEN BETS -->
-        <div *ngIf="activeTab === 'openbet'" class="tab-1 openbet">
-          <div *ngIf="historyServiceLoaded.openBetDisplay.length; else noOpen">
-            <div
-              *ngFor="let bet of historyServiceLoaded.openBetDisplay"
-              class="bet-card"
-            >
-              <div
-                class="bet-summary d-flex justify-content-between align-items-center clickable"
-                (click)="toggleExpand(bet.id)"
-              >
-                <div>
-                  <h5>
-                    {{
-                      bet.fixture[0].teams.home.name
-                    }}
-                    vs
-                    {{ bet.fixture[0].teams.away.name }}
-                  </h5>
-                  <small>
-                    Odds: {{ bet.market_odds|number:"1.1-2" }} |
-                    Return:<span class="return">{{setProfit(bet)|currencyConverter:true}}</span> |
-                    <span class="text-small">{{ bet.fixture[0].fixture.date | date:'short' }}</span>
-                  </small>
-                  <br>
-                  <small *ngIf="bet.fixture[0].fixture.timestamp |countdown|async as time" (click)="historyServiceLoaded.CancelTicket(bet)"  class="text-danger"> <i class="ti ti-trash fs-five"></i> Delete</small>
-                </div>
-                <span class="arrow">{{
-                  expandedTicketId === bet.id ? "▲" : "▼"
-                }}</span>
-              </div>
+  <!-- HEADER -->
 
-              <div *ngIf="expandedTicketId === bet.id" class="bet-details mt-2">
-                <p>Ticket ID: {{ bet.ticket_id }}</p>
-                <p>League: {{ bet.fixture[0].league.name }}</p>
-                <p>Market: {{ bet.market_value }}</p>
-                <p class="stake">Stake: {{ bet.stake_amount|currencyConverter:true }}</p>
-                <!-- <p>Start: <span class="text-deem">{{ bet.fixture[0].fixture.date | date:'short' }}</span></p> -->
+  <div class="history-header">
 
-              </div>
-            </div>
-          </div>
+    <div>
 
-          <ng-template #noOpen>
-            <div class="no-data text-center">
-              <img
-                [src]="historyServiceLoaded?.emptyDataUrl"
-                width="60"
-                alt="no data"
-              />
-              <p>No open bets found</p>
-            </div>
-          </ng-template>
-        </div>
+      <h2>
+        My Bets
+      </h2>
 
-        <!-- 🟠 SETTLED BETS -->
-        <div *ngIf="activeTab === 'settled'" class="tab-2 settled">
+      <p>
+        Track all your betting activity
+      </p>
 
-          <!-- 🔹 Date Filter -->
-          <form [formGroup]="filterForm" class="filter-bar">
-            <div class="date-picker-container">
-             <mat-form-field appearance="outline" class="date-range-field">
-               <mat-label>Select Date Range</mat-label>
-               <mat-date-range-input [rangePicker]="picker" formGroupName="range">
-                 <input matStartDate formControlName="start" placeholder="Start date">
-                 <input matEndDate formControlName="stop" placeholder="End date">
-               </mat-date-range-input>
-               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-               <mat-date-range-picker #picker></mat-date-range-picker>
-             </mat-form-field>
-
-             <button mat-raised- class="btn btn-md btn-outline-secondary filter-btn" (click)="filterByDate()">
-               <i class="ti ti-filter"></i>  Filter
-             </button>
-            </div>
-           </form>
-
-          <div class="tabs-header d-flex align-items-center gap-2">
-            <div
-              class="top_matches__innercount-item py-1 px-8 rounded-3 n11-bg"
-              [class.clickable-active]="subTab === 'won'"
-              (click)="selectSubTab('won')"
-            >
-              <span>Won</span>
-            </div>
-            <div
-              class="top_matches__innercount-item py-1 px-8 rounded-3 n11-bg"
-              [class.clickable-active]="subTab === 'loss'"
-              (click)="selectSubTab('loss')"
-            >
-              <span>Loss</span>
-            </div>
-            <div
-              class="top_matches__innercount-item py-1 px-8 rounded-3 n11-bg"
-              [class.clickable-active]="subTab === 'cancel'"
-              (click)="selectSubTab('cancel')"
-            >
-              <span>cancel</span>
-            </div>
-          </div>
-
-          <div class="tabs-content mt-7">
-            <ng-container
-              *ngIf="subDisplay.length; else noSettled"
-            >
-              <div
-                *ngFor="let bet of subDisplay"
-                class="bet-card"
-              >
-                <div
-                  class="bet-summary d-flex justify-content-between align-items-center clickable"
-                  (click)="toggleExpand(bet.id)"
-                >
-                  <div>
-                    <h5 class="status-{{bet.status}}">
-                      {{ bet.fixture[0].teams.home.name }}
-                      vs
-                      {{ bet.fixture[0].teams.away.name }}
-                    </h5>
-                    <small
-                      >Odds: {{ bet.market_odds|number:"1.0-2" }} | Stake:
-                      {{ bet.stake_amount|currencyConverter:true  }}</small
-                    >
-                  </div>
-                  <span class="arrow">{{
-                    expandedTicketId === bet.id ? "▲" : "▼"
-                  }}</span>
-                </div>
-
-                <div *ngIf="expandedTicketId === bet.id" class="bet-details mt-2">
-                  <p>Ticket ID: {{ bet.ticket_id }}</p>
-                  <p>League: {{ bet.fixture[0].league.name }}</p>
-                  <p>Market: {{ bet.market_value }}</p>
-
-                  <p class="">
-                    Score:
-                    <span class="text-main">
-                      {{ bet.fixture[0].score.fulltime.home }} -
-                      {{ bet.fixture[0].score.fulltime.away }}
-                    </span>
-
-                  </p>
-                  <p *ngIf="bet.status==='won'" class="">Profit: <span class="status-{{bet.status}}">{{ setProfit(bet,false)|currencyConverter:true }}</span></p>
-                  <p>Start: <span class="text-deem">{{ bet.fixture[0].fixture.date | date:'short' }}</span></p>
-
-                </div>
-              </div>
-            </ng-container>
-
-            <ng-template #noSettled>
-              <div class="no-data text-center">
-                <img
-                  [src]="historyServiceLoaded?.emptyDataUrl"
-                  width="60"
-                  alt="no data"
-                />
-                <p>No {{ subTab }} bets found</p>
-              </div>
-            </ng-template>
-          </div>
-        </div>
-      </div>
     </div>
+
+    <button class="filter-btn">
+
+      All Bets
+
+    </button>
+
   </div>
+
+  <!-- STATS -->
+
+  <div class="stats-grid">
+
+    <div class="stat-card open">
+
+      <div class="stat-top">
+
+        <span class="dot"></span>
+
+        Open
+
+      </div>
+
+      <h3>
+        12
+      </h3>
+
+      <small>
+        Active tickets
+      </small>
+
+    </div>
+
+    <div class="stat-card won">
+
+      <div class="stat-top">
+
+        <span class="dot"></span>
+
+        Won
+
+      </div>
+
+      <h3>
+        48
+      </h3>
+
+      <small>
+        Successful bets
+      </small>
+
+    </div>
+
+    <div class="stat-card loss">
+
+      <div class="stat-top">
+
+        <span class="dot"></span>
+
+        Loss
+
+      </div>
+
+      <h3>
+        16
+      </h3>
+
+      <small>
+        Lost tickets
+      </small>
+
+    </div>
+
+  </div>
+
+  <!-- BET LIST -->
+
+  <div class="bet-list">
+
+    <!-- OPEN -->
+
+    <div class="bet-ticket open-ticket">
+
+      <div class="ticket-status">
+
+        OPEN
+
+      </div>
+
+      <div class="ticket-header">
+
+        <div>
+
+          <small>
+            Ticket ID
+          </small>
+
+          <h4>
+            #63332fd63
+          </h4>
+
+        </div>
+
+        <div class="ticket-time">
+
+          Today • 16:00
+
+        </div>
+
+      </div>
+
+      <div class="match-row">
+
+        <div class="team">
+
+          <img
+            src="https://media.api-sports.io/football/teams/24236.png"
+          >
+
+          <span>
+            Narva U21
+          </span>
+
+        </div>
+
+        <div class="score-market">
+
+          0-0
+
+        </div>
+
+        <div class="team">
+
+          <img
+            src="https://media.api-sports.io/football/teams/24237.png"
+          >
+
+          <span>
+            Johvi Phoenix
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="bet-footer">
+
+        <div>
+
+          <small>
+            Stake
+          </small>
+
+          <strong>
+            ₦168.80
+          </strong>
+
+        </div>
+
+        <div>
+
+          <small>
+            Odds
+          </small>
+
+          <strong>
+            1.33x
+          </strong>
+
+        </div>
+
+        <div>
+
+          <small>
+            Possible Win
+          </small>
+
+          <strong class="profit">
+
+            ₦224.50
+
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- WON -->
+
+    <div class="bet-ticket won-ticket">
+
+      <div class="ticket-status won-badge">
+
+        WON
+
+      </div>
+
+      <div class="ticket-header">
+
+        <div>
+
+          <small>
+            Ticket ID
+          </small>
+
+          <h4>
+            #046631df2
+          </h4>
+
+        </div>
+
+        <div class="ticket-time">
+
+          May 22 • FT
+
+        </div>
+
+      </div>
+
+      <div class="match-row">
+
+        <div class="team">
+
+          <img
+            src="https://media.api-sports.io/football/teams/17902.png"
+          >
+
+          <span>
+            Dewa United
+          </span>
+
+        </div>
+
+        <div class="score-market">
+
+          4-0
+
+        </div>
+
+        <div class="team">
+
+          <img
+            src="https://media.api-sports.io/football/teams/2448.png"
+          >
+
+          <span>
+            Bali United
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="bet-footer">
+
+        <div>
+
+          <small>
+            Stake
+          </small>
+
+          <strong>
+            ₦5.00
+          </strong>
+
+        </div>
+
+        <div>
+
+          <small>
+            Odds
+          </small>
+
+          <strong>
+            0.54x
+          </strong>
+
+        </div>
+
+        <div>
+
+          <small>
+            Won
+          </small>
+
+          <strong class="won-text">
+
+            +₦27.00
+
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- LOSS -->
+
+    <div class="bet-ticket loss-ticket">
+
+      <div class="ticket-status loss-badge">
+
+        LOSS
+
+      </div>
+
+      <div class="ticket-header">
+
+        <div>
+
+          <small>
+            Ticket ID
+          </small>
+
+          <h4>
+            #98f04e29a
+          </h4>
+
+        </div>
+
+        <div class="ticket-time">
+
+          May 20 • FT
+
+        </div>
+
+      </div>
+
+      <div class="match-row">
+
+        <div class="team">
+
+          <img
+            src="https://media.api-sports.io/football/teams/26880.png"
+          >
+
+          <span>
+            Sheger Ketema
+          </span>
+
+        </div>
+
+        <div class="score-market">
+
+          0-1
+
+        </div>
+
+        <div class="team">
+
+          <img
+            src="https://media.api-sports.io/football/teams/4121.png"
+          >
+
+          <span>
+            Mekelle Kenema
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="bet-footer">
+
+        <div>
+
+          <small>
+            Stake
+          </small>
+
+          <strong>
+            ₦361.60
+          </strong>
+
+        </div>
+
+        <div>
+
+          <small>
+            Odds
+          </small>
+
+          <strong>
+            1.80x
+          </strong>
+
+        </div>
+
+        <div>
+
+          <small>
+            Result
+          </small>
+
+          <strong class="loss-text">
+
+            Lost
+
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 
 </section>
 

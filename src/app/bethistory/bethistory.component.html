@@ -6,191 +6,384 @@
   <section *ngIf="historyServiceLoaded" class="app-container ">
 
     <!-- BET TABS -->
-    <div class="bets-tabs mt-10 mb-4">
-      <button
-        [class.active]="activeTab === 'openbet'"
-        (click)="switchTab('openbet')">
-        Running ({{ historyServiceLoaded.openBetDisplay.length }})
-      </button>
+    <div class="bets-history-page">
 
-      <button
-        [class.active]="activeTab === 'settled'"
-        (click)="switchTab('settled')">
-        Completed ({{ historyServiceLoaded.settledBets.length }})
-      </button>
+      <!-- HEADER -->
+
+      <div class="history-header">
+
+        <div>
+
+          <h2>
+            My Bets
+          </h2>
+
+          <p>
+            Track all your betting activity
+          </p>
+
+        </div>
+
+        <button class="filter-btn">
+
+          All Bets
+
+        </button>
+
+      </div>
+
+      <!-- STATS -->
+
+      <div class="stats-grid">
+
+        <div class="stat-card open">
+
+          <div class="stat-top">
+
+            <span class="dot"></span>
+
+            Open
+
+          </div>
+
+          <h3>
+            {{historyServiceLoaded?.openBetDisplay.length}}
+          </h3>
+
+          <!-- <small>
+            Open
+          </small> -->
+
+        </div>
+
+        <div class="stat-card won">
+
+          <div class="stat-top">
+
+            <span class="dot"></span>
+
+            Won
+
+          </div>
+
+          <h3>
+            {{historyServiceLoaded?.wonBet.length}}
+          </h3>
+
+          <!-- <small>
+            won bets
+          </small> -->
+
+        </div>
+
+        <div class="stat-card loss">
+
+          <div class="stat-top">
+
+            <span class="dot"></span>
+
+            Loss
+
+          </div>
+
+          <h3>
+            {{historyServiceLoaded?.lossBet.length}}
+          </h3>
+
+          <!-- <small>
+            Lost tickets
+          </small> -->
+
+        </div>
+
+      </div>
+
+      <!-- BET LIST -->
+
+      <!-- BET TABS -->
+      <div class="bet-list">
+
+            <div
+              class="bet-ticket"
+              *ngFor="let bet of historyServiceLoaded.allBets"
+              [ngClass]="{
+                'won-ticket': bet.status === 'won',
+                'loss-ticket': bet.status === 'loss',
+                'open-ticket': bet.status === 'open'
+              }"
+            >
+
+              <!-- STATUS -->
+
+              <div
+                class="ticket-status"
+                [ngClass]="{
+                  'won-badge': bet.status === 'won',
+                  'loss-badge': bet.status === 'loss'
+                }"
+              >
+
+                {{bet.status}}
+                <!-- <span *ngIf="bet.status !== 'open'">
+
+                </span>
+                <span *ngIf="bet.fixture[0].fixture.timestamp |countdown|async as time" (click)="historyServiceLoaded.CancelTicket(bet)">
+                  cancel
+                </span> -->
+
+              </div>
+
+              <div class="">
+
+              </div>
+
+              <!-- HEADER -->
+
+              <div class="ticket-header">
+
+                <div>
+
+                  <small>
+                    Ticket ID
+                  </small>
+
+                  <h4>
+                    #{{ bet.ticket_id }}
+                  </h4>
+
+                </div>
+
+                <div class="ticket-time">
+
+                  {{
+                    bet.fixture[0].fixture.status.short === 'NS'
+                      ? (bet.start_date | date:'MMM d • HH:mm')
+                      : (bet.start_date | date:'MMM d')
+                  }}
+
+                  •
+
+                  {{
+                    bet.fixture[0].fixture.status.short
+                  }}
+
+                </div>
+
+              </div>
+
+              <!-- LEAGUE -->
+
+              <div class="league-row">
+
+                <img
+                class="logo"
+                  [src]="bet.fixture[0].league.logo"
+                >
+
+                <span>
+
+                  {{ bet.fixture[0].league.country }}
+
+                  •
+
+                  {{ bet.fixture[0].league.name }}
+
+                </span>
+
+              </div>
+
+              <!-- MATCH -->
+
+              <div class="match-row">
+
+                <!-- HOME -->
+
+                <div class="team">
+
+                  <img
+                    [src]="bet.fixture[0].teams.home.logo"
+                  >
+
+                  <span>
+
+                    {{ bet.fixture[0].teams.home.name|truncateCenter:9 }}
+
+                  </span>
+
+                </div>
+
+                <!-- MARKET -->
+
+                <div class="score-market">
+
+                  {{ bet.market_value }}
+
+                </div>
+
+                <!-- AWAY -->
+
+                <div class="team away">
+
+
+
+                  <span>
+
+                    {{ bet.fixture[0].teams.away.name|truncateCenter:9 }}
+
+                  </span>
+
+                  <img
+                    [src]="bet.fixture[0].teams.away.logo"
+                  >
+
+                </div>
+
+              </div>
+
+              <!-- FOOTER -->
+
+
+              <div class="bet-footer">
+
+                <div class="footer-item">
+
+                <small>Stake</small>
+
+                <strong>
+                  {{ bet.stake_amount | currencyConverter:true }}
+                </strong>
+
+                </div>
+
+                <div class="footer-item">
+
+                <small>Market</small>
+
+                <strong class="market-value">
+
+                  {{ bet.market_value }}
+
+                </strong>
+
+                </div>
+
+                <div class="footer-item">
+
+                <small>Odds</small>
+
+                <strong>
+
+                  {{ bet.market_odds }}x
+
+                </strong>
+
+                </div>
+
+                <!-- OPEN -->
+
+                <div
+                class="footer-item"
+                *ngIf="bet.status === 'open'"
+                >
+
+                <small>Possible Win</small>
+
+                <strong class="profit">
+
+                  {{
+                    bet.stake_amount * bet.market_odds
+                    | currencyConverter:true
+                  }}
+
+                </strong>
+
+                </div>
+
+                <!-- WON -->
+
+                <div
+                class="footer-item"
+                *ngIf="bet.status === 'won'"
+                >
+
+                <small>Total Return</small>
+
+                <strong class="won-text">
+
+                  {{
+                    bet.stake_amount * bet.market_odds
+                    | currencyConverter:true
+                  }}
+
+                </strong>
+
+                </div>
+
+                <!-- LOSS -->
+
+                <div
+                class="footer-item"
+                *ngIf="bet.status === 'loss'"
+                >
+
+                <small>Status</small>
+
+                <strong class="loss-text">
+
+                  Lost
+
+                </strong>
+
+                </div>
+
+                </div>
+
+                <!-- EXTRA SECTION -->
+
+                <div
+                class="ticket-action"
+                *ngIf="bet.status === 'open'"
+                >
+
+                <button class="cancel-ticket-btn" *ngIf="bet.fixture[0].fixture.timestamp |countdown|async as time" (click)="historyServiceLoaded.CancelTicket(bet)">
+
+                Cancel Bet
+
+                </button>
+
+                </div>
+
+                <div
+                class="ticket-action"
+                *ngIf="bet.status === 'won'"
+                >
+
+                <div class="result-banner won-banner">
+
+                ✓ Winning Ticket
+
+                </div>
+
+                </div>
+
+                <div
+                class="ticket-action"
+                *ngIf="bet.status === 'loss'"
+                >
+
+                <div class="result-banner loss-banner">
+
+                ✕ Unsuccessful Ticket
+
+                </div>
+
+                </div>
+
+            </div>
+
+          </div>
+
     </div>
-
-    <!-- OPEN BETS -->
-    <div *ngIf="activeTab === 'openbet'" class="bets-content">
-      <ng-container *ngIf="historyServiceLoaded.openBetDisplay.length; else emptyOpen">
-        <div *ngFor="let bet of historyServiceLoaded.openBetDisplay" class="tx-card">
-
-          <!-- HEADER -->
-          <div class="">
-            <div>
-              <!-- <div class="title">Open Transactions</div> -->
-              <div class="order">Order No. #1777275939843</div>
-            </div>
-
-            <button *ngIf="bet.fixture[0].fixture.timestamp |countdown|async as time" (click)="historyServiceLoaded.CancelTicket(bet)"  class="btn-cancel">Cancel</button>
-          </div>
-
-          <!-- AMOUNT -->
-          <div class="amount-row">
-            <div>
-              <div class="label">Bet Amount</div>
-              <div class="amount notranslate">{{bet.stake_amount|currencyConverter:true}}</div>
-            </div>
-
-            <div>
-              <div class="label">Estimate Return</div>
-              <div class="amount highlight notranslate">{{ setProfit(bet, true) | currencyConverter:true:false:(historyServiceLoaded?.storeData.store['wallet']?.init_currency?.symbol==="BNB" ? 5 : 2) }}</div>
-            </div>
-          </div>
-
-          <!-- STATS -->
-          <div class="stats">
-            <div class="stat">
-              <div class="label">Score</div>
-              <div>{{bet.market_value}}</div>
-            </div>
-
-            <div class="stat">
-              <div class="label">Profit %</div>
-              <div class="highlight">{{bet.market_odds}}%</div>
-            </div>
-
-            <div class="stat">
-              <div class="label">status</div>
-              <div class="{{bet.status}}">{{bet.status}}</div>
-            </div>
-          </div>
-
-          <!-- TIME -->
-          <div class="time-row">
-            <div>
-              <div class="label">Placed At</div>
-              <div class="time">{{ bet.timestamp | date:'short' }}</div>
-            </div>
-
-            <div>
-              <div class="label">Match Start</div>
-              <div class="time">{{ bet.fixture[0].fixture.date | date:'short' }}</div>
-            </div>
-          </div>
-
-          <!-- MATCH -->
-          <div class="match">
-            <div class="league">LEAGUE: {{bet.fixture[0].league.name}}</div>
-
-            <div class="teams">
-              <span>{{bet.fixture[0].teams.home.name}}</span>
-              <span class="vs">VS</span>
-              <span>{{bet.fixture[0].teams.away.name}}</span>
-            </div>
-
-          </div>
-
-        </div>
-      </ng-container>
-
-      <ng-template #emptyOpen>
-        <div class="empty-state">
-          <img src="assets/images/empty-box.png" alt="No open bets">
-          <p>No open bets found</p>
-        </div>
-      </ng-template>
-    </div>
-
-    <!-- SETTLED BETS -->
-    <div *ngIf="activeTab === 'settled'" class="bets-content">
-      <ng-container *ngIf="historyServiceLoaded.settledBets.length; else emptySettled">
-
-        <div *ngFor="let bet of historyServiceLoaded.settledBets" class="tx-card">
-
-          <!-- HEADER -->
-          <div class="">
-            <div>
-              <!-- <div class="title">Open Transactions</div> -->
-              <div class="order">Order No. #{{bet.ticket_id}}</div>
-            </div>
-
-            <button *ngIf="bet.fixture[0].fixture.timestamp |countdown|async as time" (click)="historyServiceLoaded.CancelTicket(bet)"  class="btn-cancel">Cancel</button>
-          </div>
-
-          <!-- AMOUNT -->
-          <div class="amount-row">
-            <div>
-              <div class="label">Bet Amount</div>
-              <div class="amount notranslate">{{bet.stake_amount|currencyConverter:true}}</div>
-            </div>
-
-            <div>
-              <div class="label">Estimate Return</div>
-              <div class="amount highlight {{bet.status}} notranslate">{{ setProfit(bet, true) | currencyConverter:true:false:(historyServiceLoaded?.storeData.store['wallet']?.init_currency?.symbol==="BNB" ? 5 : 2) }}</div>
-              <!-- <div class="amount highlight notranslate">{{ setProfit(bet, true) | currencyConverter:true:false:(historyServiceLoaded?.storeData.store['wallet']?.init_currency?.symbol==="BNB" ? 5 : 2) }}</div> -->
-
-            </div>
-          </div>
-
-          <!-- STATS -->
-          <div class="stats">
-            <div class="stat">
-              <div class="label">Score</div>
-              <div>{{bet.market_value}}</div>
-            </div>
-
-            <div class="stat">
-              <div class="label">Profit %</div>
-              <div class="highlight">{{bet.market_odds}}%</div>
-            </div>
-
-            <div class="stat">
-              <div class="label">status</div>
-              <div class="{{bet.status}}">{{bet.status}}</div>
-            </div>
-          </div>
-
-          <!-- TIME -->
-          <div class="time-row">
-            <div>
-              <div class="label">Placed At</div>
-              <div class="time">{{ bet.timestamp | date:'short' }}</div>
-            </div>
-
-            <div>
-              <div class="label">Match Start</div>
-              <div class="time">{{ bet.fixture[0].fixture.date | date:'short' }}</div>
-            </div>
-          </div>
-
-          <!-- MATCH -->
-          <div class="match">
-            <div class="league">LEAGUE: {{bet.fixture[0].league.name}}</div>
-
-            <div class="teams">
-              <span>{{bet.fixture[0].teams.home.name}}</span>
-              <span class="vs">
-                {{ bet.fixture[0].score?.fulltime?.home || 0 }} -
-                {{ bet.fixture[0].score.fulltime.away || 0}}
-              </span>
-              <span>{{bet.fixture[0].teams.away.name}}</span>
-            </div>
-
-          </div>
-
-        </div>
-
-      </ng-container>
-
-      <ng-template #emptySettled>
-        <div class="empty-state">
-          <img src="assets/images/empty-box.png" alt="No settled bets">
-          <p>No settled bets found</p>
-        </div>
-      </ng-template>
-    </div>
-
   </section>
 </div>
 

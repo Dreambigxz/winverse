@@ -28,7 +28,8 @@ export async function copyContent(qm:any,data:any,message='Copied to clipboard',
    try {await navigator.clipboard.writeText(data);
      // let message=text || '';
      show_message?[
-       qm.show({message: `${message} ✅`,status:'success'})
+       qm.show({message: ``,status:'success'})
+       // qm.show({message: `${message} ✅`,status:'success'})
      ]:0;
      // show_message?toastMess(message):0;
    } catch (err) {console.error('Failed to copy: ', err);}
@@ -54,7 +55,7 @@ export function loadScript(scriptUrl: string): Promise<void> {
    return new Promise((resolve, reject) => {
      const existingScript = document.querySelector(`script[src="${scriptUrl}"]`);
 
-     // console.log({existingScript});
+     console.log({existingScript});
 
      if (existingScript) {
        document.body.removeChild(existingScript);
@@ -67,6 +68,9 @@ export function loadScript(scriptUrl: string): Promise<void> {
      script.onload = () => resolve();
      script.onerror = () => reject(new Error(`Script load error: ${scriptUrl}`));
      document.body.appendChild(script);
+
+     console.log("script", document.querySelector(`script[src="${scriptUrl}"]`));
+
 
      (window as any).googleTranslateElementInit = () => {
       new google.translate.TranslateElement(
@@ -81,6 +85,40 @@ export function loadScript(scriptUrl: string): Promise<void> {
     };
    });
  }
+
+export function reloadScript(
+  url: string,
+  callback?: Function
+): void {
+
+  const oldScript =
+    document.querySelector(
+      `script[src*="${url}"]`
+    );
+
+  if (oldScript) {
+    oldScript.remove();
+  }
+
+  const script =
+    document.createElement('script');
+
+  script.src =
+    `${url}?v=${Date.now()}`;
+
+  script.type = 'text/javascript';
+
+  script.onload = () => {
+
+
+    if (callback) {
+      callback();
+    }
+
+  };
+
+  document.body.appendChild(script);
+}
 
 export function loadExternalScript(URL='https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'){
 

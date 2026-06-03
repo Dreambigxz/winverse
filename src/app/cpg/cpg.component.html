@@ -1,0 +1,72 @@
+
+  <div *ngIf="matchService.CPG as matches">
+
+
+    <div class="section-title">
+      Secured Game
+    </div>
+
+    <div (click)="router.navigate(['/game-details/'+i.fixtureID])" *ngFor="let i of matches; let in = index"  class="match-card">
+
+      <!-- Top Bar -->
+      <div class="top-bar">
+        <div class="hot-badge">
+          HOT 🔥
+        </div>
+        <!-- {{i}} -->
+        <div class="league">
+          {{i.fixture.league.country}} · {{i.fixture.league.name}}
+        </div>
+      </div>
+
+      <!-- Match Section -->
+      <div class="match-content">
+
+        <!-- Team -->
+        <div class="team">
+          <img [src]="i.fixture.teams.home.logo" alt="">
+          <span>{{i.fixture.teams.home.name|truncateCenter:9}}</span>
+        </div>
+
+        <!-- Center -->
+        <div class="center-info">
+          <div class="time">
+            {{i.fixture.fixture.timestamp | timeFormat:'time' }} <span>|</span> Today
+          </div>
+
+          <div class="prediction">
+            {{matchService.market_data?.value}}
+          </div>
+        </div>
+
+        <!-- Team -->
+        <div class="team">
+          <img [src]="i.fixture.teams.away.logo" alt="">
+          <span>{{i.fixture.teams.away.name|truncateCenter:9}}</span>
+        </div>
+
+      </div>
+
+      <!-- Odds -->
+      <!-- <div class="odds-row">
+
+        <button class="odd-box active">
+          <small>1</small>
+          <strong>1.37</strong>
+        </button>
+
+        <button class="odd-box">
+          <small>X</small>
+          <strong>5.30</strong>
+        </button>
+
+        <button class="odd-box">
+          <small>2</small>
+          <strong>7.60</strong>
+        </button>
+
+      </div> -->
+
+    </div>
+
+</div>

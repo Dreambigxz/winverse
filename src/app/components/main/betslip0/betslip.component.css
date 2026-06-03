@@ -1,0 +1,155 @@
+.bet-panel {
+  background: linear-gradient(145deg, #22180d, #120c05);
+  border-radius: 20px;
+  padding: 18px;
+  color: #fff;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,235,59,0.05);
+}
+
+/* INFO */
+.bet-info {
+  display: flex;
+  gap: 10px;
+}
+
+.info-box {
+  flex: 1;
+  background: #2a1f12;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-box.highlight {
+  border: 1px solid rgba(255,152,0,0.4);
+}
+
+.label {
+  font-size: 11px;
+  color: #aaa;
+}
+
+.value {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.positive {
+  color: #ff9800;
+}
+
+/* STAKE */
+.stake-section {
+  margin-top: 15px;
+}
+
+.stake-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #bbb;
+}
+
+.stake-input {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  background: #2a1f12;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.currency {
+  margin-right: 6px;
+  color: #ff9800;
+}
+
+.stake-input input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  outline: none;
+}
+
+.stake-input button {
+  background: #ff9800;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #111;
+}
+
+/* QUICK */
+/* CONTAINER */
+.amount-scroll {
+  margin-top: 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* HIDE SCROLLBAR */
+.amount-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* TRACK */
+.amount-track {
+  display: flex;
+  gap: 10px;
+  min-width: max-content;
+}
+
+/* CHIP */
+.amount-chip {
+  white-space: nowrap;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: #2a1f12;
+  color: #bbb;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+/* HOVER */
+.amount-chip:hover {
+  color: #fff;
+  border-color: rgba(255,235,59,0.2);
+}
+
+/* ACTIVE */
+.amount-chip.active {
+  background: linear-gradient(135deg, #ff980022, #140e06);
+  color: #ff9800;
+  border-color: #ff9800;
+  box-shadow: 0 0 10px rgba(255,152,0,0.3);
+}
+
+/* RESULT */
+.result-box {
+  margin-top: 15px;
+  background: #1e160c;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0;
+  font-size: 13px;
+}
+
+.green {
+  color: #ff9800;
+}
+
+.red {
+  color: #ff7043;
+}

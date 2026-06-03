@@ -1,56 +1,275 @@
-<div *ngIf="storeData.store['withdraw'][0] as withdraw" class="withdraw-flow">
+<div *ngIf="storeData.store['withdraw'][0] as withdraw">
 
-  <!-- 🔷 SUMMARY -->
-  <div class="withdraw-card">
+  <div class="withdrawal-invoice">
 
-    <div class="card-head">
-      <h6>Withdrawal</h6>
-      <span class="close" (click)="walletService.cancelPayment('withdraw')">✕ delete</span>
+    <div class="invoice-status pending">
+
+      <div class="status-dot"></div>
+
+      <span>
+
+        {{ withdraw.status | titlecase }}
+
+      </span>
+
     </div>
 
-    <!-- GRID INFO -->
-    <div class="info-grid">
+    <!-- AMOUNT -->
 
-      <div class="info-item">
-        <span>Receiving</span>
-        <strong>{{withdraw.method}}{{withdraw.init_amount | number:'1.2-2'}}</strong>
+    <div class="invoice-amount">
+
+      <h1>
+
+        {{ withdraw.currency }}
+        {{ withdraw.amount }}
+
+      </h1>
+
+      <small>
+
+        Requested Withdrawal
+        <!-- <br> -->
+
+      </small>
+
+    </div>
+
+    <!-- METHOD -->
+
+    <div class="invoice-method">
+
+      <div class="method-icon">
+
+        🪙
+
       </div>
 
-      <div class="info-item">
-        <span>Reference</span>
-        <strong class="mono">{{withdraw.sessionID}}</strong>
-      </div>
+      <div>
 
-      <div class="info-item">
-        <span>Opened</span>
-        <strong>{{withdraw.timestamp | date:'dd MMM, hh:mm a'}}</strong>
-      </div>
+        <strong>
 
-      <div class="info-item">
-        <span>Processing</span>
-        <strong class="countdown">
-          {{withdraw.timestamp | countdown:storeData.store['wallet']?.settings.max_await_time.withdraw | async}}
+          {{ withdraw.method }}
+
         </strong>
+
+        <span>
+
+          {{ withdraw.extraField.payment_method }}
+
+        </span>
+
       </div>
 
     </div>
 
-    <!-- STATUS -->
-    <div class="status-pill" [class]="withdraw.status">
-      {{withdraw.status | titlecase}}
+    <!-- DETAILS -->
+
+    <div class="invoice-details">
+
+      <div class="detail-row">
+
+        <span>
+          Transaction Ref
+        </span>
+
+        <strong>
+
+          #{{ withdraw.txref }}
+
+        </strong>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span>
+          Destination
+        </span>
+
+        <strong>
+
+          {{ withdraw.transactionID }}
+
+        </strong>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span>
+          Requested
+        </span>
+
+        <strong>
+
+          {{ withdraw.created_at | date:'medium' }}
+
+        </strong>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span>
+          Network Amount
+        </span>
+
+        <strong>
+
+          {{ withdraw.init_amount }}
+          {{ withdraw.method }}
+
+        </strong>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span>
+          Processing Fee
+        </span>
+
+        <strong>
+
+          {{ withdraw.currency }}
+          {{ withdraw.processFee }}
+
+        </strong>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span>
+          You Receive
+        </span>
+
+        <strong class="receive">
+
+          {{ withdraw.currency }}
+          {{
+            (+withdraw.amount - +withdraw.processFee)
+            | number:'1.2-2'
+          }}
+
+        </strong>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span>
+          Previous Balance
+        </span>
+
+        <strong>
+
+          {{ withdraw.currency }}
+          {{ withdraw.old_bal }}
+
+        </strong>
+
+      </div>
+
+      <div class="detail-row">
+
+        <span>
+          New Balance
+        </span>
+
+        <strong>
+
+          {{ withdraw.currency }}
+          {{ withdraw.new_bal }}
+
+        </strong>
+
+      </div>
+
     </div>
 
-  </div>
+    <!-- TIMELINE -->
 
-  <!-- 🧠 NOTICE -->
-  <div class="notice-card">
+    <div class="timeline">
 
-    <div class="notice-title">Processing Rules</div>
+      <div class="timeline-item active">
 
-    <div class="notice-item">• Withdrawals are processed automatically</div>
-    <div class="notice-item">• Funds will arrive within processing time</div>
-    <div class="notice-item">• Do not report before timer completes</div>
-    <div class="notice-item">• Follow rules for smooth transactions</div>
+        <div class="timeline-icon">
+          ✓
+        </div>
+
+        <div>
+
+          <strong>
+            Request Submitted
+          </strong>
+
+          <span>
+            Withdrawal request created
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="timeline-item current">
+
+        <div class="timeline-icon">
+          ⏳
+        </div>
+
+        <div>
+
+          <strong>
+            Processing
+          </strong>
+
+          <span>
+            Awaiting approval
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="timeline-item">
+
+        <div class="timeline-icon">
+          $
+        </div>
+
+        <div>
+
+          <strong>
+            Max await payment time
+          </strong>
+
+          <span class="text-pending"> {{withdraw.timestamp | countdown:storeData.store['wallet']?.settings.max_await_time.withdraw | async}}</span>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ACTIONS -->
+
+    <div
+      class="invoice-actions"
+      *ngIf="withdraw.status === 'pending'"
+      (click)="walletService.cancelPayment('withdraw')"
+    >
+
+      <button
+        class="cancel-withdraw-btn"
+      >
+
+        Cancel Withdrawal
+
+      </button>
+
+    </div>
 
   </div>
 

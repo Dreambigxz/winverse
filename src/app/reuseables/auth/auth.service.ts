@@ -67,6 +67,10 @@ export class AuthService {
   uplinner:any
   showPassword=false
 
+  isVisible = false;
+
+  mode: 'login' | 'register' | 'reset' = 'login';
+
   private addHours(date: Date, hours: number): Date {
     const newDate = new Date(date);
     newDate.setHours(newDate.getHours() + hours);
@@ -126,6 +130,8 @@ export class AuthService {
 
     this.isLoggedIn = true;
 
+    this.isVisible=false
+
     return of(true);
   }
 
@@ -175,6 +181,9 @@ export class AuthService {
 
             const [path, query] = redirectUrl.split('?');
 
+            delete this.storeData.store['soccer']
+
+
             if (query) {
               const queryParams = Object.fromEntries(new URLSearchParams(query));
               this.router.navigate([path], { queryParams });
@@ -195,6 +204,7 @@ export class AuthService {
 
   setRefCode(){
     let checkUrl = window.location.href.split('ref')
+    console.log({checkUrl});
 
     if (checkUrl[1]) {
       this.RefCode=checkUrl[1].replaceAll('=','')
@@ -222,5 +232,23 @@ export class AuthService {
     this.showPassword = !this.showPassword;
   }
 
+  open(mode: 'login' | 'register' | 'reset' = 'login') {
+
+    if (this.isLoggedIn)return;
+    
+    this.mode = mode;
+    this.isVisible = true;
+
+    if (mode==='register') {
+      this.setRefCode()
+    }
+
+  }
+
+  close() {
+
+    this.isVisible = false;
+
+  }
 
 }

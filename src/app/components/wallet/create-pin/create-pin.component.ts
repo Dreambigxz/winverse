@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';import { WalletService } from '../../../reuseables/services/wallet.service';
+import { CommonModule } from '@angular/common';
+import { WalletService } from '../../../reuseables/services/wallet.service';
 
 import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 

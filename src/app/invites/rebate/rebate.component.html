@@ -1,0 +1,101 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+<div *ngIf="quickNav.storeData.store['refDir']?.rebate as ref" class="referral-page">
+
+  <!-- HERO -->
+
+  <div class="referral-hero">
+
+    <div class="hero-label">
+
+      Rebate Earnings
+
+    </div>
+
+    <div class="hero-amount">
+
+      {{ref.total_earning|currencyConverter:true}}
+
+    </div>
+
+    <div class="hero-subtitle">
+
+      Total Commission Earned
+
+    </div>
+
+  </div>
+
+  <!-- LEVEL 1 -->
+
+    <div *ngFor="let gen of gen_" class="level-card level-{{gen}}">
+
+      <div class="level-header">
+
+        <div>
+
+          <span class="level-badge">
+            Level {{gen}}
+          </span>
+
+          <h3>
+            {{title_head[gen]}}
+          </h3>
+
+        </div>
+
+        <div class="commission">
+
+          {{ref['generation_'+gen].amount|currencyConverter:true}}
+
+        </div>
+
+      </div>
+
+      <div class="stats-grid rebate">
+
+        <div class="stat-box users-box">
+
+              <small>
+                Users
+              </small>
+
+              <!-- <strong>
+                {{ ref['generation_'+gen].count }}
+              </strong> -->
+
+              <button
+                class="view-users-btn"
+                (click)="quickNav.go(
+                  '/invite/users',
+
+                    {
+                      generation:gen,
+                      type:'rebate'
+                  }
+                )"
+              >
+
+                View Users →
+
+              </button>
+
+            </div>
+
+        <div  class="stat-box">
+
+
+
+        <div class="stat-box">
+
+          <small>Total Commission</small>
+          <strong>{{ref['generation_'+gen].amount|currencyConverter:true}}</strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+</div>

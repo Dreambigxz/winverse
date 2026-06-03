@@ -1,0 +1,135 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+
+<div class=" app-container">
+
+
+  <div *ngIf="!quickNav.storeData.store['wallet']?.hasPin">
+    <app-create-pin></app-create-pin>
+  </div>
+
+  <div *ngIf="quickNav.storeData.store['wallet']?.hasPin&&!quickNav.storeData.store['wallet']?.hasPatialMethod">
+
+    <div *ngIf="walletService.showCryptoTab&&walletService.showLocalTab" class="method-grid">
+
+      <div
+        class="method-card"
+        [class.active]="walletService.activeChannel==='crypto'"
+        (click)="walletService.setActiveChannel('crypto')"
+        *ngIf="walletService.showCryptoTab"
+      >
+
+        <div class="method-icon">
+          🪙
+        </div>
+
+        <h4>
+          Crypto Network
+        </h4>
+
+        <p>
+          Digital Assets
+        </p>
+
+      </div>
+
+      <div
+        class="method-card"
+        [class.active]="walletService.activeChannel==='local'"
+        (click)="walletService.setActiveChannel('local')"
+        *ngIf="walletService.showLocalTab"
+      >
+
+        <div class="method-icon">
+          🏦
+        </div>
+
+        <h4>
+          Local Transfer
+        </h4>
+
+        <p>
+          Bank Payment
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- CRYPTO OPTIONS -->
+
+    <div
+      class="sub-methods"
+      *ngIf="walletService.activeChannel === 'crypto'"
+    >
+
+      <div class="sub-title">
+
+        Select Crypto Network
+
+      </div>
+
+      <div class="sub-grid">
+
+          <div
+            *ngFor="let curr of walletService.getVisibleCrptoNetwork; let i=index"
+
+            class="sub-card"
+            [class.active]="walletService.selectedCryptoMethod === curr.code"
+            (click)="walletService.selectedCryptoMethod = curr.code"
+          >
+            <img [src]="walletService.cryptos[i].img" alt="">
+            <span>{{ walletService.cryptos[i].label }}</span>
+          </div>
+
+      </div>
+
+    </div>
+
+    <!-- LOCAL OPTIONS -->
+
+    <div
+      class="sub-methods"
+      *ngIf="walletService.activeChannel === 'local'"
+    >
+
+      <div class="sub-title">
+
+        Select Country Method
+
+      </div>
+
+      <div class="sub-grid">
+
+        <div class="sub-card"
+          *ngFor="let curr of walletService.getVisibleCurrencies"
+          [class.active]="walletService.selectedLocaLMethod === curr.code"
+          (click)="walletService.selectedLocaLMethod = curr.code"
+        >
+
+          <strong>🇳🇬 Nigeria</strong>
+
+          <small>Bank Transfer</small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="mt-12" *ngIf="walletService.selectedLocaLMethod||walletService.selectedCryptoMethod&&quickNav.storeData.store['wallet']?.hasPin" >
+
+      <!-- <span>SET UP Withdraw Address</span> -->
+
+      <app-addresses></app-addresses>
+
+  </div>
+
+
+
+</div>

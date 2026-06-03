@@ -24,10 +24,14 @@ import { BethistoryComponent} from "./bethistory/bethistory.component";
 
 import { WalletComponent } from "./wallet/wallet.component";
 import { DepositComponent } from "./wallet/deposit/deposit.component";
+import { SetupComponent } from "./wallet/setup/setup.component";
 import { WithdrawComponent } from "./wallet/withdraw/withdraw.component";
 import { TransactionComponent } from "./wallet/transaction/transaction.component";
 
 import { VipComponent } from "./vip/vip.component";
+import { ReferralComponent } from "./invites/referral/referral.component";
+import { RebateComponent } from "./invites/rebate/rebate.component";
+import { UsersComponent } from "./invites/users/users.component";
 
 export const routes: Routes = [
 
@@ -35,7 +39,7 @@ export const routes: Routes = [
       path: '',
       component: MainComponent,
       title: 'Main',
-      canActivate: [authGuard]
+      // canActivate: [authGuard]
     },
 
     {
@@ -83,6 +87,12 @@ export const routes: Routes = [
       title: 'Withdraw',
       canActivate: [authGuard]
     },
+    {
+      path: 'setup',
+      component: SetupComponent,
+      title: 'Setup',
+      canActivate: [authGuard]
+    },
 
     {
       path: 'invite',
@@ -90,6 +100,25 @@ export const routes: Routes = [
       title: 'Invited-users',
       canActivate: [authGuard]
     },
+    {
+      path: 'invite/referrals',
+      component: ReferralComponent,
+      title: 'My earnings',
+      canActivate: [authGuard]
+    },
+    {
+      path: 'invite/rebate',
+      component: RebateComponent,
+      title: 'My earnings',
+      canActivate: [authGuard]
+    },
+    {
+      path: 'invite/users',
+      component: UsersComponent,
+      title: 'Users',
+      canActivate: [authGuard]
+    },
+
     {
       path: 'invite-rewards',
       component: RewardComponent,
@@ -152,20 +181,20 @@ export const routes: Routes = [
 
     },
     // auth  paths (anonymous users)
-    {
-      path: 'login',
-      component: LoginComponent,
-      title: 'Login',
-    },
-    {
-      path: 'sign-up',
-      component: RegisterComponent,
-      title: 'Register',
-    },
-    {
-      path: 'reset-password',
-      component: ResetComponent,
-      title: 'Reset',
-    },
+    // {
+    //   path: 'login',
+    //   component: LoginComponent,
+    //   title: 'Login',
+    // },
+    // {
+    //   path: 'sign-up',
+    //   component: RegisterComponent,
+    //   title: 'Register',
+    // },
+    // {
+    //   path: 'reset-password',
+    //   component: ResetComponent,
+    //   title: 'Reset',
+    // },
 
 ];

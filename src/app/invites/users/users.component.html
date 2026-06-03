@@ -1,66 +1,155 @@
-<div class="table-wrapper">
+<app-header2></app-header2>
+<app-spinner></app-spinner>
 
-  <table>
+<div *ngIf="inviteService.users as users" >
 
-    <thead>
-      <tr>
-        <th>User</th>
-        <!-- <th>Level</th> -->
-        <th>Reward</th>
-        <!-- <th>Stake</th> -->
-        <th>Status</th>
-        <th>Date</th>
-      </tr>
-    </thead>
+    <div class="users-page">
 
-    <tbody>
+    <div class="page-header">
 
-      <tr *ngFor="let user of inviteService.users">
+      <h2 *ngIf="inviteService.main !== 'inactive'">
+        {{inviteService.main|titlecase}} Level {{inviteService.level}} Users
+      </h2>
 
-        <td class="user">
-          {{inviteService.level !== 'pending'? user.referred_user : user.user}}
-        </td>
+      <h2 *ngIf="inviteService.main === 'inactive'">
+        {{inviteService.main|titlecase}} Users
+      </h2>
 
-        <!-- <td>
-          L{{user.generation}}
-        </td> -->
+      <span>
 
-        <td class="profit">
-          {{user.amount | currencyConverter:true}}
-        </td>
+        {{users.length}} Members
 
-        <!-- <td>
-          {{user.base_amount | number}}
-        </td> -->
+      </span>
 
-        <td>
-          <span
-            class="status"
-            [ngClass]="{
-              'paid': user.cashed,
-              'pending': !user.cashed
-            }">
-            {{ user.cashed ? 'Paid' : 'Pending' }}
+    </div>
+
+    <div
+      class="user-card"
+      *ngFor="let user of users"
+    >
+
+      <!-- TOP -->
+
+      <div class="user-top">
+
+        <div class="avatar">
+
+          {{user?.referred_user?.[0] || user.user?.[0] | uppercase}}
+
+        </div>
+
+        <div class="user-info">
+
+          <strong>
+
+            {{user?.referred_user||user.user}}
+
+          </strong>
+
+          <span>
+
+            {{ inviteService.main === 'inactive' ? "inactive": "Level"}} {{user?.generation}}
+
           </span>
-        </td>
 
-        <td class="date">
-          {{user.timestamp | date:'short'}}
-        </td>
+        </div>
 
-      </tr>
+        <div
+          class="status"
+          [class.paid]="user.cashed"
+        >
 
-    </tbody>
+          {{user?.cashed ? 'Paid' : 'Pending'}}
 
-  </table>
+        </div>
 
-</div>
+      </div>
 
-  <div *ngIf="!inviteService.users?.length" class="empty-state">
+      <!-- STATS -->
 
-    <img src="assets/images/empty-box.png" alt="No settled bets">
-    <h4>No Users Yet</h4>
+      <div
+      class="user-stats"
+      *ngIf="inviteService.main !== 'inactive'"
+      >
 
-    <p>Your referrals will appear here once someone joins using your invite code.</p>
+        <div class="stat">
+
+          <small>
+
+            {{inviteService.main === 'referral'? 'Deposit': "Bet profit"}}
+
+          </small>
+
+          <strong>
+
+            {{user?.currency}}
+            {{user?.base_amount}}
+
+          </strong>
+
+        </div>
+
+        <div class="stat">
+
+          <small>
+
+            Commission
+
+          </small>
+
+          <strong class="earn">
+
+            +{{user?.currency}}
+            {{user?.amount}}
+
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div *ngIf="inviteService.main !== 'inactive'" class="user-footer">
+
+        <span>
+
+          {{user?.created_at | date:'mediumDate'}}
+
+        </span>
+
+        <span>
+
+          {{user?.type | titlecase}}
+
+        </span>
+
+      </div>
+
+
+      <div *ngIf="inviteService.main === 'inactive'" class="user-footer">
+
+        <span>
+
+          JOINED
+
+        </span>
+
+        <span>
+
+          {{user?.created_at | date:'mediumDate'}}
+
+        </span>
+
+      </div>
+
+    </div>
 
   </div>
+  </div>
+
+  <div *ngIf="!inviteService.users.length">
+
+    <app-empty-state></app-empty-state>
+
+    </div>

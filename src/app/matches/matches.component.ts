@@ -58,7 +58,6 @@ export class MatchesComponent {
 
   ngOnInit(): void {
 
-
     this.getSoccer()
     this.router.events.pipe(filter((event:any) => event instanceof NavigationEnd)).subscribe((event: any) => {
       if (event.urlAfterRedirects==='/'||event.urlAfterRedirects==='/matches') {
@@ -68,9 +67,12 @@ export class MatchesComponent {
   }
 
   getSoccer(){
-    if (!localStorage.getItem("token")) {this.router.navigate(['login']); return}
+
+
+    let url = "soccer/?showSpinner"
+    if (!localStorage.getItem("token")) {url = "soccer_anon/?showSpinner"; }
     if (!this.matchService.storeData.get('soccer')) {
-      this.matchService.reqServerData.get('soccer/?showSpinner').subscribe({
+      this.matchService.reqServerData.get(url).subscribe({
         next: (res) => {
           this.setData()}
       });
@@ -80,8 +82,6 @@ export class MatchesComponent {
   async setData(){
 
     const soccer = this.matchService.storeData.store['soccer']
-
-    // console.log({soccer:soccer.length});
 
     this.matchService.setFixtures()
     this.matchService.notStarted(soccer);
@@ -99,6 +99,8 @@ export class MatchesComponent {
         this.index_by = 'CPG'
 
       }
+
+      this.slice = 10
     }
   }
 

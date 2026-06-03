@@ -1,0 +1,136 @@
+
+<div  class="fixed_footer p3-bg rounded-5 container-fluid" [class.show]="matchService.isSlipVisible">
+        <div (click)="matchService.toggleSlip()" *ngIf="matchService.addingFixture" class="fixed_footer__head py-3 px-4">
+            <div class="d-flex justify-content-between">
+                <div  class="fixed_footer__head-betslip d-flex align-items-center gap-2">
+                    <span class="fw-bold">{{matchService.addingFixture?"":'BetS'}}</span>
+                    <!-- <span *ngIf="matchService.addingFixture" class="fixed_footer__head-n1">1</span> -->
+                    <button class="footfixedbtn" type="button" >
+                      <span class="text-right">Close</span>
+                      <!-- <i class="ti ti-arrow-badge-down-filled n5-color fs-four"></i> -->
+                    </button>
+
+                </div>
+                <!-- <div class="fixed_footer__head-quickbet d-flex align-items-center gap-1">
+                    <span class="fw-bold">Betslip Bet</span>
+                    <input type="checkbox" id="switch"><label for="switch">Toggle</label>
+                </div> -->
+            </div>
+        </div>
+        <div *ngIf="matchService.addingFixture" class="fixed_footer__content ">
+            <div class="box">
+                <input type="radio" class="tab-toggle" name="tab-toggle" id="tab1" checked="">
+                <input type="radio" class="tab-toggle" name="tab-toggle" id="tab2">
+                <input type="radio" class="tab-toggle" name="tab-toggle" id="tab3">
+
+                <!-- <ul class="tab-list">
+                    <li class="tab-item">
+                        <label class="tab-trigger cpoint" for="tab1">Single</label>
+                    </li>
+                    <li class="tab-item">
+                        <label class="tab-trigger cpoint" for="tab2">Multiple</label>
+                    </li>
+                    <li class="tab-item">
+                        <label class="tab-trigger cpoint" for="tab3">System</label>
+                    </li>
+                </ul> -->
+                <div class="tab-container">
+                    <div class="tab-content">
+
+                      <div  *ngIf="matchService.addingFixture; else loadBookinng" class="">
+                        <div *ngIf="matchService.addingFixture as fx" class="fixed_footer__content-live px-4 py-5 mb-5">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div class="d-flex align-content-center gap-1">
+                                    <!-- <img src="assets/images/icon/sports-salzburg.png" alt="Icon"> -->
+                                    <span class="fs-seven cpoint">{{fx.fixture.teams.home.name}}</span>
+                                    <span class="fs-seven text-deem vs">vs</span>
+                                    <span class="fs-seven cpoint">{{fx.fixture.teams.away.name}}</span>
+                                </div>
+                                <!-- <span class="r1-color fs-seven">Live</span> -->
+                                <!-- <i class="ti ti-x n4-color cpoint"></i> -->
+                            </div>
+                            <div class="d-flex align-items-center justify0 gap-2 space-between">
+                              <div>
+                                  <span class="fs-seven d-block f-bold">
+                                    <!-- <i class="ti ti-circle"></i> -->
+                                    <!-- ⚽️ -->
+                                     {{fx.selectedScore.value}}</span>
+                                  <!-- <span class="fs-nine d-block">Score</span> -->
+                              </div>
+                                <span class="fixed_footer__content-scr py-1 px-2 fs-seven">{{fx.selectedScore.odds}}%</span>
+
+                            </div>
+                        </div>
+                            <div  class="fixed_footer__content-formarea px-2">
+
+                                  <div class="border-four d-flex align-items-center justify-content-between pe-2 rounded-3 mb-4">
+                                      <input
+                                       [(ngModel)]="matchService.stakeAmount"
+                                       (keyup)="matchService.stakeAmountHandler($event)"
+                                       placeholder="Bet amount"
+                                       class="place-style"
+                                        type="number">
+                                      <button (click)="matchService.stakeAll()" class=" p-1 fs-seven fw-normal" type="button">All</button>
+                                  </div>
+
+                                  <div
+                                      *ngIf="storeData.store['wallet'] as walletData"
+                                      class="fixed_footer__content-selectammount d-flex align-items-center justify-content-between mb-4"
+                                    >
+                                      <span
+                                        *ngFor="let amt of amounts"
+                                        class="fs-seven cpoint py-1 px-4 border-four rounded-2"
+                                        [class.active]="selectedAmount === amt"
+                                        (click)="selectAmount(amt)"
+                                      >
+                                        {{ amt|currencyConverter|number }}
+                                      </span>
+                                    </div>
+
+
+
+                                <div class="fixed_footer__content-possible d-flex align-items-center justify-content-between gap-2 mb-7">
+                                    <span class="fs-seven">Total win</span>
+                                    <span class="fs-seven fw-bold">{{storeData.store['wallet']?.init_currency.symbol}}{{matchService.possibleWin|number:"1.2-2"}}</span>
+                                </div>
+
+                                <div class="action-button">
+                                  <button (click)="matchService.slipHandler('trade_bet!')" type="button" class="cmn-btn px-5 py-3 w-100 mb-4 linear">Continue <i class="fa fa-arrow-right"></i></button>
+                                  <button (click)="matchService.slipHandler('book_bet')" *ngIf="storeData.store['is_staff']" type="button" class="cmn-btn third-alt px-5 py-3 w-100 mb-6">Company bet</button>
+                                  <button (click)="matchService.slipHandler('extra_bet')" *ngIf="storeData.store['is_staff']" type="button" class="cmn-btn third-alt px-5 py-3 w-100 mb-6 extra">Bonus bet</button>
+                                </div>
+
+                            <!-- </form> -->
+                        </div>
+                      </div>
+
+                      <ng-template #loadBookinng>
+
+                        <div class="border-four d-flex align-items-center justify-content-between pe-2 rounded-3 mb-4">
+                            <input
+                             placeholder="Coupon code"
+                             class="place-style"
+                              type="number">
+                        </div>
+
+                        <button type="button" class="cmn-btn px-5 py-3 w-100 mb-4">Load</button>
+
+
+                        </ng-template>
+
+                        <!-- <div class="fixed_footer__content-bottom d-flex align-items-center justify-content-between">
+                            <div class="right-border d-flex align-items-center gap-2">
+                                <i class="ti ti-trash n3-color fs-five cpoint"></i>
+                                <a href="javascript:void(0)" class="n3-color fs-seven">Sign In &amp; Bet</a>
+                            </div>
+                            <div class="right-border2 d-flex align-items-center justify-content-end gap-2">
+                                <i class="ti ti-settings n3-color fs-five cpoint"></i>
+                                <a href="javascript:void(0)" class="n3-color fs-seven">Settings</a>
+                            </div>
+                        </div> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

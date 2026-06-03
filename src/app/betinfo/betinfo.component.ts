@@ -10,19 +10,22 @@ import { RouterLink, Router, ActivatedRoute, NavigationStart, NavigationEnd } fr
 import { RequestDataService } from '../reuseables/http-loader/request-data.service';
 import { StoreDataService } from '../reuseables/http-loader/store-data.service';
 import { BetslipComponent } from "../components/main/betslip/betslip.component";
+import { EmptyStateComponent } from "../components/empty-state/empty-state.component";
 
 import { MatchService } from '../reuseables/services/match.service';
 import { TimeFormatPipe } from '../reuseables/pipes/time-format.pipe';
 import { CountdownPipe } from '../reuseables/pipes/countdown.pipe';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-betinfo',
   imports: [Header2Component,CommonModule,
     BetslipComponent,TimeFormatPipe,
-    SpinnerComponent,CountdownPipe
+    SpinnerComponent,CountdownPipe, MatIconModule,
+    EmptyStateComponent
   ],
   templateUrl: './betinfo.component.html',
-  styleUrls: ['./betinfo.component.css', '../../matches-style.css']
+  styleUrls: ['./betinfo.component.css']
 })
 export class BetinfoComponent {
 
@@ -107,6 +110,7 @@ export class BetinfoComponent {
     }
 
     this.activeID=0
+
   }
 
 

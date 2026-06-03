@@ -60,6 +60,10 @@ export class BetHistoryService {
   /* ------------------------------------
    COMPUTED LISTS (USED BY HTML)
   ------------------------------------- */
+  // get allBet() {
+  //   return this.allBets.filter(bet => bet.status === 'open');
+  // }
+
   get openBets() {
     return this.allBets.filter(bet => bet.status === 'open');
   }
@@ -67,6 +71,20 @@ export class BetHistoryService {
   get settledBets_() {
     return this.allBets.filter(
       bet => ["won",'loss', "postponed"].includes(bet.status)
+      //=== 'won' || bet.status === 'loss'
+    );
+  }
+
+  get wonBet() {
+    return this.allBets.filter(
+      bet => ["won"].includes(bet.status)
+      //=== 'won' || bet.status === 'loss'
+    );
+  }
+
+  get lossBet() {
+    return this.allBets.filter(
+      bet => ["loss"].includes(bet.status)
       //=== 'won' || bet.status === 'loss'
     );
   }

@@ -8,6 +8,9 @@ import { RequestDataService } from '../reuseables/http-loader/request-data.servi
 import { StoreDataService } from '../reuseables/http-loader/store-data.service';
 
 import { MenuBottomComponent } from "../components/menu-bottom/menu-bottom.component";
+import { QuickNavComponent } from "../components/quick-nav/quick-nav.component";
+import { SliderComponent } from "../components/main/slider/slider.component";
+
 import { QuickNotificationsComponent } from "../components/quick-notifications/quick-notifications.component";
 import { SpinnerComponent } from '../reuseables/http-loader/spinner.component';
 import { QuickNavService } from '../reuseables/services/quick-nav.service';
@@ -19,6 +22,11 @@ import { AccountSummaryComponent } from "../account-summary/account-summary.comp
 import { NotificationModalComponent } from '../shared/notification-modal/notification-modal.component';
 
 import { MatchesComponent } from "../matches/matches.component";
+import { CpgComponent } from "../cpg/cpg.component";
+import { reloadScript } from "../reuseables/helper";
+import { ActivatedRoute } from '@angular/router';
+
+declare var $: any;
 
 @Component({
   selector: 'app-main',
@@ -28,7 +36,13 @@ import { MatchesComponent } from "../matches/matches.component";
     CommonModule,
     QuickNotificationsComponent,
     SpinnerComponent,MarketComponent,
-    TruncateCenterPipe, CurrencyConverterPipe, AccountSummaryComponent, MatchesComponent
+    TruncateCenterPipe, CurrencyConverterPipe,
+    AccountSummaryComponent,
+     MatchesComponent,
+
+     QuickNavComponent,
+     SliderComponent,
+     CpgComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
@@ -42,10 +56,27 @@ export class MainComponent {
   quickNav = inject(QuickNavService)
   appManager = inject(AppDownloadManager)
 
-  // ngOnInit(){
-  //   if (!this.storeData.get('wallet')) {
-  //     this.reqServerData.get('dashboard/').subscribe()
-  //   }
-  // }
+  route = inject(ActivatedRoute)
+
+  ngOnInit(){
+
+    reloadScript("assets/js/main.js")
+
+    this.route.queryParams.subscribe(params => {
+
+      const join = params['join'];
+
+      if (join !== undefined) {
+
+        this.quickNav.authService.open('register');
+        // this.quickNav.authService.setRefCode()
+
+      }
+
+    });
+
+
+
+  }
 
 }

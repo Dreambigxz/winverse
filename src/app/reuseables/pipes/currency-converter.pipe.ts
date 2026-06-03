@@ -21,33 +21,33 @@ export class CurrencyConverterPipe implements PipeTransform {
     const pathname =  window.location.pathname
 
     // if (this.init_currency?.symbol==="BNB") {
-    if (this.storeData.get('wallet')?.init_currency?.symbol==="BNB"||this.storeData.get('wallet')?.symbol==="BNB"){
-
-      if (!this.storeData.get('wallet')?.symbol) {
-        this.storeData.get('wallet').symbol="BNB"
-      }
-
-      if (!["withdraw", "deposit"].includes(pathname)) {
-
-        this.storeData.get('wallet').init_currency = {
-            'symbol': '$',
-            'name': 'Dollar',
-            'code': 'USD',
-            'rate': 1,
-            'flag': '🇺🇸'
-        }
-
-      } else{
-          this.storeData.get('wallet').init_currency={
-              'symbol': 'BNB',
-              'name': 'BNB',
-              'code': 'BNB',
-              'rate': 0.0015,
-              'flag': '🌐'
-          }
-      }
-
-    }
+    // if (this.storeData.get('wallet')?.init_currency?.symbol==="BNB"||this.storeData.get('wallet')?.symbol==="BNB"){
+    //
+    //   if (!this.storeData.get('wallet')?.symbol) {
+    //     this.storeData.get('wallet').symbol="BNB"
+    //   }
+    //
+    //   if (!["withdraw", "deposit"].includes(pathname)) {
+    //
+    //     this.storeData.get('wallet').init_currency = {
+    //         'symbol': '$',
+    //         'name': 'Dollar',
+    //         'code': 'USD',
+    //         'rate': 1,
+    //         'flag': '🇺🇸'
+    //     }
+    //
+    //   } else{
+    //       this.storeData.get('wallet').init_currency={
+    //           'symbol': 'BNB',
+    //           'name': 'BNB',
+    //           'code': 'BNB',
+    //           'rate': 0.0015,
+    //           'flag': '🌐'
+    //       }
+    //   }
+    //
+    // }
 
     // if (!this.wallet) {
       this.wallet=this.storeData.get('wallet');
@@ -67,6 +67,7 @@ export class CurrencyConverterPipe implements PipeTransform {
     const symbol = this.init_currency?.symbol || '';
     let converted;
 
+
     if (symbol==='trx') {
       converted = amount / rate;
     }else{
@@ -76,6 +77,7 @@ export class CurrencyConverterPipe implements PipeTransform {
     if (symbol==="BNB"&&minimumFractionDigits<=2) {
       minimumFractionDigits=3
     }
+
 
 
     return showSymbol

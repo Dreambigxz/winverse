@@ -1,84 +1,239 @@
-/* users table */
-.users-table{
-  margin-top:15px;
+.users-page {
+
+  padding: 1rem;
+
 }
 
-.table-wrapper{
-  overflow-x:auto;
-  border-radius:10px;
+/* HEADER */
+
+.page-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 1rem;
+
 }
 
-table{
-  width:100%;
-  border-collapse:collapse;
-  background:#1e160c;
-  font-size:13px;
+.page-header h2 {
+
+  margin: 0;
+
+  color: white;
+
+  font-size: 1.4rem;
+
+  font-weight: 800;
+
 }
 
-thead{
-  background:#2a1f12;
+.page-header span {
+
+  color: #cd7fd6;
+
+  font-size: .8rem;
+
+  font-weight: 700;
+
 }
 
-th{
-  text-align:left;
-  padding:12px;
-  color:#bbb;
-  font-weight:500;
-  font-size:12px;
+/* CARD */
+
+.user-card {
+
+  margin-bottom: 1rem;
+
+  padding: 1rem;
+
+  border-radius: 1rem;
+
+  background:
+    linear-gradient(
+      145deg,
+      #120714,
+      #1d0b1f,
+      #2d1330
+    );
+
+  border:
+    .0625rem solid rgba(205,127,214,.08);
+
+  box-shadow:
+    0 .5rem 1rem rgba(0,0,0,.15);
+
 }
 
-td{
-  padding:12px;
-  border-top:1px solid rgba(255,235,59,0.08);
-  color:#f5f5f5;
+/* TOP */
+
+.user-top {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: .8rem;
+
 }
 
-tr:hover{
-  background:#2a1f12;
+.avatar {
+
+  width: 3rem;
+  height: 3rem;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #cd7fd6,
+      #9c4ca6
+    );
+
+  color: white;
+
+  font-size: 1rem;
+
+  font-weight: 900;
+
 }
 
-/* user column */
-.user{
-  font-weight:500;
+.user-info {
+
+  flex: 1;
+
 }
 
-/* profit column */
-.profit{
-  color:#ff9800;
-  font-weight:600;
+.user-info strong {
+
+  display: block;
+
+  color: white;
+
+  font-size: .95rem;
+
 }
 
-/* status badge */
-.status{
-  padding:3px 8px;
-  border-radius:6px;
-  font-size:11px;
+.user-info span {
+
+  color:
+    rgba(205,127,214,.7);
+
+  font-size: .75rem;
+
 }
 
-/* paid */
-.status.paid{
-  background:rgba(255,152,0,0.15);
-  color:#ff9800;
+/* STATUS */
+
+.status {
+
+  padding: .35rem .75rem;
+
+  border-radius: 999px;
+
+  font-size: .7rem;
+
+  font-weight: 700;
+
+  background:
+    rgba(245,158,11,.15);
+
+  color: #f59e0b;
+
 }
 
-/* pending */
-.status.pending{
-  background:rgba(255,235,59,0.15);
-  color:#ffeb3b;
+.status.paid {
+
+  background:
+    rgba(34,197,94,.15);
+
+  color: #22c55e;
+
 }
 
-/* date */
-.date{
-  color:#aaa;
+/* STATS */
+
+.user-stats {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap: .75rem;
+
+  margin-top: 1rem;
+
 }
 
-/* mobile */
-@media(max-width:600px){
-  table{
-    font-size:12px;
-  }
+.stat {
 
-  th, td{
-    padding:10px;
-  }
+  padding: .8rem;
+
+  border-radius: .8rem;
+
+  background:
+    rgba(255,255,255,.03);
+
+}
+
+.stat small {
+
+  display: block;
+
+  color:
+    rgba(205,127,214,.7);
+
+  font-size: .72rem;
+
+}
+
+.stat strong {
+
+  display: block;
+
+  margin-top: .3rem;
+
+  color: white;
+
+  font-size: .95rem;
+
+}
+
+.earn {
+
+  color: #22c55e !important;
+
+}
+
+/* FOOTER */
+
+.user-footer {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 1rem;
+
+  padding-top: .8rem;
+
+  border-top:
+    .0625rem solid rgba(205,127,214,.08);
+
+}
+
+.user-footer span {
+
+  color:
+    rgba(255,255,255,.55);
+
+  font-size: .72rem;
+
 }

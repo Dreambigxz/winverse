@@ -5,272 +5,284 @@
 <div *ngIf="quickNav.storeData.store['refDir'] as ref" class="page-wrapper">
 
   <section class="app-container">
-    <div class="ref-card">
 
-      <!-- Title -->
-      <div class="ref-title">Commission cashed</div>
+    <div class="invite-page">
 
-      <!-- Amount -->
-      <div class="ref-amount">
-        <span class="amount">{{ref.cashed_commissions |currencyConverter}}</span>
-        <span class="currency">{{walletData?.init_currency['code']}}</span>
-      </div>
+  <!-- HERO -->
 
-      <div class="stat-card primary">
-          <div class="stat-title">Frozen Commission</div>
+  <div class="invite-hero">
 
-          <div class="stat-value">
-            {{ frozen_comm | currencyConverter:true }}
-          </div>
+    <div class="invite-badge">
 
-          <div *ngIf="frozen_comm" class="cashing-box">
-            <span>Cashing at</span>
-            <br>
-            <span class="cashing-time">
-              {{ firstNextMonth | countdown | async }}
-            </span>
-          </div>
-        </div>
+      🎁 Referral Program
 
-      <!-- Description -->
-      <p class="ref-desc">
-        Share this link to invite friends and earn crypto rewards!
+    </div>
+
+    <h1>
+
+      Earn While
+      <span>Friends Play</span>
+
+    </h1>
+
+    <p>
+
+      Invite friends and earn commission from every qualifying deposit.
+
+    </p>
+
+    <div class="hero-earnings">
+
+      <small>Total Earnings</small>
+
+      <strong>
+
+        {{ref.cashed_commissions |currencyConverter:true}}
+
+      </strong>
+
+    </div>
+
+  </div>
+
+  <!-- REFERRAL LINK -->
+
+  <div class="referral-card">
+
+    <div class="card-title">
+
+      Your Referral Link
+
+    </div>
+
+    <div class="referral-link">
+
+      {{refLink}}
+
+    </div>
+
+    <div class="referral-actions">
+
+      <button
+        class="primary-btn"
+        (click)="quickNav.copy(refLink,'invite link copied!')"
+        >
+
+        Copy Link
+
+      </button>
+
+      <button
+        class="secondary-btn"
+        (click)="shareReferral(refLink)"
+        >
+
+        Share
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="affiliate-nav">
+
+  <!-- REFERRAL -->
+
+  <div
+    class="affiliate-card referral"
+    (click)="quickNav.go('invite/referrals')"
+  >
+
+    <div class="card-icon">
+
+      👥
+
+    </div>
+
+    <div class="card-content">
+
+      <h3>
+
+        Referral Program
+
+      </h3>
+
+      <p>
+
+        Earn commissions from Level 1 to Level 3 referrals.
+
       </p>
 
-      <!-- Referral Link -->
-      <div class="ref-link-label">Referral Link</div>
+      <div class="card-stats">
 
-      <div class="ref-link-box">
-        <input
-          type="text"
-          [value]="refLink | truncateCenter:15"
-          readonly
-        />
-        <button (click)="quickNav.copy(refLink,'invite link copied!')">Copy</button>
-      </div>
+        <span *ngIf="ref?.referral as gen">
+          Users: {{gen?.generation_1.count+gen?.generation_2.count+gen?.generation_3.count}}
+        </span>
 
-      <!-- Social -->
-      <div class="share-section">
-        <div class="share-title">
-          <i class="ti ti-speakerphone"></i>
-          Share on Social Media
-        </div>
-
-        <div class="social-icons">
-
-          <a (click)="share('line')">
-            <img src="https://cdn.simpleicons.org/line" />
-          </a>
-
-          <a (click)="share('whatsapp')">
-            <img src="https://cdn.simpleicons.org/whatsapp" />
-          </a>
-
-          <a (click)="share('telegram')">
-            <img src="https://cdn.simpleicons.org/telegram" />
-          </a>
-
-          <a (click)="share('facebook')">
-            <img src="https://cdn.simpleicons.org/facebook" />
-          </a>
-
-          <a (click)="share('twitter')">
-            <img src="https://cdn.simpleicons.org/x" />
-          </a>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-  <section>
-    <div class="sub-page">
-
-      <!-- mainTab -->
-      <div class="sub-tabs">
-
-        <div
-          class="sub-tab"
-          [class.active]="inviteService.main === 'referral'"
-          (click)="inviteService.main = 'referral'">
-          Referral
-        </div>
-
-        <div
-          class="sub-tab"
-          [class.active]="inviteService.main === 'rebate'"
-          (click)="inviteService.main = 'rebate'">
-          Rebate
-        </div>
-
-      </div>
-
-      <!-- Control TABS -->
-      <div class="control-tabs">
-
-        <div
-          class="control-tab"
-          [class.active]="inviteService.page === 'commissions'"
-          (click)="inviteService.page = 'commissions'">
-          Commissions
-        </div>
-
-        <div
-          *ngIf="inviteService.main==='referral'"
-          class="control-tab"
-          [class.active]="inviteService.page === 'transactions'"
-          (click)="inviteService.page = 'transactions'">
-          Transactions
-        </div>
-
-        <div
-          class="control-tab"
-          [class.active]="inviteService.page === 'users'"
-          (click)="inviteService.page = 'users'">
-          Users
-        </div>
-
-      </div>
-
-
-      <!-- LEVEL TABS -->
-      <div class="level-tabs">
-
-        <div
-          *ngIf="inviteService.page !== 'users'"
-          class="level-tab"
-          [class.active]="inviteService.level === 'all'"
-          (click)="inviteService.level = 'all'">
-          All
-        </div>
-
-        <div
-          class="level-tab"
-          [class.active]="inviteService.level === 'level1' || inviteService.page === 'users' &&  inviteService.level ===  'all' "
-          (click)="inviteService.level = 'level1'">
-          Level1
-        </div>
-
-        <div
-          class="level-tab"
-          [class.active]="inviteService.level === 'level2'"
-          (click)="inviteService.level = 'level2'">
-          Level2
-        </div>
-
-        <div
-          class="level-tab"
-          [class.active]="inviteService.level === 'level3'"
-          (click)="inviteService.level = 'level3';">
-          Level3
-        </div>
-
-        <div
-          *ngIf="inviteService.page === 'users'"
-          class="level-tab"
-          [class.active]="inviteService.level == 'pending'"
-          (click)="inviteService.level = 'pending' ">
-          Inactive
-        </div>
-
-
-
-      </div>
-
-
-      <!-- DATA -->
-      <div class="mt-5" *ngIf="inviteService.calculateTabData as data">
-      <!-- <div class="mt-5" *ngIf="inviteService.calculateTabData as data"> -->
-
-        <!-- ========================= -->
-        <!-- COMMISSIONS -->
-        <!-- ========================= -->
-        <ng-container *ngIf="inviteService.page === 'commissions'">
-
-          <div class="info">
-              <span class="info-text">
-                You will get a <strong>{{inviteService.activeText}}</strong> {{inviteService.main}} earning of
-                <strong>{{ inviteService.activePercent }} %</strong>
-                <!-- from level 1–3 -->
-              </span>
-            </div>
-          <div class="stats-grid">
-
-            <div class="stat-card primary">
-              <div class="stat-title">Total cashed</div>
-              <div class="stat-value">
-                {{ data.amount |  currencyConverter:true }}
-              </div>
-            </div>
-
-            <div *ngIf="inviteService.main==='rebate'" class="stat-card primary">
-                <div class="stat-title">Frozen cashed</div>
-
-                <div class="stat-value">
-                  {{ data.frozen | currencyConverter:true }}
-                </div>
-
-                <div *ngIf="data.frozen" class="cashing-box">
-                  <span>Cashing at</span>
-                  <br>
-                  <span class="cashing-time">
-                    {{ firstNextMonth | countdown | async }}
-                  </span>
-                </div>
-              </div>
-
-            <div *ngIf="inviteService.main==='referral'" class="stat-card">
-              <div class="stat-title">Team Size</div>
-              <div class="stat-value">
-              <!-- {{data.total}}  / {{ data.active }} -->
-              {{ data.count }}
-              </div>
-            </div>
-
-          </div>
-
-        </ng-container>
-
-
-        <!-- ========================= -->
-        <!-- TRANSACTIONS -->
-        <!-- ========================= -->
-        <ng-container *ngIf="inviteService.page === 'transactions'">
-
-          <div class="stats-grid">
-
-            <div class="stat-card primary">
-              <div class="stat-title">Team Deposits</div>
-              <div class="stat-value">
-                {{ data.deposit.amount |  currencyConverter:true }}
-              </div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-title">Team Withdrawals</div>
-              <div class="stat-value">
-                {{ data.withdraw.amount |  currencyConverter:true }}
-              </div>
-            </div>
-
-          </div>
-
-        </ng-container>
-
-
-        <!-- ========================= -->
-        <!-- USERS -->
-        <!-- ========================= -->
-        <ng-container *ngIf="inviteService.page === 'users'">
-
-          <app-users></app-users>
-
-        </ng-container>
+        <span>
+          Earned: {{ref?.referral?.total_earning|currencyConverter:true}}
+        </span>
 
       </div>
 
     </div>
+
+    <div class="card-arrow">
+
+      →
+
+    </div>
+
+  </div>
+
+  <!-- REBATE -->
+
+  <div
+    class="affiliate-card rebate"
+    (click)="quickNav.go('invite/rebate')"
+  >
+
+    <div class="card-icon">
+
+      💰
+
+    </div>
+
+    <div class="card-content">
+
+      <h3>
+
+        Rebate Program
+
+      </h3>
+
+      <p>
+
+        Earn from your level 1 to level 3 team's betting activity.
+
+      </p>
+
+      <div class="card-stats">
+
+        <!-- <span>
+          Users: 96
+        </span> -->
+
+        <span>
+          Earned: {{ref?.rebate?.total_earning|currencyConverter:true}}
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="card-arrow">
+
+      →
+
+    </div>
+
+  </div>
+  <div
+    class="affiliate-card pending"
+    (click)="quickNav.go(
+      '/invite/users',
+
+        {
+          generation:'pending',
+          type:'inactive'
+      }
+    )"
+
+  >
+
+    <div class="card-icon">
+
+      ⏳
+
+    </div>
+
+    <div class="card-content">
+
+      <h3>
+
+        Pending Direct Subordinates
+
+      </h3>
+
+      <p>
+
+        Invited members awaiting activation.
+
+      </p>
+
+      <div class="card-stats">
+
+        <span>
+          Users: {{ref.pending_ref}}
+        </span>
+
+        <span>
+          Pending Deposit
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="card-arrow">
+
+      →
+
+    </div>
+
+  </div>
+
+</div>
+
+
+  <div class="guide-card">
+
+    <h3>
+
+      How It Works
+
+    </h3>
+
+    <div class="guide-step">
+
+      1️⃣ Share your referral link
+
+    </div>
+
+    <div class="guide-step">
+
+      2️⃣ Friends create accounts
+
+    </div>
+
+    <div class="guide-step">
+
+      3️⃣ They make deposits
+
+    </div>
+
+    <div class="guide-step">
+
+      4️⃣ Earn commissions automatically on their deposit
+
+    </div>
+
+    <div class="guide-step">
+      5️⃣ Continiues bonus on their betting profit
+    </div>
+
+  </div>
+
+</div>
   </section>
+
 
 
 

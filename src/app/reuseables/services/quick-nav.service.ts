@@ -148,4 +148,17 @@ export class QuickNavService {
       firstNextMonth
     };
   }
+
+  checkIn(){
+
+    if (!this.storeData.store['checked_in']) {
+      console.log("check  in user");
+
+      this.reqServerData.get("dashboard?check_in=check_in")
+      .subscribe((res)=>{
+        console.log({res});
+
+      })
+    }
+  }
 }

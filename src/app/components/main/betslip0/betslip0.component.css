@@ -1,0 +1,226 @@
+/* .fixed_footer.show .fixed_footer__content{
+      overflow-x:scroll;
+      overflow-y:scroll;
+      background: radial-gradient(circle at top, #0f172a, #02192a);
+      height:100%;
+      top: 47px;
+
+
+} */
+
+.fixed_footer__content-selectammount {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 6px;
+  white-space: nowrap;
+}
+
+/* Hide scrollbar for WebKit browsers */
+.fixed_footer__content-selectammount::-webkit-scrollbar {
+  display: none;
+}
+
+/* Optional: Hide scrollbar for Firefox */
+.fixed_footer__content-selectammount {
+  scrollbar-width: none;
+}
+
+/* Each span should have consistent size and styling */
+.fixed_footer__content-selectammount span {
+  flex: 0 0 auto;
+  text-align: center;
+  min-width: 60px;
+  /* border: 1px solid var(--border-four, #ccc); */
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Active state */
+.fixed_footer__content-selectammount span.active {
+  background-color: transparent;
+  /* var(--primary-color, #007bff); */
+  color: #fff;
+  border-color: rgb(var(--g1));
+}
+/* hover state */
+.fixed_footer__content-selectammount span.hover {
+  background-color: transparent;
+  color: #fff;
+  border-color: rgb(var(--g1));
+}
+
+
+/* input, select {
+    background: transparent !important;
+    border: none;
+}
+
+input:hover{
+  border: none !important;
+} */
+
+/* .fixed_footer.p3-bg.rounded-5.container-fluid.show {
+
+    top: 47px;
+}
+
+.action-button {
+    position: absolute;
+    bottom: 0;
+    width: 85%;
+}
+ */
+
+/* new STYLES CHATGPT */
+
+.fixed_footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -100%;
+  z-index: 999;
+  background: rgb(5 17 32);
+  color: #fff;
+  transition: bottom 0.35s ease-in-out;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.45);
+}
+
+.fixed_footer.show {
+  bottom: 0;
+}
+
+.fixed_footer__head {
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.fixed_footer__head-betslip span {
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.footfixedbtn {
+  background: transparent;
+  border: none;
+}
+
+.fixed_footer__content {
+  overflow-y: auto;
+  max-height: calc(90vh - 70px);
+}
+
+.fixed_footer__content-live {
+  background: rgb(13 23 41);
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+.fixed_footer__content-live span {
+  color: #e5e7eb;
+}
+
+.fixed_footer__content-scr {
+  background: #0479b4;//linear-gradient(135deg, #0479b4, #16a34a);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.place-style {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 1rem;
+  padding: 12px;
+}
+
+.border-four {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.border-four:focus-within {
+  border-color: #0479b4;
+}
+
+.fixed_footer__content-selectammount span {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e5e7eb;
+  transition: all 0.2s ease;
+}
+
+.fixed_footer__content-selectammount span:hover {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: #0479b4;
+}
+
+.fixed_footer__content-selectammount span.active {
+  background: #0479b4;
+  color: rgb(5 17 32);
+  font-weight: 600;
+}
+
+.fixed_footer__content-possible {
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  padding-top: 10px;
+}
+
+.fixed_footer__content-possible span:last-child {
+  color: #0479b4;
+}
+
+.cmn-btn {
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+.cmn-btn.linear {
+  background: linear-gradient(135deg, #045d89, #036496);
+  /* linear-gradient(135deg, #0479b4, #16a34a); */
+  border: none;
+  color: rgb(5 17 32);
+
+  box-shadow:
+    0 16px 40px rgba(2, 95, 141, .45),
+    inset 0 1px 0 rgba(255,255,255,.25);
+  filter: brightness(1.05);
+}
+
+.cmn-btn.linear:hover {
+  opacity: 0.9;
+}
+
+.cmn-btn.third-alt {
+  background: rgb(5 17 32);
+  border: 1px solid #0479b4;
+  color: #0479b4;
+}
+
+@media (max-width: 768px) {
+  .fixed_footer {
+    border-radius: 18px 18px 0 0;
+  }
+
+  .fixed_footer__head {
+    padding-top: 18px;
+  }
+}
+
+.vs{
+  color: #999 !important;
+}
+
+button.cmn-btn.extra {
+    background: #091728;
+}

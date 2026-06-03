@@ -1,30 +1,44 @@
-<ng-container *ngIf="walletService.activeChannelObs$ | async as mode">
+<!-- CURRENT METHOD -->
 
-  <div *ngIf="!walletService.storeData.store['savedMethod']" class="toggle-wrap">
-    <div class="toggle">
 
-      <div
-        class="toggle-indicator"
-        [class.right]="mode === 'local'">
-      </div>
+<div class="withdraw-method-card">
 
-      <div
-        *ngIf="walletService.showCryptoTab"
-        class="toggle-btn"
-        [class.active]="mode === 'crypto'"
-        (click)="walletService.setActiveChannel('crypto')">
-        Crypto
-      </div>
+  <div class="method-info">
 
-      <div
-        *ngIf="walletService.showLocalTab"
-        class="toggle-btn"
-        [class.active]="mode === 'local'"
-        (click)="walletService.setActiveChannel('local')">
-        Local
-      </div>
+    <div class="method-icon">
+
+      <span *ngIf="walletService.showCryptoTab">🪙</span>
+      <span *ngIf="walletService.showLocalTab">🏦</span>
+
 
     </div>
+
+    <div>
+
+      <small>
+        Payment Method
+      </small>
+
+      <strong>
+        {{walletService.selectedData?.code}}
+      </strong>
+
+      <span>
+        {{walletService.saved_add?.account_number|truncateCenter:9}}
+      </span>
+
+    </div>
+
   </div>
 
-</ng-container>
+  <button
+    type="button"
+    class="change-method-btn"
+    (click)="walletService.quickNav.go('setup')"
+  >
+
+    Change
+
+  </button>
+
+</div>

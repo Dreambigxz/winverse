@@ -18,7 +18,7 @@ import { CurrencyConverterPipe } from '../pipes/currency-converter.pipe';
 import {  copyContent} from '../helper';
 
 // export type PaymentChannel = 'USD' | 'USDT' | 'TRON' | 'BANK';
-export type PaymentChannelGrp = 'local'|'crypto'
+export type PaymentChannelGrp = 'local'|'crypto'| "withdraw"
 type FormPageGroup = 'deposit'|'withdraw'  | 'set_new_pin'
 type CryptoKey = 'USD' | 'TRON' | "BNB";
 
@@ -29,7 +29,7 @@ export class WalletService {
   // Hold current payment method
   private paymentMethod$ = new BehaviorSubject<PaymentChannelGrp>('local');
   private reqConfirmation = inject(ConfirmationDialogService);
-  private currencyConverter = inject(CurrencyConverterPipe);
+  public currencyConverter = inject(CurrencyConverterPipe);
 
   reqServerData = inject(RequestDataService);
   storeData = inject(StoreDataService);
@@ -63,6 +63,7 @@ export class WalletService {
       payment_info:this.fb.group({
         account_number: ['', [Validators.required]],
         pin: ['', [Validators.required]],
+        payment_method: [""]
 
       }),
       step:1
@@ -83,11 +84,26 @@ export class WalletService {
         account_holder: ['', [Validators.required]],
         bank: ['', [Validators.required]],
         pin: ['', [Validators.required]],
+
+        payment_method: [""]
       }),
 
       step:1
 
     },
+
+    withdraw: this.fb.group({
+        amount: ['', [Validators.required]],
+
+        origin: [""],
+
+        withdraw_option: [''],
+
+        saved_method_id: [''],
+
+        payment_method: [""]
+    }),
+
   }
 
   updateWithdrawalOptionsValidator(form:any) {
@@ -131,14 +147,14 @@ export class WalletService {
     { value: 'TRON', label: 'TRON', img: 'assets/img/card/tron.png' },
     { value: 'BNB', label: 'BNB NETWORK', img: 'assets/img/card/bnb.png' }
   ];
-  cryptoMap: Record<CryptoKey, { value: string; label: string; img: string }> = {
-    USD: { value: 'USD', label: 'USDT (TRC20)', img: 'assets/img/card/usdt.svg' },
-    TRON: { value: 'TRON', label: 'TRON', img: 'assets/img/card/tron.png' },
+  cryptoMap: Record <CryptoKey, any> = {
+    USD: { value: 'USD', label: 'TRC20', img: 'assets/img/card/usdt.svg',  },
+    TRON: { value: 'TRON', label: 'TRON', img: 'assets/img/card/tron.png', },
     BNB: { value: 'BNB', label: 'BNB', img: 'assets/img/card/bnb.png' }
   };
 
-  getCryptoLabel(code: string, value:any=null): string {
-    return this.cryptoMap[code as keyof typeof this.cryptoMap]?.label || '';
+  getCrypto(code: CryptoKey) {
+    return this.cryptoMap[code];
   }
 
   cryptoCoins = ["TRON", "USD", "USDT", "BNB"]
@@ -151,6 +167,8 @@ export class WalletService {
   selectedLocaLMethod: any
   selectedCryptoMethod : any = "USD"
 
+  initCryptoMethod : any
+
   selectedData :any
   editingAddress = false
 
@@ -161,6 +179,9 @@ export class WalletService {
   showLocalTab = true;
 
   payAddress = ""
+  saved_add :any
+
+  quickAmounts = [10, 20, 50, 100]
 
   constructor(private router: Router,  private route :ActivatedRoute) {
     this.router.events
@@ -177,12 +198,11 @@ export class WalletService {
   }
 
   // DISPLAY ALL LOCAL CURRENCY OR JUST SELECTED
-  getVisibleCurrencies(slice:any=[3]) {
+  get getVisibleCurrencies() {
 
+    let slice = [3]
     const isCryptoSelect = slice.length === 1
     const currencies = this.quickNav.storeData.store['init_currencies']?.slice(...slice);
-
-    // console.log({currencies});
 
     if (!this.selectedLocaLMethod) {
       return currencies; // show all before selection
@@ -198,21 +218,30 @@ export class WalletService {
 
   }
 
-  getVisibleCrptoNetwork(slice:any=[0, 3]) {
+  get getVisibleCrptoNetwork() {
+
+    let slice =[0, 3]
 
     const isCryptoSelect = slice.length === 1
     const currencies = this.quickNav.storeData.store['init_currencies']?.slice(...slice);
 
-     this.selectedData =  currencies.filter(
+     this.selectedData =  currencies?.filter(
       (curr:any) => curr.code === this.selectedCryptoMethod
      )[0];
 
 
-    if (this.selectedData.code==='BNB') {
+    if (this.selectedData?.code==='BNB') {
       this.payAddress=this.storeData.get("pay_address")?.bnb
     }else{
       this.payAddress=this.storeData.get("pay_address")?.tether
     }
+
+
+    //
+    // if (this.initCryptoMethod) {
+    //   return [this.selectedData]
+    // }
+
 
     return currencies//[this.selectedData]
 
@@ -220,11 +249,9 @@ export class WalletService {
 
   get minimumPayment(){
 
-    const code  = this.selectedData.code
+    const code  = this.selectedData?.code
     const index_by =  'minimum_'+this.page
-    const settings = this.storeData.get('wallet').settings
-
-    // console.log({index_by, settings}, this.selectedData);
+    const settings = this.storeData.get('wallet')?.settings
 
     let minimum;
     if (code==='TRON') {
@@ -232,7 +259,6 @@ export class WalletService {
     }else{
       minimum =settings[index_by] * this.selectedData.rate
     }
-    // console.log({minimum,code, index_by});
 
     return minimum
 
@@ -241,8 +267,6 @@ export class WalletService {
   setSelectedCurrency(code:string){
 
     let[getSelectedData,minimumPayment] = [this.storeData.get('wallet').init_currencies.filter((c:any)=>c.code===code),0]
-
-    console.log({getSelectedData});
 
     if (getSelectedData) {
       // selectedCurrency=getSelectedData
@@ -258,9 +282,6 @@ export class WalletService {
     //   this.selectedCurrency="";
     //   this.minimumPayment=0
     // }
-    // console.log({initialized_currency:this.initialized_currency});
-    // console.log({selectedCurrency:this.selectedCurrency});
-
   }
 
   convertUsdToTrx(usd: number, rate: number = 0.322407): number {
@@ -282,11 +303,15 @@ export class WalletService {
   initializeCurrency(){
 
     const  wallet = this.storeData.get('wallet')
-    const payment =  this.storeData.get(this.page)[0]
+    const payment =  (this.storeData.get(this.page)?.[0])
 
     let  payment_method  = wallet.payment_method
     if (!payment_method&&payment) {
       payment_method = payment.method
+    }
+
+    if (!payment_method) {
+      payment_method = wallet.saved_add[0].payment_method
     }
 
     if (payment_method) {
@@ -300,17 +325,31 @@ export class WalletService {
       this.showLocalTab = !isCrypto;
 
       // this.setSelectedCurrency(payment_method)
-      !isCrypto?this.selectedLocaLMethod = payment_method:0;
+      if (!isCrypto) {
+        this.selectedLocaLMethod = payment_method
+        this.getVisibleCurrencies;;
+
+      }else{
+        this.selectedCryptoMethod=payment_method;
+        this.initCryptoMethod=payment_method
+        this.getVisibleCrptoNetwork
+      }
+      // !isCrypto?this.selectedLocaLMethod = payment_method:this.selectedCryptoMethod=payment_method;
     }else{
       this.showCryptoTab = true;
       this.showLocalTab = true;
     }
 
+    this.saved_add = this.quickNav.storeData.get('wallet')?.saved_add?.[0]
 
   }
 
   setActiveChannel(channel: 'crypto' | 'local') {
     this.activeChannel$.next(channel);
+
+    if (channel=='local') {
+      this.selectedData = ""
+    }
   }
 
   get activeChannel() {
@@ -322,25 +361,38 @@ export class WalletService {
     return active_channel;
   }
 
+  setMaxAmount(form:any, amount:any = 0 ) {
+
+    if (!amount) {
+        amount=this.storeData.get('wallet').balance.new;
+    }
+
+    form.patchValue({
+      amount: this.currencyConverter.transform(amount)
+    });
+
+}
+
   handleSubmit(form:any,processor:any){
 
+    if (!this.selectedData) {
+      this.quickNav.alert(`Please selcet method method`,'info')
 
+    }
     form.patchValue({ payment_method: this.selectedData.code });
     form.patchValue({ origin: window.location.origin });
 
     this.formHandler.submitForm(form, processor, 'wallet/?showSpinner', true,  (res) => {
         this.editingAddress=false
         if (res.status === 'success' ) {
+          this.initializeCurrency()
           this.updateWithdrawalOptionsSelector()
+
         }
-
-        console.log({processor});
-
 
         setTimeout(() => {
 
           const deposit =  this.storeData.get('deposit')
-          console.log({processor});
 
           if (deposit?.extraField?.get("payInfo")&&processor==='create_deposit') {
             this.quickNav.openTab(deposit?.extraField.get("payInfo"))
@@ -350,7 +402,10 @@ export class WalletService {
         //   this.quickNav.go(res.redirect)
         // }
     })
+
+
   }
+
 
 
 

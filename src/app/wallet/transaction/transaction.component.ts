@@ -19,6 +19,8 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { QuickNavService } from '../../reuseables/services/quick-nav.service';
 // import { TxFilterPipe } from '../../reuseables/pipes/filter-date.pipe';
+import { EmptyStateComponent } from "../../components/empty-state/empty-state.component";
+
 
 
 @Component({
@@ -34,11 +36,12 @@ import { QuickNavService } from '../../reuseables/services/quick-nav.service';
     MatNativeDateModule,
     MatButtonModule,
     FormsModule,
+    EmptyStateComponent
     // TxFilterPipe
   ],
   templateUrl: './transaction.component.html',
   // styleUrl: './transaction.component.css'
-  styleUrls: ['./transaction.component.css', "../wallet-styles.component.css"]
+  styleUrls: ['./transaction.component.css', "./tra-styles.css"]
 
 })
 export class TransactionComponent {

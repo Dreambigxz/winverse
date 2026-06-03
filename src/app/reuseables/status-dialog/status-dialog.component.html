@@ -1,59 +1,58 @@
-<div class="premium-dialog">
+<div class="result-dialog">
 
-  <!-- GLOW -->
-  <div class="dialog-glow"></div>
+  <div class="result-card">
 
-  <!-- ICON -->
-  <div
-    class="status-icon"
-    [ngClass]="data.status"
-  >
+    <!-- STATUS -->
 
-    <div class="icon-ring"></div>
+    <div
+      class="result-badge"
+      [ngClass]="data.status"
+    >
 
-    <div class="status-symbol">
-
-      {{
-        data.status === 'success'
-          ? '✅'
-          : '🚫'
-      }}
+      <i
+        class="fa"
+        [ngClass]="
+          data.status === 'success'
+            ? 'fa-check'
+            : 'fa-times'
+        "
+      ></i>
 
     </div>
 
-  </div>
+    <!-- TITLE -->
 
-  <!-- CONTENT -->
-  <div class="dialog-content">
+    <h2 class="result-title">
 
-    <h2 class="dialog-title">
       {{ data.title }}
+
     </h2>
 
-    <p class="dialog-message">
+    <!-- MESSAGE -->
+
+    <p class="result-message">
+
       {{ data.message }}
+
     </p>
 
-  </div>
+    <!-- ACTIONS -->
 
-  <!-- ACTION -->
-  <div class="dialog-actions">
+    <div class="result-actions">
 
-    <button
-      mat-button
-      class="btn-confirm"
-      (click)="reloadPage()"
-    >
+      <button
+        class="result-btn"
+        (click)="reloadPage()"
+      >
 
-      <span>
-        Refresh
-      </span>
-
-      <div class="btn-icon">
+        <!-- <i class="fa fa-reload">↻</i>
+       -->
         ↻
-      </div>
+        Refresh Page
 
-    </button>
+      </button>
+
+    </div>
 
   </div>
 

@@ -100,5 +100,10 @@
 }
 
 .mat-mdc-dialog-surface{
-  background: linear-gradient(145deg, #22180d, #120c05);
+  background: transparent !important;
+  /* linear-gradient(145deg, #22180d, #120c05); */
+}
+
+.text-white{
+  color: #fff;
 }
