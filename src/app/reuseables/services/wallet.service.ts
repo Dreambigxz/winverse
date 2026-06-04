@@ -200,7 +200,7 @@ export class WalletService {
   // DISPLAY ALL LOCAL CURRENCY OR JUST SELECTED
   get getVisibleCurrencies() {
 
-    let slice = [3]
+    let slice = [2]
     const isCryptoSelect = slice.length === 1
     const currencies = this.quickNav.storeData.store['init_currencies']?.slice(...slice);
 
@@ -220,7 +220,7 @@ export class WalletService {
 
   get getVisibleCrptoNetwork() {
 
-    let slice =[0, 3]
+    let slice =[0, 2]
 
     const isCryptoSelect = slice.length === 1
     const currencies = this.quickNav.storeData.store['init_currencies']?.slice(...slice);
