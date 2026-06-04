@@ -8,126 +8,128 @@
 
     <div class="invite-page">
 
-  <!-- HERO -->
+    <!-- HERO -->
 
-  <div class="invite-hero">
+    <div class="invite-hero">
 
-    <div class="invite-badge">
+      <div class="invite-badge">
 
-      🎁 Referral Program
-
-    </div>
-
-    <h1>
-
-      Earn While
-      <span>Friends Play</span>
-
-    </h1>
-
-    <p>
-
-      Invite friends and earn commission from every qualifying deposit.
-
-    </p>
-
-    <div class="hero-stats">
-
-      <div class="hero-stat">
-
-        <small>
-
-          Earned
-
-        </small>
-
-        <strong>
-
-          {{ ref.cashed_commissions | currencyConverter:true }}
-
-        </strong>
+        🎁 Referral Program
 
       </div>
 
-      <div class="hero-divider"></div>
+      <h1>
 
-      <div class="hero-stat">
+        Earn While
+        <span>Friends Play</span>
 
-        <small>
+      </h1>
 
-          Frozen
+      <p>
 
-        </small>
+        Invite friends and earn commission from every qualifying deposit.
 
-        <strong class="frozen">
+      </p>
 
-          {{ inviteService.totalFrozenReferral + inviteService.totalFrozenRebate  | currencyConverter:true }}
+      <!-- REFERRAL LINK -->
 
-        </strong>
+      <div class="referral-card">
+
+        <div class="card-title">
+
+          Your Referral Link
+
+        </div>
+
+        <div class="referral-link">
+
+          {{refLink|truncateCenter:9}}
+
+        </div>
+
+        <div class="referral-actions">
+
+          <button
+            class="primary-btn"
+            (click)="quickNav.copy(refLink,'invite link copied!')"
+            >
+
+            Copy Link
+
+          </button>
+
+          <button
+            class="secondary-btn"
+            (click)="shareReferral(refLink)"
+            >
+
+            Share
+
+          </button>
+
+        </div>
 
       </div>
 
-      <div class="hero-divider"></div>
+      <div class="hero-stats">
 
-      <div class="hero-stat">
+        <div class="hero-stat">
 
-        <small>
+          <small>
 
-          Cashout
+            Earned
 
-        </small>
+          </small>
 
-        <strong class="cash-date">
+          <strong>
 
-          {{ inviteService.nextCashCountdown$|async }}
+            {{ ref.cashed_commissions | currencyConverter:true }}
 
-        </strong>
+          </strong>
+
+        </div>
+
+        <div class="hero-divider"></div>
+
+        <div class="hero-stat">
+
+          <small>
+
+            Frozen
+
+          </small>
+
+          <strong class="frozen">
+
+            {{ inviteService.totalFrozenReferral + inviteService.totalFrozenRebate  | currencyConverter:true }}
+
+          </strong>
+
+        </div>
+
+        <div class="hero-divider"></div>
+
+        <div class="hero-stat">
+
+          <small>
+
+            Cashout
+
+          </small>
+
+          <strong class="cash-date">
+
+            {{ inviteService.nextCashCountdown$|async }}
+
+          </strong>
+
+        </div>
 
       </div>
 
     </div>
 
-  </div>
 
-  <!-- REFERRAL LINK -->
-
-  <div class="referral-card">
-
-    <div class="card-title">
-
-      Your Referral Link
-
-    </div>
-
-    <div class="referral-link">
-
-      {{refLink}}
-
-    </div>
-
-    <div class="referral-actions">
-
-      <button
-        class="primary-btn"
-        (click)="quickNav.copy(refLink,'invite link copied!')"
-        >
-
-        Copy Link
-
-      </button>
-
-      <button
-        class="secondary-btn"
-        (click)="shareReferral(refLink)"
-        >
-
-        Share
-
-      </button>
-
-    </div>
-
-  </div>
 
   <div class="affiliate-nav">
 
