@@ -13,7 +13,7 @@ declare global {
 
 @Injectable({ providedIn: 'root' })
 export class TelegramService {
-  private botUsername = 'socrex_bot';  // Replace with your bot username (without @)
+  private botUsername = 'winversefbBot';  // Replace with your bot username (without @)
 
   constructor(private http: RequestDataService) {}
 
