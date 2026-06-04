@@ -47,46 +47,418 @@
       color: #ff9800;
     }
   </style>
-  <div class="modal fade" id="iosPwaModal" tabindex="-1" aria-labelledby="iosPwaModalLabel" aria-hidden="true">
+  <div
+    class="modal fade premium-install-modal"
+    id="iosPwaModal"
+    tabindex="-1"
+  >
+
     <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content shadow-lg border-0">
-      <div class="modal-header border-0">
-        <h5 class="modal-title fw-bold" id="iosPwaModalLabel">Installation Guide</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+      <div class="modal-content install-content">
+
+        <div class="install-glow"></div>
+
+        <div class="install-header">
+
+          <div class="install-icon">
+
+            📲
+
+          </div>
+
+          <h3>
+
+            Install App
+
+          </h3>
+
+          <p>
+
+            Get the full experience directly from your home screen.
+
+          </p>
+
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+          ></button>
+
+        </div>
+
+        <div class="install-body">
+
+          <div class="guide-card">
+
+            <div class="step-number">
+
+              1
+
+            </div>
+
+            <div class="step-content">
+
+              <h6>
+
+                Tap Share
+
+              </h6>
+
+              <p>
+
+                Safari: Tap 📤 at the bottom.
+
+                <br>
+
+                Chrome: Tap 📤 in the address bar.
+
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="guide-card">
+
+            <div class="step-number">
+
+              2
+
+            </div>
+
+            <div class="step-content">
+
+              <h6>
+
+                Add To Home Screen
+
+              </h6>
+
+              <p>
+
+                Scroll and select
+
+                <strong>
+
+                  Add to Home Screen
+
+                </strong>
+
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="guide-card">
+
+            <div class="step-number">
+
+              3
+
+            </div>
+
+            <div class="step-content">
+
+              <h6>
+
+                Confirm Installation
+
+              </h6>
+
+              <p>
+
+                Tap
+
+                <strong>
+
+                  Add
+
+                </strong>
+
+                to finish.
+
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="install-note">
+
+            🚀 Launch the app instantly from your home screen anytime.
+
+          </div>
+
+        </div>
+
+        <div class="install-footer">
+
+          <button
+            class="install-btn"
+            data-bs-dismiss="modal"
+          >
+
+            Got It
+
+          </button>
+
+        </div>
+
       </div>
-      <div class="modal-body">
-        <p>To install this app on your iPhone or iPad:</p>
-        <ol>
-          <li>
-            <small class="text-warning">On Safari browser? </small>
-            Tap the <strong>Share</strong> button
-            <span class="d-inline-block align-middle">📤</span> at the bottom
-            <br>
-            <br>
-            <small class="text-warning">On Chrome browser? </small>
-            Tap the <strong>Share</strong> button
-            <span class="d-inline-block align-middle">📤</span> at the top of the search bar
-          </li>
-          <br>
-          <li>
-            Scroll down and tap <strong>Add to Home Screen</strong>.
-          </li>
-          <li>
-            Tap <strong>Add</strong> in the top right corner.
-          </li>
-        </ol>
-        <br>
-        <p class="text-muted small">
-          Once added, you can launch it like a regular app from your home screen.
-        </p>
-      </div>
-      <div class="modal-footer border-0">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it</button>
-      </div>
+
     </div>
-  </div>
+
   </div>
 
+  <style media="screen">
+      .install-content {
+
+        position: relative;
+
+        overflow: hidden;
+
+        border: none;
+
+        border-radius: 1.5rem;
+
+        background:
+          linear-gradient(
+            145deg,
+            #120714,
+            #1d0b1f,
+            #2d1330
+          );
+
+        box-shadow:
+          0 1rem 3rem rgba(0,0,0,.4);
+
+        }
+
+        /* GLOW */
+
+        .install-glow {
+
+        position: absolute;
+
+        top: -8rem;
+        right: -8rem;
+
+        width: 16rem;
+        height: 16rem;
+
+        border-radius: 50%;
+
+        background:
+          radial-gradient(
+            circle,
+            rgba(205,127,214,.18),
+            transparent
+          );
+
+        }
+
+        /* HEADER */
+
+        .install-header {
+
+        position: relative;
+
+        text-align: center;
+
+        padding: 2rem 1.5rem 1rem;
+
+        }
+
+        .install-icon {
+
+        width: 5rem;
+        height: 5rem;
+
+        margin: auto;
+
+        border-radius: 1.25rem;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        font-size: 2rem;
+
+        background:
+          linear-gradient(
+            135deg,
+            rgba(205,127,214,.2),
+            rgba(205,127,214,.05)
+          );
+
+        }
+
+        .install-header h3 {
+
+        margin-top: 1rem;
+
+        color: white;
+
+        font-weight: 800;
+
+        }
+
+        .install-header p {
+
+        color:
+          rgba(255,255,255,.6);
+
+        margin-bottom: 0;
+
+        }
+
+        /* BODY */
+
+        .install-body {
+
+        padding: 1rem 1.5rem;
+
+        }
+
+        .guide-card {
+
+        display: flex;
+
+        gap: 1rem;
+
+        margin-bottom: 1rem;
+
+        padding: 1rem;
+
+        border-radius: 1rem;
+
+        background:
+          rgba(255,255,255,.03);
+
+        border:
+          .0625rem solid rgba(205,127,214,.08);
+
+        }
+
+        .step-number {
+
+        width: 2.4rem;
+        height: 2.4rem;
+
+        flex-shrink: 0;
+
+        border-radius: 50%;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        font-weight: 800;
+
+        color: white;
+
+        background:
+          linear-gradient(
+            135deg,
+            #cd7fd6,
+            #a855b0
+          );
+
+        }
+
+        .step-content h6 {
+
+        margin: 0 0 .3rem;
+
+        color: white;
+
+        font-weight: 700;
+
+        }
+
+        .step-content p {
+
+        margin: 0;
+
+        color:
+          rgba(255,255,255,.65);
+
+        font-size: .85rem;
+
+        }
+
+        .install-note {
+
+        margin-top: 1rem;
+
+        padding: 1rem;
+
+        border-radius: 1rem;
+
+        background:
+          rgba(34,197,94,.08);
+
+        border:
+          .0625rem solid rgba(34,197,94,.15);
+
+        color: #22c55e;
+
+        font-size: .85rem;
+
+        text-align: center;
+
+        }
+
+        /* FOOTER */
+
+        .install-footer {
+
+        padding: 1rem 1.5rem 1.5rem;
+
+        }
+
+        .install-btn {
+
+        width: 100%;
+
+        height: 3.4rem;
+
+        border: none;
+
+        border-radius: 1rem;
+
+        color: white;
+
+        font-weight: 800;
+
+        background:
+          linear-gradient(
+            135deg,
+            #cd7fd6,
+            #a855b0
+          );
+
+        box-shadow:
+          0 .6rem 1.5rem rgba(205,127,214,.25);
+
+        }
+
+        /* MOBILE */
+
+        @media (max-width:576px) {
+
+        .modal-dialog {
+
+          margin: 1rem;
+
+        }
+
+        }
+  </style>
 
   <app-root></app-root>
 
@@ -118,162 +490,162 @@
 
       }
 
-    .app-container {
-      padding-left: 16px;
-      padding-right: 16px;
-      width: 100%;
-
-      width:100%;
-
-      /* min-height:100vh; */
-      height:auto;
-
-      overflow-x:hidden;
-      /* max-width: 420px;
-      min-height: 100vh;
-      background: #16142a;
-
-      box-shadow: 0 0 25px rgba(0,0,0,0.6); */
-      /* padding-bottom: 90px; */
-    }
-
-    body,
-      {
-
-        padding-bottom: 6rem;
-
-      }
-
-    /* Bigger phones / tablets */
-    @media (min-width: 480px) {
       .app-container {
+        padding-left: 16px;
+        padding-right: 16px;
+        width: 100%;
 
+        width:100%;
 
-        padding-left: 20px;
-        padding-right: 20px;
-      }
-    }
+        /* min-height:100vh; */
+        height:auto;
 
-    /* Tablets */
-    @media (min-width: 768px) {
-      .app-container {
-        padding-left: 24px;
-        padding-right: 24px;
-      }
-    }
+        overflow-x:hidden;
+        /* max-width: 420px;
+        min-height: 100vh;
+        background: #16142a;
 
-
-    /* html {
-        font-size: .599rem;
-    } */
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      position: relative;
-      /* background-image: url("https://wallpapercave.com/wp/wp15458889.jpg") !important; */
-      /* background-image: url("https://wallpapercave.com/wp/wp6374451.jpg") !important; */
-      background-image: url("https://wallpapercave.com/uwp/uwp5037754.png") !important;
-      background-size: cover !important;
-      background-repeat: no-repeat !important;
-      isolation: isolate;
-      background-attachment: fixed !important;
-
-    }
-
-      /* Overlay to darken background */
-      body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        background-color: rgb(22 13 35 / 97%);
-        /* background-color: rgba(0, 0, 0, 0.9); */
-        /* background-color: rgba(66, 10, 10, 0.8); */
-        z-index: -1;
+        box-shadow: 0 0 25px rgba(0,0,0,0.6); */
+        /* padding-bottom: 90px; */
       }
 
+      body,
+        {
 
-      /* Custom style for the select dropdown */
-      .custom-google-select .goog-te-combo {
-        background-color: #192430;
-        color: #ccc;
-        padding: 8px 12px;
-        font-size: 1rem;
-        border: none;
-        /* 1px solid #ccc; */
-        border-radius: 6px;
-        appearance: none;
-        outline: none;
-        width: auto;
-        cursor: pointer;
-        font-family: inherit;
-        box-shadow: 0 2px 6px rgb(207 151 151 / 10%);
-      }
+          padding-bottom: 6rem;
 
-
-      .VIpgJd-ZVi9od-ORHb-OEVmcd{
-        display: none !important;
-      }
-      .VIpgJd-yAWNEb-hvhgNd{
-        display: none !important;
-
-      }
-
-      /* Optional: hover/focus effect */
-      .custom-google-select .goog-te-combo:hover,
-      .custom-google-select .goog-te-combo:focus {
-      border-color: #007bff;
-      }
-
-      .goog-te-gadget-icon {
-          margin-left: 2px;
-          margin-right: 2px;
-          width: auto !important;
-          height: auto !important;
-          border: 0;
-          vertical-align: middle;
-      }
-
-      .custom-google-select {
-            display: flex;
-            /* justify-content: flex-end; */
-            padding: 10px;
-            margin-left: auto;
         }
 
-        .VIpgJd-yAWNEb-L7lbkb {
-            color: #222;
-            background-color: transparent !important;
+      /* Bigger phones / tablets */
+      @media (min-width: 480px) {
+        .app-container {
+
+
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+
+      /* Tablets */
+      @media (min-width: 768px) {
+        .app-container {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+      }
+
+
+      /* html {
+          font-size: .599rem;
+      } */
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        position: relative;
+        /* background-image: url("https://wallpapercave.com/wp/wp15458889.jpg") !important; */
+        /* background-image: url("https://wallpapercave.com/wp/wp6374451.jpg") !important; */
+        background-image: url("https://wallpapercave.com/uwp/uwp5037754.png") !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        isolation: isolate;
+        background-attachment: fixed !important;
+
+      }
+
+        /* Overlay to darken background */
+        body::before {
+          content: '';
+          position: fixed;
+          inset: 0;
+          background-color: rgb(22 13 35 / 97%);
+          /* background-color: rgba(0, 0, 0, 0.9); */
+          /* background-color: rgba(66, 10, 10, 0.8); */
+          z-index: -1;
+        }
+
+
+        /* Custom style for the select dropdown */
+        .custom-google-select .goog-te-combo {
+          background-color: #192430;
+          color: #ccc;
+          padding: 8px 12px;
+          font-size: 1rem;
+          border: none;
+          /* 1px solid #ccc; */
+          border-radius: 6px;
+          appearance: none;
+          outline: none;
+          width: auto;
+          cursor: pointer;
+          font-family: inherit;
+          box-shadow: 0 2px 6px rgb(207 151 151 / 10%);
+        }
+
+
+        .VIpgJd-ZVi9od-ORHb-OEVmcd{
+          display: none !important;
+        }
+        .VIpgJd-yAWNEb-hvhgNd{
+          display: none !important;
+
+        }
+
+        /* Optional: hover/focus effect */
+        .custom-google-select .goog-te-combo:hover,
+        .custom-google-select .goog-te-combo:focus {
+        border-color: #007bff;
+        }
+
+        .goog-te-gadget-icon {
+            margin-left: 2px;
+            margin-right: 2px;
+            width: auto !important;
+            height: auto !important;
+            border: 0;
+            vertical-align: middle;
+        }
+
+        .custom-google-select {
+              display: flex;
+              /* justify-content: flex-end; */
+              padding: 10px;
+              margin-left: auto;
+          }
+
+          .VIpgJd-yAWNEb-L7lbkb {
+              color: #222;
+              background-color: transparent !important;
+              display: none !important;
+
+          }
+
+          .VIpgJd-ZVi9od-aZ2wEe-OiiCO-ti6hGc {
+            -webkit-transform: scale(.5);
+            transform: scale(.5);
+            opacity: 1;
             display: none !important;
-
         }
 
-        .VIpgJd-ZVi9od-aZ2wEe-OiiCO-ti6hGc {
-          -webkit-transform: scale(.5);
-          transform: scale(.5);
-          opacity: 1;
-          display: none !important;
-      }
+        .goog-te-gadget > *:nth-child(2) {
+            display: none !important;
+          }
 
-      .goog-te-gadget > *:nth-child(2) {
-          display: none !important;
+          .goog-te-gadget {
+              font-size: 0 !important; /* hide text like "Powered by" */
+            }
+
+            .goog-te-combo {
+              font-size: 14px !important; /* restore font for dropdown */
+            }
+
+        /*  end of  gpoogle translator styling */
+
+        .hide{
+          display: none;
         }
 
-        .goog-te-gadget {
-            font-size: 0 !important; /* hide text like "Powered by" */
-          }
-
-          .goog-te-combo {
-            font-size: 14px !important; /* restore font for dropdown */
-          }
-
-      /*  end of  gpoogle translator styling */
-
-      .hide{
-        display: none;
-      }
-
-  </style>
+    </style>
 
   <div id="google_translate_element" style="display:none;"></div>
 

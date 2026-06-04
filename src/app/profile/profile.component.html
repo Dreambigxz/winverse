@@ -424,44 +424,97 @@
 
 <!-- chamge Password modal -->
 
-<div class="modal fade crypto-modal" id="changePassword" tabindex="-1">
+<div
+  class="modal fade premium-modal"
+  id="changePassword"
+  tabindex="-1"
+>
 
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+
+    <div class="modal-content premium-content">
+
+      <div class="modal-glow"></div>
 
       <div class="modal-header">
-        <h5 class="modal-title">🔐 Reset Password</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+
+        <div class="header-icon">
+
+          🔐
+
+        </div>
+
+        <div>
+
+          <h5>
+
+            Change Password
+
+          </h5>
+
+          <span>
+
+            Secure your account
+
+          </span>
+
+        </div>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+        ></button>
+
       </div>
 
       <div class="modal-body">
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form
+          [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+        >
 
-          <div class="crypto-input">
+          <div class="premium-input">
+
+            <label>
+
+              Current Password
+
+            </label>
+
             <input
-              class="form__input"
-              type="text"
-              placeholder="Old password"
+              type="password"
+              placeholder="Enter current password"
               formControlName="old-password"
             >
+
           </div>
 
-          <div class="crypto-input">
+          <div class="premium-input">
+
+            <label>
+
+              New Password
+
+            </label>
+
             <input
-              class="form__input"
-              type="text"
-              placeholder="New password"
+              type="password"
+              placeholder="Enter new password"
               formControlName="new-password"
             >
+
           </div>
 
           <button
-            class="apool__btn"
+            class="form-btn"
             [disabled]="!form.valid"
             type="submit"
           >
+
             Update Password
+
           </button>
 
         </form>
@@ -469,6 +522,7 @@
       </div>
 
     </div>
+
   </div>
 
 </div>

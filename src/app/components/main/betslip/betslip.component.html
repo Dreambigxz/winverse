@@ -106,7 +106,7 @@
 
       <!-- QUICK AMOUNTS -->
 
-      <div class="quick-amounts">
+      <!-- <div class="quick-amounts">
 
         <button
            *ngFor="let amt of amounts"
@@ -115,7 +115,7 @@
           >
           {{ amt | currencyConverter |number }}
         </button>
-      </div>
+      </div> -->
 
     </div>
 
@@ -130,7 +130,7 @@
         </span>
 
         <strong>
-          {{storeData.store['wallet']?.init_currency.symbol}}{{matchService.profit|number:"1.5-5"}}
+          {{storeData.store['wallet']?.init_currency.symbol}}{{matchService.profit|number:"1.2-2"}}
         </strong>
 
       </div>
@@ -143,7 +143,7 @@
 
         <strong class="profit">
 
-          +{{storeData.store['wallet']?.init_currency.symbol}}{{matchService.possibleWin|number:"1.5-5"}}
+          +{{storeData.store['wallet']?.init_currency.symbol}}{{matchService.possibleWin|number:"1.2-2"}}
 
         </strong>
 
