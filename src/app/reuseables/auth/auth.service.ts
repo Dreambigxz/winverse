@@ -235,7 +235,7 @@ export class AuthService {
   open(mode: 'login' | 'register' | 'reset' = 'login') {
 
     if (this.isLoggedIn)return;
-    
+
     this.mode = mode;
     this.isVisible = true;
 
