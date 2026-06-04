@@ -94,6 +94,9 @@
           value="100"
           placeholder="Enter amount"
           [(ngModel)]="matchService.stakeAmount"
+          (keyup)="matchService.stakeAmountHandler($event)"
+
+
         >
 
         <button class="max-btn" (click)="matchService.stakeAll()">
