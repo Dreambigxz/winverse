@@ -33,6 +33,7 @@ import { ReferralComponent } from "./invites/referral/referral.component";
 import { RebateComponent } from "./invites/rebate/rebate.component";
 import { UsersComponent } from "./invites/users/users.component";
 
+import { BindComponent } from "./components/telegram/bind/bind.component";
 export const routes: Routes = [
 
     {
@@ -91,6 +92,12 @@ export const routes: Routes = [
       path: 'setup',
       component: SetupComponent,
       title: 'Setup',
+      canActivate: [authGuard]
+    },
+    {
+      path: 'tg-bind',
+      component: BindComponent,
+      title: 'Bind',
       canActivate: [authGuard]
     },
 

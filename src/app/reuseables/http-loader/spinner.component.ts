@@ -37,7 +37,6 @@ styles: [`
     justify-content: center;
 
     backdrop-filter: blur(2px);
-    background: rgba(20, 14, 6, 0.8);
 
     z-index: 99999999;
     overflow: hidden;

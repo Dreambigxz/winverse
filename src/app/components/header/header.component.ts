@@ -5,11 +5,16 @@ import { StoreDataService } from '../../reuseables/http-loader/store-data.servic
 import { CurrencyConverterPipe } from '../../reuseables/pipes/currency-converter.pipe';
 import { AuthService } from '../../reuseables/auth/auth.service';
 import { QuickNavService } from '../../reuseables/services/quick-nav.service';
-import { NotiPopupComponent } from "../../noti-popup/noti-popup.component";
+
+// import { NotiPopupComponent } from "../../noti-popup/noti-popup.component";
+import { QuickNotificationsComponent } from "../../components/quick-notifications/quick-notifications.component";
 
 @Component({
   selector: 'app-header',
-  imports: [CurrencyConverterPipe, CommonModule, NotiPopupComponent],
+  imports: [
+    CurrencyConverterPipe,
+    CommonModule, QuickNotificationsComponent
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

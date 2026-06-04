@@ -14,9 +14,9 @@
 
         <div>
 
-          <h2>
+          <!-- <h2>
             My Bets
-          </h2>
+          </h2> -->
 
           <p>
             Track all your betting activity
@@ -216,7 +216,7 @@
 
                 <div class="score-market">
 
-                  {{ bet.market_value }}
+                  {{ bet.fixture[0].score?.fulltime?.home || 0 }} - {{ bet.fixture[0].score.fulltime.away || 0}}
 
                 </div>
 
@@ -381,7 +381,11 @@
 
             </div>
 
-          </div>
+      </div>
+
+      <div *ngIf="!historyServiceLoaded.allBets?.length">
+        <app-empty-state></app-empty-state>
+        </div>
 
     </div>
   </section>

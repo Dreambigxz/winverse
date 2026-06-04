@@ -22,7 +22,7 @@
 
   <div
       class="quick-card"
-      [class.highlight]="!quickNav.storeData.store['checked_in']"
+      [class.highlight]="!quickNav.storeData.store['checked_in']&&quickNav.authService.isLoggedIn"
       (click)="quickNav.checkIn()"
     >
     <div class="quick-icon">📅</div>

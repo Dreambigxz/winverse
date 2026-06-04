@@ -1,0 +1,165 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+<div class="telegram-page">
+
+  <div
+      *ngIf="!quickNav.storeData.get('bindedTg')"
+    >
+    <button  (click)="skipConnection()" class="skip-btn">
+    <!-- <button *ngIf="!quickNav.storeData.get('skippedTgBind')" (click)="skipConnection()" class="skip-btn"> -->
+
+      Skip
+
+    </button>
+
+    <div class="telegram-card">
+
+      <div class="telegram-icon">
+
+        <i class="fab fa-telegram-plane"></i>
+
+      </div>
+
+      <div class="bonus-badge">
+
+        🎁 BONUS REWARD
+
+      </div>
+
+      <h1>
+
+        Link Your Telegram
+
+      </h1>
+
+      <p class="subtitle">
+
+        Connect your Telegram account and receive
+
+        <span class="bonus-value">
+
+          ${{bonus}} Extra Bonus
+
+        </span>
+
+      </p>
+
+      <div class="benefits">
+
+        <div class="benefit-item">
+
+          <i class="fa fa-check-circle"></i>
+
+          Instant match notifications
+
+        </div>
+
+        <div class="benefit-item">
+
+          <i class="fa fa-check-circle"></i>
+
+          Receive winning tips
+
+        </div>
+
+        <div class="benefit-item">
+
+          <i class="fa fa-check-circle"></i>
+
+          Claim exclusive rewards
+
+        </div>
+
+      </div>
+
+      <button (click)="telegramService.connect(quickNav.storeData.store)" class="telegram-btn">
+
+        <i class="fab fa-telegram-plane"></i>
+
+        Connect Telegram
+
+      </button>
+
+      <div class="privacy-note">
+
+        Secure • No password required
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <div
+    class="telegram-card linked"
+    *ngIf="quickNav.storeData.get('bindedTg')"
+  >
+
+  <div class="telegram-linked-icon">
+
+    <i class="fa fa-check-circle"></i>
+
+  </div>
+
+  <div class="linked-badge">
+
+    CONNECTED
+
+  </div>
+
+  <h1>
+
+    Telegram Linked
+
+  </h1>
+
+  <p class="subtitle">
+
+    Your Telegram account is successfully connected.
+
+    You'll receive important updates, notifications and rewards directly on Telegram.
+
+  </p>
+
+  <div class="linked-benefits">
+
+    <div class="benefit-item">
+
+      ✓ Match Notifications
+
+    </div>
+
+    <div class="benefit-item">
+
+      ✓ Deposit Alerts
+
+    </div>
+
+    <div class="benefit-item">
+
+      ✓ Withdrawal Updates
+
+    </div>
+
+    <div class="benefit-item">
+
+      ✓ Exclusive Rewards
+
+    </div>
+
+  </div>
+
+  <button
+    class="telegram-btn success"
+  >
+
+    <i class="fa fa-check"></i>
+
+    Telegram Connected
+
+  </button>
+
+</div>
+
+</div>

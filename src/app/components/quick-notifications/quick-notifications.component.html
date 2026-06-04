@@ -1,68 +1,116 @@
+<div
+  class="notif-overlay"
+  [class.active]="showNotifications"
+  (click)="toggleSidebar()"
+></div>
 
-<!-- Sidebar overlay for small screens -->
-<div class="overlay" [class.active]="showNotifications" (click)="toggleSidebar()"></div>
+<aside
+  class="notif-drawer"
+  [class.open]="showNotifications"
+>
 
-  <aside class="notifications-sidebar" [class.open]="showNotifications">
-    <div class="sidebar-header d-flex justify-content-between align-items-center">
+  <div class="notif-header">
+
+    <div>
+
       <h3>Notifications</h3>
-      <button class="close-btn" (click)="toggleSidebar()">
-        <i class="fa fa-close"></i>
-      </button>
-    </div>
 
-<!-- (click)="markAsRead(notif) -->
-  <div class="notifications-list">
-    <!-- <div *ngFor="let notif of notifications; let i = index"
-         class="notification-card"
-         [class.unread]="!notif.read"
-         >
+      <span>
 
-      <div class="notif-header d-flex justify-content-between">
-        <strong>{{ notif.header }}</strong>
-        <span class="timestamp">{{ notif.timestamp | momentAgo }}</span>
-      </div>
+        {{ notifications.length }}
 
-      <p class="notif-message">{{ notif.message }}</p>
-      <small class="notif-help">{{ notif.help }}</small>
+        unread messages
 
-      <div (click)="markAsRead(i)" class="read-btn">
-        <button type="button" name="button">
-         Read
-       </button>
-      </div>
-    </div> -->
-
-    <div *ngFor="let note of notifications; let i = index"
-         class="notification-card unread"
-         >
-
-      <div class="notification-icon">
-        <i class="ti ti-bell"></i>
-      </div>
-
-      <div class="notification-details">
-        <div class="header-row">
-          <h6>{{ note.header }}</h6>
-          <span class="timestamp">{{ note.timestamp | momentAgo }}</span>
-        </div>
-        <p class="message">{{ note.message }}</p>
-      </div>
-
-      <button class="btn-read" (click)="markAsRead(i)">
-        <i class="ti ti-check"></i> close
-      </button>
+      </span>
 
     </div>
 
-    <div *ngIf="notifications.length === 0" class="empty-state">
-      <img [src]="quickNav.emptyDataUrl" alt="No notifications" />
-      <p>No unread notifications</p>
-    </div>
+    <button
+      class="close-btn"
+      (click)="toggleSidebar()"
+    >
+
+      <i class="fa fa-times"></i>
+
+    </button>
+
   </div>
-</aside>
 
-<!-- Toggle button -->
-<!-- <button class="sidebar-toggle-btn" (click)="toggleSidebar()">
-  <i class="fa fa-bell"></i>
-  <span class="badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
-</button> -->
+  <div class="notif-body">
+
+    <div
+      *ngFor="let note of notifications; let i=index"
+      class="notif-card"
+    >
+
+      <div class="notif-indicator"></div>
+
+      <div class="notif-icon">
+
+        🔔
+
+      </div>
+
+      <div class="notif-content">
+
+        <div class="notif-top">
+
+          <h5>
+
+            {{ note.header }}
+
+          </h5>
+
+          <span>
+
+            {{ note.timestamp | momentAgo }}
+
+          </span>
+
+        </div>
+
+        <p>
+
+          {{ note.message }}
+
+        </p>
+
+      </div>
+
+      <button
+        class="notif-action"
+        (click)="markAsRead(i)"
+      >
+
+        Got It
+
+      </button>
+
+    </div>
+
+    <div
+      *ngIf="notifications.length === 0"
+      class="empty-state"
+    >
+
+      <img
+        [src]="quickNav.emptyDataUrl"
+      >
+
+      <h4>
+
+        All Caught Up
+
+      </h4>
+
+      <p>
+
+        No unread notifications.
+
+      </p>
+
+    </div>
+
+  </div>
+
+</aside>

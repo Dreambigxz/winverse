@@ -11,7 +11,6 @@ import { MenuBottomComponent } from "../components/menu-bottom/menu-bottom.compo
 import { QuickNavComponent } from "../components/quick-nav/quick-nav.component";
 import { SliderComponent } from "../components/main/slider/slider.component";
 
-import { QuickNotificationsComponent } from "../components/quick-notifications/quick-notifications.component";
 import { SpinnerComponent } from '../reuseables/http-loader/spinner.component';
 import { QuickNavService } from '../reuseables/services/quick-nav.service';
 import { TruncateCenterPipe } from '../reuseables/pipes/truncate-center.pipe';
@@ -19,7 +18,6 @@ import { CurrencyConverterPipe } from '../reuseables/pipes/currency-converter.pi
 
 import { AppDownloadManager } from '../reuseables/services/app-download-manager.service';
 import { AccountSummaryComponent } from "../account-summary/account-summary.component";
-import { NotificationModalComponent } from '../shared/notification-modal/notification-modal.component';
 
 import { MatchesComponent } from "../matches/matches.component";
 import { CpgComponent } from "../cpg/cpg.component";
@@ -34,7 +32,6 @@ declare var $: any;
     HeaderComponent,
     MenuBottomComponent,
     CommonModule,
-    QuickNotificationsComponent,
     SpinnerComponent,MarketComponent,
     TruncateCenterPipe, CurrencyConverterPipe,
     AccountSummaryComponent,

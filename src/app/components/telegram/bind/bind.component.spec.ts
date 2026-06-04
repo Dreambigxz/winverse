@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { BindComponent } from './bind.component';
+
+describe('BindComponent', () => {
+  let component: BindComponent;
+  let fixture: ComponentFixture<BindComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [BindComponent]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(BindComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

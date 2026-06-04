@@ -101,13 +101,19 @@ export const PostHttpInterceptor: HttpInterceptorFn = (req, next) => {
             console.log(body.main);
 
             if (wallet){
+              authService.isVisible=false
+
               if(!wallet?.hasPin||!wallet.saved_add) {
                 if (!["/setup"].includes(window.location.pathname)) {
                   // window.location.href = '/setup'
                   router.navigate(['/setup'])
                 }
               }
-              authService.isVisible=false
+              else if (!storeData.get("bindedTg")&&!storeData.get("skippedTgBind")) {
+                router.navigate(['/tg-bind'])
+              }
+
+
             }
 
           }

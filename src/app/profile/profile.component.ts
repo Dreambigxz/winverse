@@ -15,6 +15,7 @@ import { ReactiveFormsModule, FormBuilder, Validators , FormsModule} from '@angu
 
 import { AppDownloadManager } from '../reuseables/services/app-download-manager.service';
 import { AccountSummaryComponent } from "../account-summary/account-summary.component";
+import { TelegramService } from "../reuseables/services/telegram-binder.service";
 
 
 @Component({
@@ -33,6 +34,7 @@ export class ProfileComponent {
 
   quickNav = inject(QuickNavService)
   appManager= inject(AppDownloadManager)
+  telegramService = inject(TelegramService)
 
   formHandler = inject(FormHandlerService);
   fb = inject(FormBuilder);
@@ -51,6 +53,8 @@ export class ProfileComponent {
       this.quickNav.reqServerData.get("profile/")
       .subscribe()
     }
+
+    document.addEventListener("visibilitychange", this.handleVisibilityChange);
 }
 
   openModal() {
@@ -72,5 +76,24 @@ export class ProfileComponent {
       }
     });
   }
+
+  handleVisibilityChange = () => {
+
+    // console.log(this.quickNav?.storeData.store);
+
+    if (this.quickNav?.storeData?.get('skippedTgBind') || this.quickNav.storeData.get("bindedTg") ) return;
+
+    if (!document.hidden) {
+
+      this.quickNav?.reqServerData.get('check-if-binded')
+      .subscribe((res)=>{
+        // if (res.main.bindedTg) {}
+
+      })
+
+
+    }
+
+  };
 
 }

@@ -16,7 +16,7 @@ import { copyContent } from '../helper';
   providedIn: 'root'
 })
 export class QuickNavService {
-  constructor(private router: Router) {}
+  constructor(public router: Router) {}
 
   /**
    * Navigate quickly to any route.
@@ -151,8 +151,7 @@ export class QuickNavService {
 
   checkIn(){
 
-    if (!this.storeData.store['checked_in']) {
-      console.log("check  in user");
+    if (!this.storeData.store['checked_in']&&this.authService.isLoggedIn) {
 
       this.reqServerData.get("dashboard?check_in=check_in")
       .subscribe((res)=>{

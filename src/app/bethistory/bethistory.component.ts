@@ -19,6 +19,7 @@ import { SpinnerComponent } from '../reuseables/http-loader/spinner.component';
 import { RequestDataService } from '../reuseables/http-loader/request-data.service';
 
 import { MenuBottomComponent } from "../components/menu-bottom/menu-bottom.component";
+import { EmptyStateComponent } from "../components/empty-state/empty-state.component";
 
 import { RouterLink, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -36,7 +37,8 @@ import { filter } from 'rxjs/operators';
       MatNativeDateModule,
       MatButtonModule,
       MenuBottomComponent,
-      TruncateCenterPipe
+      TruncateCenterPipe,
+      EmptyStateComponent
     ],
   templateUrl: './bethistory.component.html',
   styleUrls: ['./bethistory.component.css', './bethistory-table.component.css']

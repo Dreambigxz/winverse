@@ -355,6 +355,62 @@
 
       </div>
 
+      <div class="profile-actions">
+
+        <button
+          *ngIf="!quickNav.storeData.get('bindedTg')"
+          class="action-btn telegram-btn"
+          (click)="telegramService.connect(quickNav.storeData.store)"
+        >
+
+          <i class="fab fa-telegram-plane"></i>
+
+          <span>
+
+            Link Telegram Account
+
+          </span>
+
+          <i class="fa fa-chevron-right"></i>
+
+        </button>
+
+        <button
+          *ngIf="quickNav.storeData.get('bindedTg')"
+          class="action-btn telegram-linked"
+        >
+
+          <i class="fa fa-check-circle"></i>
+
+          <span>
+
+            Telegram Connected
+
+          </span>
+
+          <i class="fa fa-chevron-right"></i>
+
+        </button>
+
+        <button
+          class="action-btn logout-btn"
+          (click)="quickNav.authService.logout(false)"
+        >
+
+          <i class="fa fa-sign-out-alt"></i>
+
+          <span>
+
+            Logout Account
+
+          </span>
+
+          <i class="fa fa-chevron-right"></i>
+
+        </button>
+
+      </div>
+
     </div>
 
  </section>
