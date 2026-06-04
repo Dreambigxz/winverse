@@ -36,7 +36,7 @@ styles: [`
     align-items: center;
     justify-content: center;
 
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1px);
 
     z-index: 99999999;
     overflow: hidden;

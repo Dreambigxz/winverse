@@ -9,7 +9,7 @@
 
 
 
-  <div class="matches-header">
+  <div *ngIf="location.pathname!=='/matches'" class="matches-header">
 
     <div class="section-titled">
 
@@ -164,7 +164,7 @@
 
     <i class="fa fa-plus-circle"></i>
 
-    Load More Matches
+    Load  Matches
 
   </button>
 
