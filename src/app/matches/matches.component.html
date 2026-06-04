@@ -7,8 +7,6 @@
 
 <section class="app-container ">
 
-
-<div *ngIf="location.pathname === '/matches'">
   <div class="section-titled">
 
     <span class="title-icon">
@@ -27,132 +25,132 @@
 
   </div>
 
-  <div  class="matches-header">
-      <div class="fixture-search">
+  <div *ngIf="location.pathname === '/matches'">
+    <div  class="matches-header">
+        <div class="fixture-search">
 
-        <div class="fixture-search-inner">
+          <div class="fixture-search-inner">
 
-          <input
-            type="text"
-            placeholder="Find team, league or fixture by ID..."
-            [(ngModel)]="matchService.searchTerm"
-          >
+            <input
+              type="text"
+              placeholder="Find team, league or fixture by ID..."
+              [(ngModel)]="matchService.searchTerm"
+            >
 
-          <button
+            <button
 
-            (click)="matchService.search()"
-          >
+              (click)="matchService.search()"
+            >
 
-            GO
+              GO
 
-          </button>
+            </button>
 
+          </div>
+
+        </div>
+    </div>
+
+    <div  *ngIf="matchService.notStartedMatches.slice(0,slice) as matches">
+      <div  *ngFor="let i of matches">
+
+
+
+        <div class="fixture-card" (click)="router.navigate(['/game-details/'+i.fixtureID])"  *ngIf="i.fixture.fixture.timestamp | countdown :0:'data'| async as time;">
+
+          <!-- Header -->
+          <div class="fixture-header">
+
+            <div class="league-info">
+
+              <span class="time">
+                {{ i.fixture.fixture.timestamp | timeFormat:'time' }}
+              </span>
+
+              <span class="id">
+                ID {{ i.fixtureID }}
+              </span>
+
+              <span class="league">
+                {{ i.fixture.league?.country }} - {{ i.fixture.league.name   }}
+              </span>
+
+            </div>
+
+            <button class="stats-btn">
+              <!-- <mat-icon>insights</mat-icon> -->
+            </button>
+
+          </div>
+
+          <!-- Match Row -->
+          <div class="match-row">
+
+            <!-- Teams -->
+            <div class="teams">
+
+              <div class="team-block">
+                <div class="logo">
+                  <img [src]="i.fixture.teams.home.logo" alt="Arsenal">
+                </div>
+
+                <div class="team-name">
+                  {{ i.fixture.teams.home.name|truncateCenter:9 }}
+                </div>
+              </div>
+
+              <div class="team-block">
+
+                <div class="logo">
+                  <img [src]="i.fixture.teams.away.logo" alt="Arsenal">
+                </div>
+                <div class="team-name">
+                  {{ i.fixture.teams.away.name|truncateCenter:9 }}
+                </div>
+
+              </div>
+
+              <!-- <div class="extra-info">
+                +{{ match.markets }}
+
+                <img
+                  src="assets/icons/stv.png"
+                  alt=""
+                >
+              </div> -->
+
+            </div>
+
+            <!-- Timer -->
+            <div class="countdown-box">
+
+              <div class="time-block">
+                <span>{{ (time + '') | slice:2:4 }}</span>
+                <small>HR</small>
+              </div>
+
+              <div class="separator">:</div>
+
+              <div class="time-block">
+                <span>{{ (time + '') | slice:4:6 }}</span>
+                <small>MIN</small>
+              </div>
+
+              <div class="separator">:</div>
+
+              <div class="time-block">
+                <span>{{ (time + '') | slice:6:9 }}</span>
+                <small>SEC</small>
+              </div>
+
+            </div>
+
+          </div>
         </div>
 
       </div>
-
-  </div>
-
-  <div  *ngIf="matchService.notStartedMatches.slice(0,slice) as matches">
-    <div  *ngFor="let i of matches">
-
-
-
-      <div class="fixture-card" (click)="router.navigate(['/game-details/'+i.fixtureID])"  *ngIf="i.fixture.fixture.timestamp | countdown :0:'data'| async as time;">
-
-        <!-- Header -->
-        <div class="fixture-header">
-
-          <div class="league-info">
-
-            <span class="time">
-              {{ i.fixture.fixture.timestamp | timeFormat:'time' }}
-            </span>
-
-            <span class="id">
-              ID {{ i.fixtureID }}
-            </span>
-
-            <span class="league">
-              {{ i.fixture.league?.country }} - {{ i.fixture.league.name   }}
-            </span>
-
-          </div>
-
-          <button class="stats-btn">
-            <!-- <mat-icon>insights</mat-icon> -->
-          </button>
-
-        </div>
-
-        <!-- Match Row -->
-        <div class="match-row">
-
-          <!-- Teams -->
-          <div class="teams">
-
-            <div class="team-block">
-              <div class="logo">
-                <img [src]="i.fixture.teams.home.logo" alt="Arsenal">
-              </div>
-
-              <div class="team-name">
-                {{ i.fixture.teams.home.name|truncateCenter:9 }}
-              </div>
-            </div>
-
-            <div class="team-block">
-
-              <div class="logo">
-                <img [src]="i.fixture.teams.away.logo" alt="Arsenal">
-              </div>
-              <div class="team-name">
-                {{ i.fixture.teams.away.name|truncateCenter:9 }}
-              </div>
-
-            </div>
-
-            <!-- <div class="extra-info">
-              +{{ match.markets }}
-
-              <img
-                src="assets/icons/stv.png"
-                alt=""
-              >
-            </div> -->
-
-          </div>
-
-          <!-- Timer -->
-          <div class="countdown-box">
-
-            <div class="time-block">
-              <span>{{ (time + '') | slice:2:4 }}</span>
-              <small>HR</small>
-            </div>
-
-            <div class="separator">:</div>
-
-            <div class="time-block">
-              <span>{{ (time + '') | slice:4:6 }}</span>
-              <small>MIN</small>
-            </div>
-
-            <div class="separator">:</div>
-
-            <div class="time-block">
-              <span>{{ (time + '') | slice:6:9 }}</span>
-              <small>SEC</small>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-
     </div>
   </div>
-</div>
 
   <button
     class="load-more-btn"
