@@ -376,7 +376,8 @@ export class WalletService {
   handleSubmit(form:any,processor:any){
 
     if (!this.selectedData) {
-      this.quickNav.alert(`Please selcet method method`,'info')
+      this.quickNav.alert(`Please selcet method method`,'info');
+      return
 
     }
     form.patchValue({ payment_method: this.selectedData.code });
