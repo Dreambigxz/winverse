@@ -9,28 +9,25 @@
 
 
 <div *ngIf="location.pathname === '/matches'">
-  <div *ngIf="location.pathname === '/matches'" class="matches-header">
+  <div class="section-titled">
 
-    <div class="section-titled">
+    <span class="title-icon">
 
-      <span class="title-icon">
+      ⚽
 
-        ⚽
+    </span>
 
-      </span>
+    Todays Matches
 
-      Todays Matches
+    <span class="match-count">
 
-      <span class="match-count">
+      {{ matchService.notStartedMatches.length }}
 
-        {{ matchService.notStartedMatches.length }}
+    </span>
 
-      </span>
+  </div>
 
-    </div>
-
-
-
+  <div  class="matches-header">
       <div class="fixture-search">
 
         <div class="fixture-search-inner">
