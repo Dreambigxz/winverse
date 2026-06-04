@@ -6,12 +6,40 @@
 
 <section class="page  page-wrapper">
 
+  <div
+    class="welcome-badge"
+    *ngIf="quickNav.storeData.store['username']"
+    >
 
-  <section class="app-container">
-    <app-quick-nav></app-quick-nav>
-  </section>
+    <div class="welcome-icon">
 
-  
+    👋
+
+    </div>
+
+    <div class="welcome-text">
+
+    <small>
+
+     Welcome Back
+
+    </small>
+
+    <strong>
+
+     {{ quickNav.storeData.store['username']?.[0] | titlecase }}
+
+    </strong>
+
+    </div>
+
+    </div>
+
+      <section class="app-container">
+        <app-quick-nav></app-quick-nav>
+      </section>
+
+
       <section class="app-container">
         <app-slider></app-slider>
       </section>
