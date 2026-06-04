@@ -139,7 +139,7 @@
         </div>
 
         <button
-          class="auth-btn"
+              type="button"
             [disabled]="authModal.formView.login.invalid"
           >
 
@@ -280,7 +280,7 @@
         </div>
 
         <button
-          class="auth-btn"
+          type="button"
           [disabled]="authModal.formView.register.invalid"
           >
 
@@ -295,19 +295,26 @@
 
     <div *ngIf="authModal.mode === 'reset'">
 
-      <div class="form-group">
+      <form
+          [formGroup]="authModal.formView.reset"
+          (ngSubmit)="authModal.onSubmit(authModal.formView.reset,'forgot-password')">
+            <div class="form-group">
 
-        <label>Email</label>
+              <label>Email</label>
 
-        <input placeholder="Enter email">
+              <input placeholder="Enter email"
+              formControlName='email'>
 
-      </div>
+            </div>
 
-      <button class="auth-btn">
+            <button
+              type="button"
+              [disabled]="authModal.formView.reset.invalid">
 
-        Send Reset Link
+              Send Reset Link
 
-      </button>
+            </button>
+        </form>
 
     </div>
 
