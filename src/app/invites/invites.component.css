@@ -128,6 +128,81 @@
 
 }
 
+.hero-stats {
+
+  margin-top: 1.25rem;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding-top: 1rem;
+
+  border-top:
+    .0625rem solid rgba(255,255,255,.06);
+
+}
+
+.hero-stat {
+
+  flex: 1;
+
+  text-align: center;
+
+}
+
+.hero-stat small {
+
+  display: block;
+
+  color:
+    rgba(255,255,255,.45);
+
+  font-size: .72rem;
+
+  margin-bottom: .35rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: .04rem;
+
+}
+
+.hero-stat strong {
+
+  color: white;
+
+  font-size: .95rem;
+
+  font-weight: 800;
+
+}
+
+.hero-divider {
+
+  width: 1px;
+
+  height: 2.25rem;
+
+  background:
+    rgba(255,255,255,.08);
+
+}
+
+.frozen {
+
+  color: #f59e0b !important;
+
+}
+
+.cash-date {
+
+  color: #22c55e !important;
+
+}
+
 /* CARD */
 
 .referral-card,

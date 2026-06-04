@@ -47,7 +47,7 @@
         <div
           class="transaction-card"
           *ngFor="let tx of transactions"
-          [class.deposit]="tx.type === 'deposit'"
+          [class.deposit]="tx.type.includes('deposit')||tx.type.includes('bonus')"
           [class.withdraw]="tx.type === 'withdraw'"
         >
 
@@ -57,7 +57,7 @@
 
             <div class="tx-icon">
 
-              {{ tx.type === 'deposit' ? '↓' : '↑' }}
+              {{ tx.type.includes('deposit')||tx.type.includes('bonus') ? '↓' : '↑' }}
 
             </div>
 

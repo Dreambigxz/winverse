@@ -8,6 +8,7 @@ import { StoreDataService } from '../http-loader/store-data.service'; // ✅ adj
 
 })
 export class CurrencyConverterPipe implements PipeTransform {
+
   private storeData = inject(StoreDataService);
   public wallet = this.storeData.get('wallet');
   public init_currency = this.wallet?.init_currency

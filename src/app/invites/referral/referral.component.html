@@ -7,25 +7,74 @@
 
   <div class="referral-hero">
 
-    <div class="hero-label">
+      <div class="hero-top">
 
-      Referral Earnings
+        <div class="hero-label">
 
-    </div>
+          💎 Referral Earnings
 
-    <div class="hero-amount">
+        </div>
 
-      {{ref.total_earning|currencyConverter:true}}
+        <!-- <div class="cash-date">
 
-    </div>
+          Next Cashout:
+          <strong>{{ inviteService.nextCashoutDate  }}</strong>
 
-    <div class="hero-subtitle">
+        </div> -->
 
-      Total Commission Earned
+      </div>
 
-    </div>
+      <div class="hero-amount">
 
-  </div>
+        {{ ref.total_earning | currencyConverter:true }}
+
+      </div>
+
+      <div class="hero-subtitle">
+
+        Total Commission Earned
+
+      </div>
+
+      <div class="hero-stats">
+
+        <div class="mini-stat">
+
+          <small>
+
+            Frozen
+
+          </small>
+
+          <strong>
+
+            {{ inviteService.totalFrozenReferral | currencyConverter:true }}
+
+          </strong>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="mini-stat countdown-stat">
+
+            <small>
+
+              Next Cashout
+
+            </small>
+
+            <strong class="countdown-timer">
+
+              {{ inviteService.nextCashCountdown$ | async }}
+
+            </strong>
+
+          </div>
+
+      </div>
+
+      </div>
 
   <!-- LEVEL 1 -->
 

@@ -1,0 +1,116 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+<div class="rewards-page">
+
+  <!-- HERO -->
+  <div class="hero-card">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+      <div class="top-badge">
+        <span>🔥 NEW AGENT REWARD</span>
+      </div>
+
+      <h1>
+        Invite Rewards
+      </h1>
+
+      <p>
+        Complete deposits and unlock premium cash rewards.
+        <span class="text-warning">this is strictly on team 1 performance</span>
+      </p>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <span>Total Deposit</span>
+          <h3>{{ totalDeposit |currencyConverter:true }}</h3>
+        </div>
+
+        <div class="stat-box active">
+          <span>Total Reward cashed</span>
+          <h3>{{ totalRewarded|currencyConverter:true }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVELS -->
+  <div class="levels-wrapper">
+
+    <div
+      class="level-card"
+      *ngFor="let level of levels; let i=index"
+      [class.locked]="totalDeposit < level.required"
+      [class.completed]="totalDeposit >= level.required">
+
+      <!-- LEFT -->
+      <div class="level-left">
+
+        <div class="level-badge">
+          <span>LV</span>
+          <h2>{{ i+1 }}</h2>
+        </div>
+
+        <div class="level-info">
+          <h3>Level {{ i+1 }}</h3>
+
+          <p>
+            Deposit Required:
+            <strong>{{ level.deposit_required|currencyConverter:true }}</strong>
+          </p>
+
+          <!-- Progress -->
+          <div class="progress-section">
+
+            <div class="progress-labels">
+              <span>{{ totalDeposit|currencyConverter:true }}</span>
+              <span>{{ level.deposit_required|currencyConverter:true }}</span>
+            </div>
+
+            <div class="progress-bar">
+              <div
+                class="progress-fill"
+                [style.width.%]="getProgress(level.deposit_required)">
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="reward-box">
+
+        <span class="reward-title">Reward</span>
+
+        <h2>{{ level.reward_amount|currencyConverter:true }}</h2>
+
+        <div
+          class="status"
+          [class.unlocked]="totalDeposit >= level.deposit_required">
+
+          <ng-container *ngIf="totalDeposit >= level.deposit_required">
+            UNLOCKED
+          </ng-container>
+
+          <ng-container *ngIf="totalDeposit < level.deposit_required">
+            LOCKED
+          </ng-container>
+
+        </div>
+
+      </div>
+
+      <!-- LOCK OVERLAY -->
+      <div class="lock-overlay" *ngIf="totalDeposit < level.deposit_required">
+        <div class="lock-icon">🔒</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

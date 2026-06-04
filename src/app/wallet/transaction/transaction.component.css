@@ -158,7 +158,7 @@
 
 }
 
-.tx-status.completed {
+.tx-status.success {
 
   background:
     rgba(34,197,94,.15);

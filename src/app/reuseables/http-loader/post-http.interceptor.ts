@@ -98,14 +98,12 @@ export const PostHttpInterceptor: HttpInterceptorFn = (req, next) => {
             }
 
             const wallet = storeData.get("wallet")
-            console.log(body.main);
 
             if (wallet){
               authService.isVisible=false
 
               if(!wallet?.hasPin||!wallet.saved_add) {
                 if (!["/setup"].includes(window.location.pathname)) {
-                  // window.location.href = '/setup'
                   router.navigate(['/setup'])
                 }
               }

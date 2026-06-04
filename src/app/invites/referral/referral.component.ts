@@ -9,6 +9,7 @@ import { QuickNavService } from '../../reuseables/services/quick-nav.service';
 
 import { MenuBottomComponent } from "../../components/menu-bottom/menu-bottom.component";
 import { InviteServices } from "../invite.service";
+import { CountdownPipe } from '../../reuseables/pipes/countdown.pipe';
 
 @Component({
   selector: 'app-referral',
@@ -16,10 +17,11 @@ import { InviteServices } from "../invite.service";
     CommonModule,
     Header2Component,
     SpinnerComponent,
-    CurrencyConverterPipe
+    CurrencyConverterPipe,
+    CountdownPipe
   ],
   templateUrl: './referral.component.html',
-  styleUrl: './referral.component.css'
+  styleUrl: '../styles.css'
 })
 export class ReferralComponent {
 
@@ -41,11 +43,12 @@ export class ReferralComponent {
 
           console.log({res});
 
-
         }
       )}
 
   }
+
+
 
 
 }

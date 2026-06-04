@@ -25,7 +25,6 @@ export class RewardComponent {
   levels : any = [ ]
   totalDeposit = 0
   totalRewarded= 0;
-  total_invites=0
 
   ngOnInit(){
 
@@ -35,7 +34,7 @@ export class RewardComponent {
           console.log({res});
 
           this.levels = this.quickNav.storeData.get("invite-rewards").rewards
-          this.total_invites = this.quickNav.storeData.get("invite-rewards").total_invites
+          this.totalDeposit = this.quickNav.storeData.get("invite-rewards").total_lv1_deposited
           this.totalRewarded = this.quickNav.storeData.get("invite-rewards").total_cashed
       })
     }
@@ -52,7 +51,7 @@ export class RewardComponent {
   }
 
   getProgress(required: number): number {
-    const progress = (this.total_invites / required) * 100;
+    const progress = (this.totalDeposit / required) * 100;
     return Math.min(progress, 100);
   }
 

@@ -31,15 +31,59 @@
 
     </p>
 
-    <div class="hero-earnings">
+    <div class="hero-stats">
 
-      <small>Total Earnings</small>
+      <div class="hero-stat">
 
-      <strong>
+        <small>
 
-        {{ref.cashed_commissions |currencyConverter:true}}
+          Earned
 
-      </strong>
+        </small>
+
+        <strong>
+
+          {{ ref.cashed_commissions | currencyConverter:true }}
+
+        </strong>
+
+      </div>
+
+      <div class="hero-divider"></div>
+
+      <div class="hero-stat">
+
+        <small>
+
+          Frozen
+
+        </small>
+
+        <strong class="frozen">
+
+          {{ inviteService.totalFrozenReferral + inviteService.totalFrozenRebate  | currencyConverter:true }}
+
+        </strong>
+
+      </div>
+
+      <div class="hero-divider"></div>
+
+      <div class="hero-stat">
+
+        <small>
+
+          Cashout
+
+        </small>
+
+        <strong class="cash-date">
+
+          {{ inviteService.nextCashCountdown$|async }}
+
+        </strong>
+
+      </div>
 
     </div>
 
@@ -159,7 +203,7 @@
 
       <p>
 
-        Earn from your level 1 to level 3 team's betting activity.
+        Earn instant 0.6% commission from level 1 team's betting activity.
 
       </p>
 

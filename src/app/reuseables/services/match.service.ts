@@ -242,7 +242,7 @@ export class MatchService {
     const trade =  !["book_bet",'extra_bet'].includes(processor)
 
     if (trade&&parseFloat(minimumStake)>parseFloat(this.stakeAmount)) {
-      this.quickNav.alert(`You need at least ${minimumStake} to bet!`,'info')
+      this.quickNav.alert(`You need at least ${this.currencyConverter.init_currency.symbol}${minimumStake} to bet!`,'info')
       return
     }
 

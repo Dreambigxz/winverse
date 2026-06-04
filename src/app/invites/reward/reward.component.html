@@ -1,112 +1,107 @@
 <app-header2></app-header2>
 <app-spinner></app-spinner>
 
-<div class="rewards-page">
 
-  <!-- HERO -->
-  <div class="hero-card">
-    <div class="overlay"></div>
+<div class="reward-section app-container">
 
-    <div class="hero-content">
-      <div class="top-badge">
-        <span>🔥 NEW AGENT REWARD</span>
-      </div>
+  <div class="reward-header">
 
-      <h1>
-        Invite Rewards
-      </h1>
+    <div>
 
-      <p>
-        Complete deposits and unlock premium cash rewards.
-        <span class="text-warning">this is strictly on team 1 performance</span>
-      </p>
+      <!-- <h3>🎁 Invite Rewards</h3> -->
 
-      <div class="stats-row">
-        <div class="stat-box">
-          <span>Total Deposit</span>
-          <h3>{{ totalDeposit |currencyConverter:true }}</h3>
-        </div>
+      <span>
 
-        <div class="stat-box active">
-          <span>Total Reward cashed</span>
-          <h3>{{ totalRewarded|currencyConverter:true }}</h3>
-        </div>
-      </div>
+        Earn rewards by inviting friends
+
+      </span>
+
     </div>
+
+    <div class="reward-earned">
+
+      <small>Total Claimed</small>
+
+      <strong>
+
+        {{ totalRewarded | currencyConverter:true }}
+
+      </strong>
+
+    </div>
+
   </div>
 
-  <!-- LEVELS -->
-  <div class="levels-wrapper">
+  <div class="reward-list">
 
     <div
-      class="level-card"
-      *ngFor="let level of levels; let i=index"
-      [class.locked]="totalDeposit < level.required"
-      [class.completed]="totalDeposit >= level.required">
+      class="reward-item"
+      *ngFor="let level of levels"
+    >
 
-      <!-- LEFT -->
-      <div class="level-left">
+      <div class="reward-top">
 
-        <div class="level-badge">
-          <span>LV</span>
-          <h2>{{ i+1 }}</h2>
-        </div>
+        <div class="reward-prize">
 
-        <div class="level-info">
-          <h3>Level {{ i+1 }}</h3>
-
-          <p>
-            Deposit Required:
-            <strong>{{ level.deposit_required|currencyConverter:true }}</strong>
-          </p>
-
-          <!-- Progress -->
-          <div class="progress-section">
-
-            <div class="progress-labels">
-              <span>{{ totalDeposit|currencyConverter:true }}</span>
-              <span>{{ level.deposit_required|currencyConverter:true }}</span>
-            </div>
-
-            <div class="progress-bar">
-              <div
-                class="progress-fill"
-                [style.width.%]="getProgress(level.deposit_required)">
-              </div>
-            </div>
-
-          </div>
+          🎁 {{ level.reward_amount | currencyConverter:true }}
 
         </div>
-
-      </div>
-
-      <!-- RIGHT -->
-      <div class="reward-box">
-
-        <span class="reward-title">Reward</span>
-
-        <h2>{{ level.reward_amount|currencyConverter:true }}</h2>
 
         <div
-          class="status"
-          [class.unlocked]="totalDeposit >= level.deposit_required">
+          class="reward-status unlocked"
+          *ngIf="total_invites >= level.invites_required"
+        >
+          Claimed
+        </div>
 
-          <ng-container *ngIf="totalDeposit >= level.deposit_required">
-            UNLOCKED
-          </ng-container>
-
-          <ng-container *ngIf="totalDeposit < level.deposit_required">
-            LOCKED
-          </ng-container>
-
+        <div
+          class="reward-status"
+          *ngIf="total_invites < level.invites_required"
+        >
+          {{ level.invites_required - total_invites }}
+          Left
         </div>
 
       </div>
 
-      <!-- LOCK OVERLAY -->
-      <div class="lock-overlay" *ngIf="totalDeposit < level.deposit_required">
-        <div class="lock-icon">🔒</div>
+      <div class="reward-desc">
+
+        Invite
+
+        <strong>
+
+          {{ level.invites_required }}
+
+        </strong>
+
+        friends
+
+
+
+      </div>
+
+      <div class="reward-progress">
+
+        <div
+          class="reward-fill"
+          [style.width.%]="getProgress(level.invites_required)"
+        ></div>
+
+      </div>
+
+      <div class="reward-footer">
+
+        <span>
+
+          {{ total_invites }}
+
+          /
+          {{ level.invites_required }}
+
+          Invites
+
+        </span>
+
       </div>
 
     </div>

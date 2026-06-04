@@ -21,7 +21,7 @@ export class BindComponent {
   telegramService = inject(TelegramService)
   quickNav = inject(QuickNavService)
 
-  bonus = 0.04
+  bonus = 0.10
 
   ngOnInit() {
 
@@ -42,7 +42,7 @@ export class BindComponent {
   handleVisibilityChange = () =>{
 
     if (this.quickNav?.storeData?.get('skippedTgBind') || this.quickNav?.storeData?.get("bindedTg") ) return;
-    
+
     if (!document.hidden) {
 
       this.quickNav.reqServerData.get('check-if-binded')

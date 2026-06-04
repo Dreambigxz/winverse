@@ -8,19 +8,21 @@
 
 .referral-hero {
 
-  text-align: center;
+  position: relative;
+
+  overflow: hidden;
 
   margin-bottom: 1.25rem;
 
-  padding: 1.5rem;
+  padding: 1.4rem;
 
-  border-radius: 1.25rem;
+  border-radius: 1.5rem;
 
   background:
     radial-gradient(
-      circle at top,
-      rgba(205,127,214,.15),
-      transparent 45%
+      circle at top right,
+      rgba(205,127,214,.18),
+      transparent 35%
     ),
     linear-gradient(
       145deg,
@@ -32,26 +34,78 @@
   border:
     .0625rem solid rgba(205,127,214,.08);
 
+  box-shadow:
+    0 1rem 2rem rgba(0,0,0,.2);
+
+    text-align: center;
+
+
+}
+
+/* TOP */
+
+.hero-top {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 1rem;
+
 }
 
 .hero-label {
 
   color:
-    rgba(205,127,214,.8);
+    rgba(205,127,214,.9);
 
   font-size: .8rem;
 
-  font-weight: 700;
+  font-weight: 800;
+
+  letter-spacing: .05rem;
+
+  text-transform: uppercase;
+  text-align: center;
+
 
 }
 
+.cash-date {
+
+  padding: .4rem .75rem;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,255,255,.04);
+
+  color:
+    rgba(255,255,255,.65);
+
+  font-size: .72rem;
+
+}
+
+.cash-date strong {
+
+  color: white;
+
+}
+
+/* AMOUNT */
+
 .hero-amount {
 
-  margin-top: .5rem;
+  margin-top: .8rem;
 
-  font-size: 2.5rem;
+  font-size: 2.6rem;
 
   font-weight: 900;
+
+  line-height: 1;
 
   background:
     linear-gradient(
@@ -67,13 +121,125 @@
 
 .hero-subtitle {
 
-  margin-top: .3rem;
+  margin-top: .35rem;
 
   color:
-    rgba(255,255,255,.6);
+    rgba(255,255,255,.55);
+
+  font-size: .85rem;
 
 }
 
+/* STATS */
+
+.hero-stats {
+
+  margin-top: 1.25rem;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding-top: 1rem;
+
+  border-top:
+    .0625rem solid rgba(255,255,255,.06);
+
+}
+
+.mini-stat {
+
+  flex: 1;
+
+  text-align: center;
+
+}
+
+.mini-stat small {
+
+  display: block;
+
+  color:
+    rgba(255,255,255,.45);
+
+  font-size: .7rem;
+
+  margin-bottom: .25rem;
+
+}
+
+.mini-stat strong {
+
+  color: white;
+
+  font-size: 1rem;
+
+  font-weight: 800;
+
+}
+
+
+.countdown-stat {
+
+  position: relative;
+
+}
+
+.countdown-timer {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 7rem;
+
+  padding: .45rem .8rem;
+
+  margin-top: .35rem;
+
+  border-radius: .75rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(205,127,214,.12),
+      rgba(168,85,176,.08)
+    );
+
+  border:
+    .0625rem solid rgba(205,127,214,.15);
+
+  color: #cd7fd6;
+
+  font-size: .9rem;
+
+  font-weight: 900;
+
+  letter-spacing: .08rem;
+
+  font-family:
+    'Courier New',
+    monospace;
+
+  box-shadow:
+    inset 0 0 .75rem rgba(205,127,214,.08);
+
+}
+
+.divider {
+
+  width: 1px;
+
+  height: 2rem;
+
+  background:
+    rgba(255,255,255,.08);
+
+}
 /* LEVEL CARD */
 
 .level-card {

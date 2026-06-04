@@ -127,7 +127,7 @@ export const routes: Routes = [
     },
 
     {
-      path: 'invite-rewards',
+      path: 'invite/rewards',
       component: RewardComponent,
       title: 'Invite-rewards',
       canActivate: [authGuard]
