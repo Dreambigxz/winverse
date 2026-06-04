@@ -8,8 +8,8 @@
 <section class="app-container ">
 
 
-
-  <div *ngIf="location.pathname!=='/matches'" class="matches-header">
+<div *ngIf="location.pathname === '/matches'">
+  <div *ngIf="location.pathname === '/matches'" class="matches-header">
 
     <div class="section-titled">
 
@@ -56,7 +56,7 @@
 
   </div>
 
-  <div *ngIf="matchService.notStartedMatches.slice(0,slice) as matches">
+  <div  *ngIf="matchService.notStartedMatches.slice(0,slice) as matches">
     <div  *ngFor="let i of matches">
 
 
@@ -155,6 +155,7 @@
 
     </div>
   </div>
+</div>
 
   <button
     class="load-more-btn"
