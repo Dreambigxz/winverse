@@ -1,12 +1,19 @@
 <app-header2></app-header2>
 <app-spinner></app-spinner>
 
-<div class="telegram-page">
 
-  <button class="start-betting-btn" (click)="quickNav.go('matches')">
+<div class="app-container">
+  <button *ngIf="!quickNav.storeData.get('bindedTg')" class="start-betting-btn" (click)="quickNav.go('matches')">
       <span>🎯</span>
       Start Betting
     </button>
+
+</div>
+
+
+<div class="telegram-page">
+
+
   <div
       *ngIf="!quickNav.storeData.get('bindedTg')"
     >

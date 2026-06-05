@@ -291,7 +291,7 @@
                 <strong class="profit">
 
                   {{
-                    bet.stake_amount * bet.market_odds
+                    bet.stake_amount * bet.market_odds / 100 + bet.stake_amount
                     | currencyConverter:true
                   }}
 
@@ -311,7 +311,7 @@
                 <strong class="won-text">
 
                   {{
-                    bet.stake_amount * bet.market_odds
+                    bet.stake_amount * bet.market_odds / 100 + bet.stake_amount
                     | currencyConverter:true
                   }}
 
