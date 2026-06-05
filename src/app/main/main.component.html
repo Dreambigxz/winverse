@@ -7,39 +7,39 @@
 <section class=" page-wrapper">
 
   <div
-    class="welcome-badge"
-    *ngIf="quickNav.storeData.store['username']"
-    >
+      class="welcome-badge"
+      *ngIf="quickNav.storeData.store['username']"
+      >
 
-    <div class="welcome-icon">
+      <div class="welcome-icon">
 
-    👋
+      👋
 
-    </div>
+      </div>
 
-    <div class="welcome-text">
+      <div class="welcome-text">
 
-    <small>
+      <small>
 
-     Welcome Back
+       Welcome Back
 
-    </small>
+      </small>
 
-    <strong>
+      <strong>
 
-      {{ quickNav.storeData.store['username'] | titlecase }}
+        {{ quickNav.storeData.store['username'] | titlecase }}
 
-    </strong>
+      </strong>
 
-    </div>
+      </div>
 
-    <div class="vip-chip">
+      <div class="vip-chip">
 
-      <span class="vip-dot"></span>
+        <span class="vip-dot"></span>
 
-      VIP {{quickNav.storeData.store['vip_system']?.active?.vip_level||0}}
+        VIP {{quickNav.storeData.store['vip_system']?.active?.vip_level||0}}
 
-    </div>
+      </div>
 
     </div>
 
@@ -53,14 +53,39 @@
       </section>
 
 
-
-
-
       <section class="app-container">
         <app-cpg></app-cpg>
       </section>
 
         <app-matches></app-matches>
+
+        <section class="app-container channel">
+          <!-- <p> Channel </p> -->
+          <div (click)="quickNav.openTab('https://t.me/winversegamechannel')" class="quick-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="20" height="20">
+              <circle cx="120" cy="120" r="120" fill="#229ED9"/>
+              <path fill="#FFFFFF" d="
+                M180.7 67.5
+                L49.4 118.1
+                C40.4 121.7 40.5 126.7 47.8 128.9
+                L81.5 139.4
+                L159.5 90.2
+                C163.2 88 166.5 89.2 163.7 91.7
+                L100.5 148.7
+                L98.1 182.5
+                C101.6 182.5 103.1 180.9 105.1 179
+                L121.5 163
+                L155.6 188.2
+                C161.9 191.7 166.4 189.9 168 182.4
+                L190.4 76.7
+                C192.8 67.5 186.8 63.3 180.7 67.5
+                Z"/>
+            </svg>
+            <span>Join signal 📡 channel</span>
+          </div>
+
+        </section>
+
 
   </section>
 

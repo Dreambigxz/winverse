@@ -260,3 +260,49 @@
     0 0 .8rem #cd7fd6;
 
 }
+
+.app-container.channel {
+  padding: 16px;
+}
+
+.app-container.channel p {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+.quick-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px 18px;
+  border-radius: 14px;
+
+  background: #e3d1e3;
+  border: 1px solid #ececec;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.quick-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(34, 158, 217, 0.12);
+  border-color: #229ed9;
+}
+
+.quick-card svg {
+  flex-shrink: 0;
+}
+
+.quick-card span {
+  font-size: 15px;
+  font-weight: 500;
+  color: #222;
+}
