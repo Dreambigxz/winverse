@@ -71,7 +71,7 @@
       <table class="premium-table">
         <tr *ngFor="let gen of ['generation_1','generation_2','generation_3']">
           <td>G{{ gen.replace('generation_','') }}</td>
-          <td class="text-danger">
+          <td class="">
             ${{ dashboardData.withdraw[gen].amount | number:'1.2-2' }}
           </td>
         </tr>

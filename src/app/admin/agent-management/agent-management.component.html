@@ -86,7 +86,7 @@
 
               <div class="item-row">
                 <span class="label">Total Withdrawn</span>
-                <span class="value text-danger">${{ user.history.withdraw | number:'1.2-2' }}</span>
+                <span class="value">${{ user.history.withdraw | number:'1.2-2' }}</span>
               </div>
 
               <div class="item-row">
@@ -100,7 +100,7 @@
               <div class="item-row">
                 <span class="label">Company Games</span>
                 <span class="value">
-                  <strong class="text-bold">${{ user.bet_history?.records?.true?.won?.won_amount || 0 | number:"1-2-2" }}</strong> / {{ user.bet_history?.records?.true?.won?.count || 0 }}
+                  <strong class="text-bold">${{ user.bet_history?.records?.true?.won?.won_amount || 0 | number:"1.2-2" }}</strong> / {{ user.bet_history?.records?.true?.won?.count || 0 }}
                 </span>
               </div>
 
@@ -130,7 +130,7 @@
 
                 <div class="item-row">
                   <span class="label">Agent Withdrawn</span>
-                  <span class="value text-danger">
+                  <span class="value ">
                     ${{ agent.total_withdrawn | number:'1.2-2' }}
                   </span>
                 </div>
@@ -161,7 +161,7 @@
         </div>
 
         <div  class="load-new-user mt-4">
-          <p class="text-primary">
+          <p class="text-info">
             select data to load!
           </p>
 
@@ -169,7 +169,7 @@
 
             <!-- <form (ngSubmit)="loadUserData()"> -->
 
-              <select *ngIf="quickNav.storeData.store['is_admin']; else staffOptions" class="mb-3 form__input" (change)="changeSelectedData($event)" name="select-user-obj">
+              <select *ngIf="quickNav.storeData.store['is_admin']; else staffOptions" class="mb-3 form-group" (change)="changeSelectedData($event)" name="select-user-obj">
                   <option selected='selected' disabled=true>Select</option>
                   <option value="promotion_info">Load Invites</option>
                   <option data-prompt=amount value="credit_agent">Credit wallet</option>
@@ -183,7 +183,7 @@
                 </select>
 
                 <ng-template #staffOptions>
-                  <select  class="mb-3 form__input" (change)="changeSelectedData($event)" name="select-user-obj">
+                  <select  class="mb-3 form-group" (change)="changeSelectedData($event)" name="select-user-obj">
                       <option selected='selected' disabled=true>Select</option>
                       <option data-prompt=amount value="credit_agent">Credit wallet</option>
                       <!-- <option data-prompt="amount" value="increase_agent_withdrawal_limit">Increase withdraw limit</option> -->
@@ -191,10 +191,10 @@
                     </select>
                 </ng-template>
 
-                <input class="form__input" [(ngModel)]="sendingData" *ngIf="['increase_agent_withdrawal_limit','credit_agent'].includes(selectedData)" type="number" placeholder="amount ">
-                <input class="form__input" [(ngModel)]="sendingData" *ngIf="selectedData==='change_email'" type="text" placeholder="New Email">
-                <div class="form__input" *ngIf="selectedData==='change_password'" class="set-new-pass">
-                  <input class="form__input" [(ngModel)]="sendingData"  type="text" placeholder="New password">
+                <input class="form-group" [(ngModel)]="sendingData" *ngIf="['increase_agent_withdrawal_limit','credit_agent'].includes(selectedData)" type="number" placeholder="amount ">
+                <input class="form-group" [(ngModel)]="sendingData" *ngIf="selectedData==='change_email'" type="text" placeholder="New Email">
+                <div class="form-group" *ngIf="selectedData==='change_password'" class="set-new-pass">
+                  <input class="form-group" [(ngModel)]="sendingData"  type="text" placeholder="New password">
                   <!-- <button type="button" name="button">Generate password</button> -->
                   <span (click)="sendingData=quickNav.generatePassword(6)" class="gen-pass-btn">Generate</span>
                 </div>
@@ -223,7 +223,7 @@
               [(ngModel)]="manageUser"
               type="text" name=""
               placeholder="Email / username"
-              class="form__input"
+              class="form-group"
                >
               <button
                 type="submit"

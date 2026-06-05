@@ -18,26 +18,26 @@
 }
 
 .summary-card {
-  background: linear-gradient(135deg, #1a1200, #2b1d00);
+  background: linear-gradient(135deg, #1d0b1f, #3a0751);
   padding: 16px;
   border-radius: 16px;
-  color: #fff8e1;
-  border: 1px solid rgba(255, 235, 59, 0.1);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
-  transition: 0.3s ease;
+  color: #f7e7fa;
+  border: 1px solid rgba(205, 127, 214, 0.12);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  transition: .3s ease;
 }
 
 .summary-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 152, 0, 0.25);
-  background: linear-gradient(135deg, #241700, #382400);
+  border-color: rgba(205, 127, 214, 0.3);
+  background: linear-gradient(135deg, #261028, #4a0a68);
 }
 
 .summary-card .label {
   font-size: 11px;
-  color: #fcd34d;
+  color: rgba(205, 127, 214, 0.85);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: .5px;
 }
 
 .summary-card .value {
@@ -49,7 +49,7 @@
 }
 
 .summary-card .code {
-  color: #ffeb3b;
+  color: #cd7fd6;
   letter-spacing: 1px;
 }
 
@@ -57,18 +57,18 @@
    PREMIUM CARD
 ========================= */
 .premium-card {
-  background: linear-gradient(135deg, #1a1200, #2b1d00);
+  background: linear-gradient(135deg, #1d0b1f, #3a0751);
   padding: 18px;
   border-radius: 18px;
-  color: #fff8e1;
-  border: 1px solid rgba(255, 235, 59, 0.1);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
-  transition: 0.3s ease;
+  color: #f7e7fa;
+  border: 1px solid rgba(205, 127, 214, 0.12);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+  transition: .3s ease;
 }
 
 .premium-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(255, 152, 0, 0.22);
+  border-color: rgba(205, 127, 214, 0.25);
 }
 
 /* =========================
@@ -77,8 +77,8 @@
 .premium-card h3 {
   font-size: 14px;
   margin-bottom: 12px;
-  color: #ffeb3b;
-  letter-spacing: 0.4px;
+  color: #cd7fd6;
+  letter-spacing: .4px;
 }
 
 /* =========================
@@ -91,7 +91,7 @@
 
 .premium-table th {
   font-size: 11px;
-  color: #fcd34d;
+  color: rgba(205, 127, 214, 0.85);
   text-align: left;
   padding: 10px 0;
   font-weight: 600;
@@ -100,14 +100,17 @@
 
 .premium-table td {
   padding: 12px 0;
-  border-top: 1px solid rgba(255, 235, 59, 0.06);
+  border-top: 1px solid rgba(205, 127, 214, 0.08);
   font-size: 13px;
-  color: #fff8e1;
+  color: #f7e7fa;
 }
 
-/* Row hover */
+.premium-table tbody tr {
+  transition: .2s ease;
+}
+
 .premium-table tbody tr:hover {
-  background: rgba(255, 235, 59, 0.03);
+  background: rgba(205, 127, 214, 0.04);
 }
 
 /* =========================
@@ -123,16 +126,16 @@
    COLORS
 ========================= */
 .text-success {
-  color: #ffeb3b;
+  color: #cd7fd6;
   font-weight: 600;
 }
 
 .text-danger {
-  color: #ff9800;
+  color: #ff7ab8;
   font-weight: 600;
 }
 
 .text-warning {
-  color: #ffc107;
+  color: #e7a7ee;
   font-weight: 600;
 }
