@@ -143,11 +143,11 @@ export class WalletService {
   }
 
   cryptos = [
-    { value: 'USD', label: 'USDT (TRC20)', img: 'assets/img/card/usdt.svg' },
-    { value: 'BNB', label: 'BNB NETWORK', img: 'assets/img/card/bnb.png' },
+      { value: 'USD', label: 'USDT (TRC20)', img: 'assets/img/card/usdt.svg' },
+      { value: 'BNB', label: 'BEP20 NETWORK', img: 'assets/img/card/bnb.png' },
 
-    { value: 'TRON', label: 'TRON', img: 'assets/img/card/tron.png' },
-  ];
+      { value: 'TRON', label: 'TRON', img: 'assets/img/card/tron.png' },
+    ];
   cryptoMap: Record <CryptoKey, any> = {
     USD: { value: 'USD', label: 'TRC20', img: 'assets/img/card/usdt.svg',  },
     TRON: { value: 'TRON', label: 'TRON', img: 'assets/img/card/tron.png', },
