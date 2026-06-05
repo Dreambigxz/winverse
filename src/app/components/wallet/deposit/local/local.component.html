@@ -69,13 +69,14 @@
 
         <span>
 
-          Processing Fee
+          Minimum Deposit
 
         </span>
 
         <strong>
 
-          {{walletService.selectedData?.symbol}}0.0
+          {{ walletService.selectedData?.symbol }}
+          {{ walletService.minimumPayment | number:'1.2-2' }}
 
         </strong>
 
@@ -85,13 +86,13 @@
 
         <span>
 
-          Total Withdraw
+          Total Deposited
 
         </span>
 
         <strong>
 
-          {{wallet?.history?.withdraw || 0 |currencyConverter:true}}
+          {{wallet?.history?.deposit || 0 |currencyConverter:true}}
 
         </strong>
 

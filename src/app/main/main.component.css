@@ -58,80 +58,205 @@
 
 .welcome-badge {
 
-  display: inline-flex;
+  display: flex;
 
   align-items: center;
 
-  gap: .75rem;
+  gap: .85rem;
 
-  padding: .75rem 1rem;
+  padding: .9rem 1rem;
 
-  /* border-radius: 999px;
+  /* border-radius: 1rem;
 
   background:
     linear-gradient(
       135deg,
       rgba(205,127,214,.12),
-      rgba(168,85,176,.06)
+      rgba(29,11,31,.95)
     );
 
   border:
-    .0625rem solid rgba(205,127,214,.12); */
+    .0625rem solid rgba(205,127,214,.15);
 
-  backdrop-filter:
-    blur(10px);
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 .5rem 1.5rem rgba(0,0,0,.25); */
 
 }
 
 .welcome-icon {
 
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 3rem;
+
+  height: 3rem;
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   border-radius: 50%;
 
-  background:
-    rgba(205,127,214,.15);
+  font-size: 1.2rem;
 
-  font-size: 1rem;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(205,127,214,.2),
+      rgba(168,85,176,.1)
+    );
+
+  border:
+    .0625rem solid rgba(205,127,214,.15);
+
+  flex-shrink: 0;
 
 }
 
 .welcome-text {
 
-  display: flex;
-  gap:12px;
+  flex: 1;
 
-  /* flex-direction: column; */
+  min-width: 0;
 
 }
 
 .welcome-text small {
 
+  display: block;
+
   color:
-    rgba(255,255,255,.5);
+    rgba(255,255,255,.55);
 
   font-size: .68rem;
 
   text-transform: uppercase;
 
-  letter-spacing: .06rem;
+  letter-spacing: .08rem;
+
+  margin-bottom: .15rem;
 
 }
 
 .welcome-text strong {
 
+  display: block;
+
   color: white;
 
-  font-size: .95rem;
+  font-size: 1rem;
 
   font-weight: 800;
 
-  line-height: 1.1;
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+}
+
+.vip-chip {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: .4rem;
+
+  padding: .45rem .75rem;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(205,127,214,.2),
+      rgba(168,85,176,.08)
+    );
+
+  border:
+    .0625rem solid rgba(205,127,214,.18);
+
+  color: #cd7fd6;
+
+  font-size: .72rem;
+
+  font-weight: 800;
+
+  flex-shrink: 0;
+
+}
+
+.vip-dot {
+
+  width: .45rem;
+
+  height: .45rem;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+
+  box-shadow:
+    0 0 .5rem #22c55e;
+
+  animation: vipPulse 1.8s infinite;
+
+}
+
+@keyframes vipPulse {
+
+  0%,100% {
+
+    transform: scale(1);
+
+    opacity: 1;
+
+  }
+
+  50% {
+
+    transform: scale(1.4);
+
+    opacity: .6;
+
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .welcome-badge {
+
+    padding: .8rem;
+
+    gap: .7rem;
+
+  }
+
+  .vip-chip {
+
+    font-size: .65rem;
+
+    padding: .35rem .55rem;
+
+  }
+
+}
+
+.vip-dot {
+
+  width: .5rem;
+  height: .5rem;
+
+  border-radius: 50%;
+
+  background: #cd7fd6;
+
+  box-shadow:
+    0 0 .8rem #cd7fd6;
 
 }

@@ -1,6 +1,14 @@
 /* ==========================
    DEPOSIT INVOICE
 ========================== */
+/* --- Color Palette Variables --- */
+:root {
+  --main-dark: #fff;      /* Deep background / Text color */
+  --main-purple: #3a0751;    /* Primary Brand Purple */
+  --light-purple: #cd7fd6;   /* Accent / Active / Highlight */
+  --white: #ffffff;
+  --gray-light: #f5f0f7;
+}
 
 .deposit-invoice {
 
@@ -75,6 +83,8 @@
 
 }
 
+
+
 .status-dot {
 
   width: .55rem;
@@ -100,6 +110,17 @@
 
   font-weight: 800;
 
+}
+
+.awaiting.invoice-status{
+  background: rgb(54 244 195 / 48%);
+
+  .status-dot{
+    background: #6cf8d4;
+  }
+  span{
+    color:#6cf8d4;
+  }
 }
 
 /* ==========================
@@ -475,4 +496,120 @@
 
   margin-right: .45rem;
 
+}
+
+
+/*  */
+/* 🏦 BANK SELECT (Tabs Container) */
+.bank-select {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+/* Individual Tab Chips */
+.bank-chip {
+  cursor: pointer;
+  padding: 10px 18px;
+  background-color: var(--gray-light);
+  color: #fff;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+/* Hover State */
+.bank-chip:hover {
+  background-color: rgba(205, 127, 214, 0.15); /* Tint of light purple */
+}
+
+/* Active Tab State */
+.bank-chip.active {
+  background-color: var(--main-purple);
+  color: var(--white);
+  border-color: var(--light-purple);
+  box-shadow: 0 4px 10px rgba(58, 7, 81, 0.2);
+}
+
+/* 🏦 BANK DETAILS CARD (Main Container) */
+.bank-card {
+  background-color: var(--white);
+  border: 1px solid rgba(58, 7, 81, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(29, 11, 31, 0.05);
+}
+
+/* Rows inside the Card */
+.bank-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(29, 11, 31, 0.05);
+}
+
+.bank-row:last-of-type {
+  border-bottom: none;
+}
+
+.bank-row span {
+  color: #fff; /* Muted main-dark */
+  font-size: 14px;
+  /* font-weight: 800; */
+}
+
+.bank-row strong {
+  color: #cd7fd6;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Copy Action Area */
+.copy-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.copy-line button {
+  background-color: transparent;
+  border: 1px solid var(--light-purple);
+  color: var(--main-purple);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copy-line button:hover {
+  background-color: var(--light-purple);
+  color: var(--main-dark);
+}
+
+/* ⚠ NOTICE BOX */
+.notice {
+  margin-top: 20px;
+  background-color: rgba(58, 7, 81, 0.04); /* Light mist of main purple */
+  border-left: 4px solid var(--light-purple);
+  padding: 14px 16px;
+  border-radius: 4px 12px 12px 4px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.notice strong {
+  color: var(--main-purple);
+  background: rgba(205, 127, 214, 0.2);
+  padding: 2px 6px;
+  border-radius: 4px;
 }

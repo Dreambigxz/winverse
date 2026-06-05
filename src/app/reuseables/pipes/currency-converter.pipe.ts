@@ -14,52 +14,20 @@ export class CurrencyConverterPipe implements PipeTransform {
   public init_currency = this.wallet?.init_currency
 
 
-  transform(amount: number=0, showSymbol: boolean = false, another_currency=false,minimumFractionDigits:number=2): string {
+  transform(amount: number=0, showSymbol: boolean = false, another_currency:any=false,minimumFractionDigits:number=2): string {
 
     // const wallet = this.storeData.get('wallet');
     // let
 
     const pathname =  window.location.pathname
 
-    // if (this.init_currency?.symbol==="BNB") {
-    // if (this.storeData.get('wallet')?.init_currency?.symbol==="BNB"||this.storeData.get('wallet')?.symbol==="BNB"){
-    //
-    //   if (!this.storeData.get('wallet')?.symbol) {
-    //     this.storeData.get('wallet').symbol="BNB"
-    //   }
-    //
-    //   if (!["withdraw", "deposit"].includes(pathname)) {
-    //
-    //     this.storeData.get('wallet').init_currency = {
-    //         'symbol': '$',
-    //         'name': 'Dollar',
-    //         'code': 'USD',
-    //         'rate': 1,
-    //         'flag': '🇺🇸'
-    //     }
-    //
-    //   } else{
-    //       this.storeData.get('wallet').init_currency={
-    //           'symbol': 'BNB',
-    //           'name': 'BNB',
-    //           'code': 'BNB',
-    //           'rate': 0.0015,
-    //           'flag': '🌐'
-    //       }
-    //   }
-    //
-    // }
+    this.wallet=this.storeData.get('wallet');
+    this.init_currency = this.wallet?.init_currency
 
-    // if (!this.wallet) {
-      this.wallet=this.storeData.get('wallet');
-      this.init_currency = this.wallet?.init_currency
-
-    // }
-
-
-
+    // console.log({another_currency,"init_currency_symbol":this.init_currency.symbol});
 
     if (another_currency) {
+    // if (another_currency!==this.init_currency.symbol) {
       [this.init_currency] = this.wallet.init_currencies.filter((c:any)=>c.code===another_currency)
     }
 

@@ -183,6 +183,7 @@ export class WalletService {
   saved_add :any
 
   quickAmounts = [10, 20, 50, 100]
+  amountInUSD:number=0
 
   constructor(private router: Router,  private route :ActivatedRoute) {
     this.router.events
@@ -192,6 +193,10 @@ export class WalletService {
           this.page = this.route.snapshot.queryParamMap.get('page')
         }
       });
+  }
+
+  get Page(){
+    return window.location.pathname.replace("/", "")
   }
 
   selectNetwork(network: string) {
@@ -251,14 +256,15 @@ export class WalletService {
   get minimumPayment(){
 
     const code  = this.selectedData?.code
-    const index_by =  'minimum_'+this.page
+    const index_by =  'minimum_'+this.Page
     const settings = this.storeData.get('wallet')?.settings
+
 
     let minimum;
     if (code==='TRON') {
       minimum =this.convertUsdToTrx(settings[index_by] ,this.selectedData.rate)
     }else{
-      minimum =settings[index_by] * this.selectedData.rate
+      minimum =settings[index_by] * this.selectedData?.rate
     }
 
     return minimum
@@ -312,7 +318,7 @@ export class WalletService {
     }
 
     if (!payment_method) {
-      payment_method = wallet.saved_add[0].payment_method
+      payment_method = wallet.saved_add?.[0].payment_method
     }
 
     if (payment_method) {
@@ -364,12 +370,13 @@ export class WalletService {
 
   setMaxAmount(form:any, amount:any = 0 ) {
 
+    const symbol =  this.selectedData?.symbol
     if (!amount) {
         amount=this.storeData.get('wallet').balance.new;
     }
 
     form.patchValue({
-      amount: this.currencyConverter.transform(amount)
+      amount: this.currencyConverter.transform(amount,false)
     });
 
 }
@@ -406,6 +413,24 @@ export class WalletService {
     })
 
 
+  }
+
+  cvtToUSD(amount:any){
+
+    if(!amount)  this.amountInUSD=0; return
+
+    let rate = this.storeData.get("wallet").init_currencies.filter((item:any) => item.code === this.selectedCryptoMethod)[0].rate;//[this.selectedCryptoMethod]
+
+    let cvt_val = 0
+    if (this.selectedCryptoMethod==='USD') {
+      cvt_val=0
+    }else if (this.selectedCryptoMethod==='TRON') {
+      cvt_val = +(amount * rate).toFixed(2)
+    }else{
+      cvt_val = +(amount / rate).toFixed(2)
+    }
+
+    this.amountInUSD = cvt_val
   }
 
 
