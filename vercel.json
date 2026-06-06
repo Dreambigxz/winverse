@@ -5,7 +5,7 @@
 
     {
       "source": "/api/(.*)",
-      "destination": "https://api.winversefb.space/api/$1"
+      "destination": "https://apis.k57football.live/api/$1"
     },
 
     { "source": "/(.*)", "destination": "/index.html" }
