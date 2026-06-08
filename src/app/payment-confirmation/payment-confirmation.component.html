@@ -62,8 +62,8 @@
 		                </div>
 
 		                <div class="button-group" *ngIf="tra.status === 'pending'">
-		                  <button class="confirm" (click)="TransactionHandler(tra, 'success')">Confirm</button>
-		                  <button class="decline" (click)="TransactionHandler(tra, 'declined')">Decline</button>
+		                  <button type="submit" class="confirm" (click)="TransactionHandler(tra, 'success')">Confirm</button>
+		                  <button type="submit" class="decline" (click)="TransactionHandler(tra, 'declined')">Decline</button>
 		                </div>
 		              </div>
 		              <!-- <div (click)="openDetails(tra,['info-'+i,'details-'+i])" class="proof details-{{i}}">
