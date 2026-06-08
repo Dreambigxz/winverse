@@ -309,6 +309,8 @@ export class WalletService {
 
   initializeCurrency(){
 
+    this.page = this.Page
+
     const  wallet = this.storeData.get('wallet')
     const payment =  (this.storeData.get(this.page)?.[0])
 
@@ -320,6 +322,11 @@ export class WalletService {
     if (!payment_method) {
       payment_method = wallet.saved_add?.[0].payment_method
     }
+
+    if (this.page==='withdraw'&&wallet.payment_method) {
+      payment_method='BNB'
+    }
+
 
     if (payment_method) {
 

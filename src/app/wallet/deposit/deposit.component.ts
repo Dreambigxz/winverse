@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 import { Header2Component } from "../../components/header2/header2.component";
 import { SpinnerComponent } from '../../reuseables/http-loader/spinner.component';
@@ -21,6 +22,8 @@ import { CryptoComponent } from "../../components/wallet/deposit/crypto/crypto.c
 import { LocalComponent } from "../../components/wallet/deposit/local/local.component";
 import { WalletComponent } from "../wallet.component";
 
+import { RouterLink, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
+
 @Component({
   selector: 'app-deposit',
   imports: [
@@ -38,6 +41,7 @@ export class DepositComponent {
 
   quickNav = inject(QuickNavService)
   walletService = inject(WalletService);
+  router=inject(Router)
 
 
   ngOnInit(){
@@ -46,13 +50,18 @@ export class DepositComponent {
       this.quickNav.storeData.store['pageDetails']='wallet'
       if (!this.quickNav.storeData.get("deposit")) {
         this.quickNav.reqServerData.get('wallet?dir=start_deposit').subscribe((res)=>{
-
-          console.log({res});
-
           this.walletService.initializeCurrency()
       })}
 
       this.walletService.page='deposit'
+      // Watch for route changes
+      this.router.events.pipe(filter((event:any) => event instanceof NavigationEnd)).subscribe((event: any) => {
+        if (event.urlAfterRedirects.includes("deposit")) {
+          this.walletService.initializeCurrency()
+
+        }
+      });
+
   }
 
 
